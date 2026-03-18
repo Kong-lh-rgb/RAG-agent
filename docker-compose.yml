@@ -1,0 +1,111 @@
+version: '3.8'
+
+services:
+  # ========================================
+  # 1. PostgreSQL (持久化元数据、用户配置等)
+  # ========================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: rag_postgres
+    environment:
+      POSTGRES_USER: rag_user
+      POSTGRES_PASSWORD: rag_password
+      POSTGRES_DB: rag_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - rag_network
+    restart: unless-stopped
+
+  # ========================================
+  # 2. Redis (缓存热点数据、控制会话、限流等)
+  # ========================================
+  redis:
+    image: redis:7-alpine
+    container_name: rag_redis
+    # 强烈建议设置密码，即使是本地测试
+    command: redis-server --requirepass "redis_password"
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - rag_network
+    restart: unless-stopped
+
+  # ========================================
+  # 3. Milvus 依赖：Etcd (存储 Milvus 的元数据)
+  # ========================================
+  etcd:
+    image: quay.io/coreos/etcd:v3.5.5
+    container_name: rag_etcd
+    environment:
+      - ETCD_AUTO_COMPACTION_MODE=revision
+      - ETCD_AUTO_COMPACTION_RETENTION=1000
+      - ETCD_QUOTA_BACKEND_BYTES=4294967296
+      - ETCD_SNAPSHOT_COUNT=50000
+    volumes:
+      - etcd_data:/etcd
+    command: etcd -advertise-client-urls=http://127.0.0.1:2379 -listen-client-urls http://0.0.0.0:2379 --data-dir /etcd
+    networks:
+      - rag_network
+    restart: unless-stopped
+
+  # ========================================
+  # 4. Milvus 依赖：MinIO (存储向量的日志和索引文件)
+  # ========================================
+  minio:
+    image: minio/minio:RELEASE.2023-03-20T20-16-18Z
+    container_name: rag_minio
+    environment:
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    volumes:
+      - minio_data:/minio_data
+    command: minio server /minio_data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    networks:
+      - rag_network
+    restart: unless-stopped
+
+  # ========================================
+  # 5. Milvus 核心服务 (Standalone 模式)
+  # ========================================
+  milvus:
+    image: milvusdb/milvus:v2.3.11 # 推荐使用稳定的 2.3.x 版本
+    container_name: rag_milvus
+    command: [ "milvus", "run", "standalone" ]
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      ETCD_ENDPOINTS: etcd:2379
+      MINIO_ADDRESS: minio:9000
+    volumes:
+      - milvus_data:/var/lib/milvus
+    ports:
+      - "19530:19530" # 核心 gRPC / REST API 端口
+      - "9091:9091" # 监控/管理端口
+    depends_on:
+      - etcd
+      - minio
+    networks:
+      - rag_network
+    restart: unless-stopped
+
+# ========================================
+# 全局网络与数据卷配置
+# ========================================
+networks:
+  rag_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
+  etcd_data:
+  minio_data:
+  milvus_data:

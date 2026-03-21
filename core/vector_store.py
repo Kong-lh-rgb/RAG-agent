@@ -2,6 +2,7 @@
 Layer 4: Milvus 向量存储
 ========================
 管理 Milvus 连接、Collection 创建、数据插入与索引构建。
+支持 doc_id 级别的文档隔离。
 """
 
 from pymilvus import (
@@ -49,7 +50,6 @@ class MilvusStore:
         except Exception:
             self.connect()
             return
-        # 连接地址存在但可能未真正建立
         if not connections.has_connection("default"):
             self.connect()
 
@@ -57,7 +57,7 @@ class MilvusStore:
         """获取已有 Collection，不存在时新建。
 
         与 recreate_collection 不同，此方法不会删除已有数据。
-        适用于 query 场景。
+        适用于累积入库和 query 场景。
         """
         self.ensure_connected()
 
@@ -73,7 +73,7 @@ class MilvusStore:
         return self._collection
 
     def recreate_collection(self) -> Collection:
-        """重建 Collection（删旧建新）。"""
+        """重建 Collection（删旧建新）。仅用于开发调试。"""
         self.ensure_connected()
 
         if utility.has_collection(self.collection_name):
@@ -85,36 +85,58 @@ class MilvusStore:
         print(f"📦 已创建 Collection: {self.collection_name}")
         return self._collection
 
-    def insert(self, chunks: list[str], embeddings: list[list[float]]) -> int:
-        """插入文本和嵌入数据。
+    def insert(
+        self,
+        doc_id: str,
+        chunks: list[str],
+        embeddings: list[list[float]],
+        chunk_indices: list[int],
+        parent_indices: list[int],
+    ) -> int:
+        """插入带 doc_id 的文本和嵌入数据。
 
         Args:
-            chunks:     文本块列表。
-            embeddings: 对应的嵌入向量列表。
+            doc_id:         文档唯一标识。
+            chunks:         文本块列表。
+            embeddings:     对应的嵌入向量列表。
+            chunk_indices:  子块在文档内的序号列表。
+            parent_indices: 对应父块序号列表。
 
         Returns:
             插入的记录数。
         """
         if self._collection is None:
-            self.recreate_collection()
+            self.get_or_create_collection()
 
-        result = self._collection.insert([chunks, embeddings])
+        doc_ids = [doc_id] * len(chunks)
+        data = [doc_ids, chunks, embeddings, chunk_indices, parent_indices]
+        result = self._collection.insert(data)
         self._collection.flush()
-        print(f"💾 已插入 {result.insert_count} 条记录")
+        print(f"💾 已插入 {result.insert_count} 条记录 (doc_id={doc_id})")
         return result.insert_count
 
     def build_index(self) -> None:
-        """创建 IVF_FLAT 索引并加载到内存。"""
+        """创建 IVF_FLAT 索引并加载到内存（幂等，已有索引则跳过）。"""
         if self._collection is None:
-            raise RuntimeError("Collection 尚未创建，请先调用 recreate_collection()")
+            raise RuntimeError("Collection 尚未创建")
 
-        index_params = {
-            "metric_type": "L2",
-            "index_type": "IVF_FLAT",
-            "params": {"nlist": 128},
-        }
-        self._collection.create_index(field_name="embedding", index_params=index_params)
-        print("🏗️  已创建索引: IVF_FLAT (L2)")
+        # 检查是否已有索引
+        indexes = self._collection.indexes
+        has_embedding_index = any(
+            idx.field_name == "embedding" for idx in indexes
+        )
+        if not has_embedding_index:
+            index_params = {
+                "metric_type": "L2",
+                "index_type": "IVF_FLAT",
+                "params": {"nlist": 128},
+            }
+            self._collection.create_index(
+                field_name="embedding", index_params=index_params
+            )
+            print("🏗️  已创建索引: IVF_FLAT (L2)")
+        else:
+            print("🏗️  索引已存在，跳过创建")
 
         self._collection.load()
         print("✅ Collection 已加载到内存，可供检索")
@@ -130,10 +152,31 @@ class MilvusStore:
     # ── 私有方法 ────────────────────────────────
 
     def _build_schema(self) -> CollectionSchema:
-        """构建 Collection Schema。"""
+        """构建 Collection Schema（含 doc_id / chunk_index / parent_index）。"""
         fields = [
-            FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=True),
-            FieldSchema(name="text", dtype=DataType.VARCHAR, max_length=65535),
-            FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=self.dim),
+            FieldSchema(
+                name="id", dtype=DataType.INT64,
+                is_primary=True, auto_id=True,
+            ),
+            FieldSchema(
+                name="doc_id", dtype=DataType.VARCHAR,
+                max_length=64, description="文档 ID",
+            ),
+            FieldSchema(
+                name="text", dtype=DataType.VARCHAR,
+                max_length=65535, description="子块文本",
+            ),
+            FieldSchema(
+                name="embedding", dtype=DataType.FLOAT_VECTOR,
+                dim=self.dim, description="嵌入向量",
+            ),
+            FieldSchema(
+                name="chunk_index", dtype=DataType.INT64,
+                description="子块在文档内的序号",
+            ),
+            FieldSchema(
+                name="parent_index", dtype=DataType.INT64,
+                description="对应父块序号",
+            ),
         ]
-        return CollectionSchema(fields, description="RAG document collection")
+        return CollectionSchema(fields, description="RAG knowledge base collection")

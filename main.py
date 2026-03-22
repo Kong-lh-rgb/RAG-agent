@@ -6,11 +6,11 @@ Usage:
     python main.py query     --query "什么是RAG"
     python main.py evaluate  --dataset data/eval_sample.json
 """
-// # 准备你的评测数据集 JSON（格式见 data/eval_sample.json）
-// # 运行评测
+# 准备你的评测数据集 JSON（格式见 data/eval_sample.json）
+# 运行评测
 """python main.py evaluate --dataset data/eval_sample.json"""
 
-// # 指定文档 + 自定义输出
+# 指定文档 + 自定义输出
 """python main.py evaluate --dataset data/eval_sample.json --doc-id your-doc-id --output results.json"""
 
 import argparse

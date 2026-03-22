@@ -35,11 +35,11 @@ class RAGEvaluator:
     """
 
     def __init__(self):
-        # 评测用 LLM（智谱 GLM via OpenAI 兼容接口）
+        # 评测用 LLM（通义千问 via DashScope OpenAI 兼容接口）
         self._llm = LangchainLLMWrapper(ChatOpenAI(
-            model=settings.llm_model,
-            api_key=settings.llm_api_key,
-            base_url=settings.llm_base_url,
+            model=settings.judge_model,
+            api_key=settings.judge_api_key,
+            base_url=settings.judge_base_url,
         ))
         # 评测用 Embedding（复用现有 OpenAI Embedding）
         self._embeddings = LangchainEmbeddingsWrapper(OpenAIEmbeddings(
@@ -86,12 +86,25 @@ class RAGEvaluator:
         result = evaluate(dataset=dataset, metrics=metrics)
 
         # 4. 格式化结果
-        scores = result.scores.to_dict()
+        df = result.to_pandas()
+        metric_columns = [
+            c for c in df.columns
+            if c not in ("user_input", "response", "retrieved_contexts", "reference")
+        ]
+
+        # 每条样本的明细（NaN → None，输出合法 JSON）
+        details = df.where(df.notna(), None).to_dict(orient="records")
+        # 各指标的平均分
+        avg_scores = {}
+        for col in metric_columns:
+            vals = df[col].dropna().tolist()
+            avg_scores[col] = sum(vals) / len(vals) if vals else 0.0
+
         output = {
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "sample_count": len(samples),
-            "scores": scores,
-            "details": result.to_pandas().to_dict(orient="records"),
+            "scores": avg_scores,
+            "details": details,
         }
 
         # 5. 打印概览
@@ -113,12 +126,7 @@ class RAGEvaluator:
         print(f"{'='*60}")
 
         scores = output["scores"]
-        for metric, values in scores.items():
-            # scores 通常是 {metric_name: [score1, score2, ...]} 或 {metric_name: avg}
-            if isinstance(values, list):
-                avg = sum(v for v in values if v is not None) / max(len([v for v in values if v is not None]), 1)
-                print(f"  {metric:.<40s} {avg:.4f}")
-            else:
-                print(f"  {metric:.<40s} {values:.4f}")
+        for metric, avg in scores.items():
+            print(f"  {metric:.<40s} {avg:.4f}")
 
         print(f"{'='*60}")

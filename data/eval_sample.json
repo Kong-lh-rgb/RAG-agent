@@ -1,14 +1,402 @@
 [
   {
-    "question": "什么是RAG？",
-    "ground_truth": "RAG（Retrieval-Augmented Generation）是检索增强生成技术，它将信息检索与文本生成相结合，先从知识库中检索相关文档，再将检索到的内容作为上下文输入给大语言模型来生成回答。"
+    "question": "流式传输（Streaming）为何对基于 LLM 构建的应用程序至关重要？",
+    "ground_truth": "流式传输能够在完整响应准备好之前逐步显示输出，从而显著提升了处理 LLM 延迟时的用户体验。"
   },
   {
-    "question": "向量数据库在RAG中的作用是什么？",
-    "ground_truth": "向量数据库在RAG中用于存储文档的嵌入向量表示，并支持高效的相似度搜索。当用户发起查询时，查询文本被转换为向量，然后在向量数据库中查找最相似的文档片段，作为LLM生成回答的上下文。"
+    "question": "LangChain 的流式传输系统支持哪三种主要的流模式？",
+    "ground_truth": "系统支持的流模式包括 updates、messages 和 custom。"
   },
   {
-    "question": "文本分块的目的是什么？",
-    "ground_truth": "文本分块是将长文档切分为较小的语义片段的过程。目的是让每个片段足够短以适配嵌入模型的输入限制，同时保留足够的上下文信息，提高检索的精确度和相关性。"
+    "question": "在流式传输中，updates 模式的具体作用是什么？",
+    "ground_truth": "它会在每个代理（Agent）步骤之后单独流式传输状态更新。"
+  },
+  {
+    "question": "如果在同一个代理步骤中进行了多次更新，updates 模式会如何处理？",
+    "ground_truth": "这些更新将会被分别单独进行流式传输。"
+  },
+  {
+    "question": "messages 流模式输出的数据结构是什么？",
+    "ground_truth": "它会从任何调用了 LLM 的图节点中流式传输（token，metadata）元组。"
+  },
+  {
+    "question": "custom 流模式允许用户执行什么操作？",
+    "ground_truth": "它允许用户使用流写入器从图节点内部流式传输自定义数据。"
+  },
+  {
+    "question": "要流式传输代理的执行进度，应该调用哪些方法及参数？",
+    "ground_truth": "应该使用 stream 或 astream 方法，并设置 stream_mode=\"updates\"。"
+  },
+  {
+    "question": "当代理调用工具并完成后，工具节点（Tool node）通常会返回什么消息？",
+    "ground_truth": "工具节点会返回包含执行结果的 ToolMessage。"
+  },
+  {
+    "question": "在代理流式进度中，LLM 节点在需要调用工具时会发出什么？",
+    "ground_truth": "LLM 节点会发出带有工具调用请求的 AIMessage。"
+  },
+  {
+    "question": "如果开发者想要查看 LLM 逐个生成的 token，应使用哪种流模式？",
+    "ground_truth": "开发者应该使用 stream_mode=\"messages\"。"
+  },
+  {
+    "question": "什么内置函数允许在工具执行期间流式传输自定义的更新状态？",
+    "ground_truth": "get_stream_writer 函数可以实现流式传输任意数据。"
+  },
+  {
+    "question": "在工具内部添加 get_stream_writer 会带来什么调用限制？",
+    "ground_truth": "该工具将无法在 LangGraph 执行上下文之外被独立调用。"
+  },
+  {
+    "question": "当同时流式传输多种模式时，如何确定当前接收的数据块属于哪种流模式？",
+    "ground_truth": "可以通过读取 chunk[\"type\"] 属性来确定流模式。"
+  },
+  {
+    "question": "在多模式流式传输的数据块中，通过哪个键可以访问实际的有效载荷？",
+    "ground_truth": "可以通过 chunk[\"data\"] 键来访问实际的有效载荷。"
+  },
+  {
+    "question": "为了流式传输模型内部产生的“思考（thinking）”或“推理”标记，应过滤哪种内容块类型？",
+    "ground_truth": "应在使用 messages 模式时，过滤类型为 \"reasoning\" 的标准内容块。"
+  },
+  {
+    "question": "流式传输推理 token 前，必须在模型端确认什么前提条件？",
+    "ground_truth": "前提是该模型必须已启用推理输出（Reasoning output）功能。"
+  },
+  {
+    "question": "LangChain 是如何统一不同模型提供商的专有推理输出格式的？",
+    "ground_truth": "LangChain 会通过 content_blocks 属性将它们标准化为统一的 \"reasoning\" 内容块类型。"
+  },
+  {
+    "question": "如果想在流式传输时同时访问增量消息和由状态追踪的完整解析消息，应如何设置流模式？",
+    "ground_truth": "应将流模式设置为 stream_mode=[\"messages\", \"updates\"]。"
+  },
+  {
+    "question": "如果已完成的消息没有被反映在状态更新中，开发者可以采取哪两种方式访问它们？",
+    "ground_truth": "可以使用自定义更新，或者在流式传输循环中聚合消息块。"
+  },
+  {
+    "question": "在聚合消息块以获取完整工具调用时，应该检查 token 的哪个属性是否为 \"last\"？",
+    "ground_truth": "应该检查 token.chunk_position 属性是否等于 \"last\"。"
+  },
+  {
+    "question": "为代理添加人类在环（human-in-the-loop）中断功能时，必须配置哪两个组件？",
+    "ground_truth": "必须配置人类在环中间件和检查点（checkpointer）。"
+  },
+  {
+    "question": "在使用“人类在环”工作流时，中断事件是在哪种流模式期间被收集的？",
+    "ground_truth": "中断事件是在 \"updates\" 流模式期间生成的。"
+  },
+  {
+    "question": "当系统中有多个子代理参与时，如何消除所生成消息的来源歧义？",
+    "ground_truth": "可以在创建每个代理时为其传递一个特定的名称。"
+  },
+  {
+    "question": "代理名称被设置后，可以通过 metadata 中的哪个键在消息流中识别它？",
+    "ground_truth": "可以通过 metadata 中的 lc_agent_name 键来识别。"
+  },
+  {
+    "question": "如果要实现子图（子代理）的流式传输，必须在创建流时指定什么参数？",
+    "ground_truth": "必须在创建流时指定 subgraphs=True。"
+  },
+  {
+    "question": "为一个代理设置了名称后，该名称对该代理生成的 AIMessage 有什么影响？",
+    "ground_truth": "该名称也会被附加到由该代理生成的所有 AIMessage 上。"
+  },
+  {
+    "question": "在某些场景下需要禁用特定模型的令牌流式传输时，应在初始化时如何设置？",
+    "ground_truth": "应在初始化模型时设置 streaming=False。"
+  },
+  {
+    "question": "如果部署到 LangSmith 并希望防止某些模型输出流向客户端，需要在哪个阶段配置 streaming=False？",
+    "ground_truth": "需要在部署之前的图形代码（graph code）中进行配置。"
+  },
+  {
+    "question": "如果某个特定的聊天模型集成不支持 streaming 参数，开发者应该使用哪个参数替代？",
+    "ground_truth": "应该使用该基础类提供的 disable_streaming=True 参数。"
+  },
+  {
+    "question": "为了获得统一的 type、ns 和 data 键的块格式，应当在调用流方法时传递什么参数？",
+    "ground_truth": "应当传递 version=\"v2\" 参数。"
+  },
+  {
+    "question": "在 v2 版本格式中，invoke() 方法的返回值是什么对象？",
+    "ground_truth": "它返回一个 GraphOutput 对象。"
+  },
+  {
+    "question": "GraphOutput 对象包含哪两个属性来将状态与中断元数据干净地分离开来？",
+    "ground_truth": "它包含 .value 和 .interrupts 属性。"
+  },
+  {
+    "question": "LangChain 代理（Agents）的核心是将什么和工具结合起来？",
+    "ground_truth": "它将语言模型与工具结合了起来以创建能够推理和执行任务的系统。"
+  },
+  {
+    "question": "一个代理会一直执行工具循环直至触发什么条件？",
+    "ground_truth": "直到触发停止条件，即模型发出最终输出或达到指定的迭代限制。"
+  },
+  {
+    "question": "LangChain 中用于构建生产就绪图基代理运行时的函数是什么？",
+    "ground_truth": "是 create_agent 函数。"
+  },
+  {
+    "question": "什么是静态模型（Static model）？",
+    "ground_truth": "静态模型是在创建代理时配置一次并在整个执行过程中保持不变的模型。"
+  },
+  {
+    "question": "除了直接初始化模型实例，还可以通过传入什么类型的值来让系统自动推断并初始化静态模型？",
+    "ground_truth": "可以通过传入模型标识符字符串（如 \"openai:gpt-5\"）来自动推断。"
+  },
+  {
+    "question": "当需要针对对话长度等条件改变当前使用的模型时，应该采用什么类型的模型配置方案？",
+    "ground_truth": "应该采用在运行时选择的动态模型（Dynamic models）方案。"
+  },
+  {
+    "question": "为了根据对话复杂性实现动态模型选择，应该编写并使用什么类型的拦截器？",
+    "ground_truth": "应该使用带有 @wrap_model_call 装饰器创建的中间件。"
+  },
+  {
+    "question": "工具（Tools）能突破单纯的模型文字输出，为代理提供什么能力？",
+    "ground_truth": "工具为代理提供了采取行动的能力，如获取实时数据或执行代码。"
+  },
+  {
+    "question": "如果给 create_agent 传递了一个空的工具列表，生成的代理会有何特征？",
+    "ground_truth": "该代理将只包含一个无法进行工具调用的单一 LLM 节点。"
+  },
+  {
+    "question": "为了避免工具过多导致模型上下文过载，并适应不同对话阶段，应使用什么工具策略？",
+    "ground_truth": "应使用动态工具（Dynamic tools）选择策略。"
+  },
+  {
+    "question": "如果编译时已知所有可能的工具但希望基于用户权限来暴露它们，采用动态工具的哪种具体方法最合适？",
+    "ground_truth": "最合适的方法是过滤预注册工具（Filtering pre-registered tools）。"
+  },
+  {
+    "question": "若要向模型返回自定义的工具执行错误信息，应使用哪个装饰器创建中间件？",
+    "ground_truth": "应使用 @wrap_tool_call 装饰器创建错误处理中间件。"
+  },
+  {
+    "question": "经过自定义错误处理的工具如果发生异常，返回给模型的包含错误内容的消息是什么类型的？",
+    "ground_truth": "是带有自定义错误消息的 ToolMessage。"
+  },
+  {
+    "question": "代理在运行中反复交替进行简短推理、针对性工具调用和利用观察结果的模式被称为什么？",
+    "ground_truth": "这被称为 ReAct（推理+行动）模式。"
+  },
+  {
+    "question": "如何最快捷地告诉代理它是一个“有用的助手并且需要保持简明扼要”？",
+    "ground_truth": "可以将这段描述作为字符串传给 system_prompt 参数。"
+  },
+  {
+    "question": "如果代理在初始化时没有收到任何 system_prompt，它会如何了解自己的任务？",
+    "ground_truth": "代理将直接从接收到的消息内容中推断出自己的任务。"
+  },
+  {
+    "question": "对于像 Anthropic 这样的模型，通过传入 SystemMessage 对象而不是简单字符串来设置系统提示有什么好处？",
+    "ground_truth": "这让开发者有更多的控制权去配置诸如提示缓存（prompt caching）等提供商特定的功能。"
+  },
+  {
+    "question": "在基于运行时用户角色动态更改系统提示的高级用例中，需要用到哪个装饰器？",
+    "ground_truth": "需要用到 @dynamic_prompt 装饰器来生成动态系统提示。"
+  },
+  {
+    "question": "为保证在各大模型提供商上的兼容性，给代理和工具命名时应优先使用哪种命名规则？",
+    "ground_truth": "应优先使用只包含字母数字、下划线和连字符的蛇形命名法（snake_case）。"
+  },
+  {
+    "question": "如何触发（Invoke）并运行一个已经创建好的代理？",
+    "ground_truth": "通过将代表状态更新的消息传入代理即可触发运行。"
+  },
+  {
+    "question": "当提供商原生的结构化输出不可用或不可靠时，应使用哪种策略来生成结构化数据？",
+    "ground_truth": "应使用依赖于人工工具调用的 ToolStrategy。"
+  },
+  {
+    "question": "如果模型支持原生的结构化输出生成，直接传入 schema 会默认激活哪种响应格式策略？",
+    "ground_truth": "会默认激活 ProviderStrategy 策略。"
+  },
+  {
+    "question": "代理系统中的“短期记忆”是指存储在哪里的信息？",
+    "ground_truth": "是指自动存储在对话消息状态（state）中的信息。"
+  },
+  {
+    "question": "在构建自定义的图状态模式时，必须作为 TypedDict 扩展哪个类？",
+    "ground_truth": "必须扩展 AgentState 类。"
+  },
+  {
+    "question": "在 langchain 1.0 中，自定义状态模式是否依然支持 Pydantic 模型或数据类（dataclasses）？",
+    "ground_truth": "不支持，Pydantic 模型和 dataclasses 已不再受支持。"
+  },
+  {
+    "question": "为什么通过中间件（middleware）来定义自定义状态比通过 create_agent 上的 state_schema 更好？",
+    "ground_truth": "因为中间件允许将状态扩展在概念上严格限制在相关的中间件和工具的作用域内。"
+  },
+  {
+    "question": "在流式获取中间进度字典中的内容时，可以通过哪个表达式获取到最新生成的消息？",
+    "ground_truth": "可以通过 chunk[\"messages\"][-1] 来获取。"
+  },
+  {
+    "question": "中间件允许在核心代理执行流程中的哪些关键点进行数据拦截和修改？",
+    "ground_truth": "允许在调用模型前处理状态、调用模型后修改响应以及处理工具执行错误时进行拦截。"
+  },
+  {
+    "question": "定义一个简单工具的最基础的方法是在函数上添加什么装饰器？",
+    "ground_truth": "在函数上添加 @tool 装饰器。"
+  },
+  {
+    "question": "在使用 @tool 装饰器而不提供额外描述时，模型是从哪里了解该工具的用途的？",
+    "ground_truth": "模型是从该函数的文档字符串（docstring）中了解其用途的。"
+  },
+  {
+    "question": "如何让函数的实际名称和暴露给代理的工具名称不一致？",
+    "ground_truth": "可以在 @tool 装饰器中显式传递一个自定义名称，如 @tool(\"custom_name\")。"
+  },
+  {
+    "question": "当 @tool 函数的文档字符串不足以清晰指导模型时，如何重写工具描述？",
+    "ground_truth": "可以在 @tool 装饰器中使用 description 参数来重写它。"
+  },
+  {
+    "question": "若需要工具接收高度复杂的 JSON 结构或具有细致校验的参数，应使用 @tool 装饰器的哪个参数？",
+    "ground_truth": "应使用 args_schema 参数并结合一个 Pydantic 模型。"
+  },
+  {
+    "question": "在定义工具函数的参数时，哪个参数名称被保留用于传递 RunnableConfig 而不能被使用？",
+    "ground_truth": "参数名称 \"config\" 被保留使用。"
+  },
+  {
+    "question": "在定义工具函数的参数时，哪个参数名称被保留用于访问 ToolRuntime 实例？",
+    "ground_truth": "参数名称 \"runtime\" 被保留使用。"
+  },
+  {
+    "question": "如果一个工具的签名中包含 runtime: ToolRuntime 参数，模型在调用该工具时会看到这个参数吗？",
+    "ground_truth": "不会，它会自动被注入并对 LLM 隐藏。"
+  },
+  {
+    "question": "工具如何访问当前对话中用户发出的最新消息？",
+    "ground_truth": "通过访问 runtime.state[\"messages\"] 并从中提取最后一条属于人类的消息。"
+  },
+  {
+    "question": "除了读取数据，工具如果需要主动将数据（如新设置的用户名称）写入或更新到状态中，它的返回值应当是什么类型？",
+    "ground_truth": "它的返回值应当是 Command 类型。"
+  },
+  {
+    "question": "如果多个工具在并行执行时更新了同一个状态字段，必须利用什么机制来解决写入冲突？",
+    "ground_truth": "必须为这些字段定义一个归约器（reducer）。"
+  },
+  {
+    "question": "用来存储用户 ID、会话详情等在对话调用时即不可变的配置数据的是哪个运行时对象？",
+    "ground_truth": "是 Context（上下文）对象。"
+  },
+  {
+    "question": "工具内部应当通过哪条代码路径获取在调用时传入的只读 Context 数据？",
+    "ground_truth": "应当通过 runtime.context 获取。"
+  },
+  {
+    "question": "如果代理需要记录用户的喜好，并且希望这种偏好在未来的对话会话中依然有效，它应该使用哪个存储系统？",
+    "ground_truth": "它应该使用通过 runtime.store 访问的长周期记忆（Store）。"
+  },
+  {
+    "question": "持久化数据在 Store 中是通过哪种组织模式来保存和查找的？",
+    "ground_truth": "是通过命名空间和键（namespace/key）的模式来组织的。"
+  },
+  {
+    "question": "为了在生产环境中安全留存长期记忆数据，官方推荐采用哪种特定实现来替代 InMemoryStore？",
+    "ground_truth": "推荐使用像 PostgresStore 这样的持久化存储实现。"
+  },
+  {
+    "question": "如果一个工具操作耗时很长，它应该通过调用什么来为终端用户发射实时的进度事件？",
+    "ground_truth": "它应该调用 runtime.stream_writer 来发射事件。"
+  },
+  {
+    "question": "在 LangGraph 工作流中，哪个预构建节点主要负责并行处理工具执行、错误拦截和状态注入？",
+    "ground_truth": "是 ToolNode 节点。"
+  },
+  {
+    "question": "如果要在一个完全自定义的 StateGraph 中使用工具组合，应当将工具列表传递给哪个类的实例？",
+    "ground_truth": "应当传递给 ToolNode 类的实例。"
+  },
+  {
+    "question": "如果一个工具的目的是向语言模型提供纯粹供其阅读和推理的自然语言内容，那么该工具最合适的返回类型是什么？",
+    "ground_truth": "最合适的返回类型是纯文本字符串（string）。"
+  },
+  {
+    "question": "返回一个字符串内容的工具会自动更新代理的工作图状态（graph state）字段吗？",
+    "ground_truth": "不会，它不会直接更新状态，除非模型或后续工具据此采取了写操作。"
+  },
+  {
+    "question": "如果一个工具向后方返回的是一个包含气温和天气的 Python 字典对象，这个对象在返回给模型前会经历什么处理？",
+    "ground_truth": "它会被序列化并作为工具的输出返回。"
+  },
+  {
+    "question": "当工具通过 Command 去更新代理状态时，为了向模型确认执行成功，应在 update 参数中额外包括什么类型的对象？",
+    "ground_truth": "应包括一个指定了 tool_call_id 的 ToolMessage 消息对象。"
+  },
+  {
+    "question": "在生成确认 ToolMessage 时，工具调用的唯一标识符应该从 ToolRuntime 的哪个属性获取？",
+    "ground_truth": "应该从 runtime.tool_call_id 属性获取。"
+  },
+  {
+    "question": "在不做额外设置的默认情况下，ToolNode 会如何处理工具抛出的代码执行错误（execution errors）？",
+    "ground_truth": "它会重新抛出（re-raise）这些执行错误。"
+  },
+  {
+    "question": "如果你希望工具运行出现崩溃时不会中断整个流程，而是将错误信息发还给大语言模型，你需要给 ToolNode 配置什么参数？",
+    "ground_truth": "需要配置 handle_tool_errors=True。"
+  },
+  {
+    "question": "ToolNode 能否只针对特定类型的错误进行拦截并向模型发送失败反馈？",
+    "ground_truth": "可以，通过将特定异常类（如 ValueError, TypeError）作为元组传递给 handle_tool_errors。"
+  },
+  {
+    "question": "在为图形编排添加条件边缘（conditional edges）时，可以用哪个预置函数来判断 LLM 节点是否输出了调用工具的指令？",
+    "ground_truth": "可以使用 tools_condition 预置函数。"
+  },
+  {
+    "question": "当 tools_condition 检测到 LLM 要求调用工具时，它会将图形路由到哪一个目标节点？",
+    "ground_truth": "它会将图形路由到 \"tools\" 节点。"
+  },
+  {
+    "question": "LangChain 官方是否提供诸如网络搜索、代码解释等开箱即用的能力集成？",
+    "ground_truth": "是的，LangChain 提供了一大批预构建工具（Prebuilt tools）和工具包。"
+  },
+  {
+    "question": "由模型提供方自己在后端运行网络搜索或者代码执行环境，而无需开发者在本地部署具体工具逻辑的特性被称为什么？",
+    "ground_truth": "这被称为服务器端工具使用（Server-side tool use）。"
+  },
+  {
+    "question": "系统提示（system prompt）能在每次运行前发生改变吗？",
+    "ground_truth": "可以，通过 @dynamic_prompt 等中间件技术可以在运行时根据上下文动态改变系统提示。"
+  },
+  {
+    "question": "若一个流数据块显示 {\"type\": \"messages\"}，我们应当通过它的什么结构去访问产生的 token？",
+    "ground_truth": "应当通过解析它的 \"data\" 属性获得一个包含 token 和 metadata 的元组。"
+  },
+  {
+    "question": "当开发者在自定义状态模型中需要对字段更新进行冲突控制时，除了定义类型外，还应为可能并发修改的字段提供什么？",
+    "ground_truth": "应提供一个 reducer（归约器）函数。"
+  },
+  {
+    "question": "在使用流式人类在环控制时，Interrupt.value 提供的数据结构是什么？",
+    "ground_truth": "它提供了一个包含了待处理动作请求及其详细信息的数据列表。"
+  },
+  {
+    "question": "为了响应中断并继续代理执行流，必须向代理的 stream() 方法传递包含决策的什么对象？",
+    "ground_truth": "必须传递一个 Command(resume=decisions) 对象。"
+  },
+  {
+    "question": "如果不希望处理整个中间件流程，是否有更快捷的途径只将状态约束在某几个特定的工具之中？",
+    "ground_truth": "可以使用 create_agent 函数上的 state_schema 参数。"
+  },
+  {
+    "question": "如何快速从代理流式结果的 token 结构中辨别出它是一个带有工具执行请求的数据块？",
+    "ground_truth": "可以通过判断其 content_blocks 是否包含 type='tool_call_chunk' 的子块。"
+  },
+  {
+    "question": "当 agent 运行时遇到多轮思考，但最终生成回答前由于网络等原因需要暂停，我们可以用哪一项机制确保它能在稍后继续运行？",
+    "ground_truth": "可以通过使用检查点（checkpointer）配合持久化存储来实现中断与恢复。"
+  },
+  {
+    "question": "如果在使用 ChatOpenAI 初始化模型时没有指定 tools 列表，那么 invoke 该模型能返回 ToolMessage 吗？",
+    "ground_truth": "不能，如果不给代理配置可用工具集，代理就只具备单纯的 LLM 文字生成能力，无法产生后续的工具消息响应。"
   }
 ]

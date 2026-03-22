@@ -36,7 +36,19 @@ class Settings:
     )
     llm_base_url: str = "https://open.bigmodel.cn/api/paas/v4"
     llm_model: str = field(
-        default_factory=lambda: os.getenv("LLM_MODEL", "glm-4-flash")
+        default_factory=lambda: os.getenv("LLM_MODEL", "glm-4.7-flash")
+    )
+    judge_model: str = field(
+        default_factory=lambda: os.getenv("JUDGE_MODEL", "qwen3-vl-flash-2026-01-22")
+    )
+    judge_api_key: str = field(
+        default_factory=lambda: os.getenv("DASHSCOPE_API_KEY", "")
+    )
+    judge_base_url: str = field(
+        default_factory=lambda: os.getenv(
+            "JUDGE_BASE_URL",
+            "https://dashscope.aliyuncs.com/compatible-mode/v1",
+        )
     )
     llm_max_tokens: int = int(os.getenv("LLM_MAX_TOKENS", "1024"))
     llm_temperature: float = float(os.getenv("LLM_TEMPERATURE", "0.7"))

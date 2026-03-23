@@ -10,10 +10,53 @@ Usage:
 """
 
 import json
+import logging
 from datetime import datetime, timezone
+from typing import Any, List, Optional
 
+from langchain_core.callbacks import CallbackManagerForLLMRun, AsyncCallbackManagerForLLMRun
+from langchain_core.messages import BaseMessage
+from langchain_core.outputs import ChatResult
 from langchain_openai import ChatOpenAI
 from ragas import EvaluationDataset, SingleTurnSample, evaluate
+
+logger = logging.getLogger(__name__)
+
+class FallbackChatOpenAI(ChatOpenAI):
+    """具有自动回退机制的 ChatOpenAI 封装。
+    
+    当主模型（如因额度耗尽）抛出异常时，自动回退到备用模型继续执行，
+    并将模型的名称更新为备用模型，之后的所有请求将直接使用备用模型。
+    """
+    fallback_model_name: str = "qwen3.5-397b-a17b"
+
+    def _generate(
+        self,
+        messages: List[BaseMessage],
+        stop: Optional[List[str]] = None,
+        run_manager: Optional[CallbackManagerForLLMRun] = None,
+        **kwargs: Any,
+    ) -> ChatResult:
+        try:
+            return super()._generate(messages, stop, run_manager, **kwargs)
+        except Exception as e:
+            logger.warning(f"模型 {self.model_name} 发生异常: {e}。切换至备用模型: {self.fallback_model_name}")
+            self.model_name = self.fallback_model_name
+            return super()._generate(messages, stop, run_manager, **kwargs)
+
+    async def _agenerate(
+        self,
+        messages: List[BaseMessage],
+        stop: Optional[List[str]] = None,
+        run_manager: Optional[AsyncCallbackManagerForLLMRun] = None,
+        **kwargs: Any,
+    ) -> ChatResult:
+        try:
+            return await super()._agenerate(messages, stop, run_manager, **kwargs)
+        except Exception as e:
+            logger.warning(f"模型 {self.model_name} 发生异常: {e}。切换至备用模型: {self.fallback_model_name}")
+            self.model_name = self.fallback_model_name
+            return await super()._agenerate(messages, stop, run_manager, **kwargs)
 from ragas.llms import LangchainLLMWrapper
 from ragas.embeddings import LangchainEmbeddingsWrapper
 from ragas.metrics import (
@@ -35,11 +78,12 @@ class RAGEvaluator:
     """
 
     def __init__(self):
-        # 评测用 LLM（通义千问 via DashScope OpenAI 兼容接口）
-        self._llm = LangchainLLMWrapper(ChatOpenAI(
+        # 评测用 LLM（通义千问 via DashScope OpenAI 兼容接口，带自动回退）
+        self._llm = LangchainLLMWrapper(FallbackChatOpenAI(
             model=settings.judge_model,
             api_key=settings.judge_api_key,
             base_url=settings.judge_base_url,
+            fallback_model_name="qwen3.5-397b-a17b",
         ))
         # 评测用 Embedding（复用现有 OpenAI Embedding）
         self._embeddings = LangchainEmbeddingsWrapper(OpenAIEmbeddings(

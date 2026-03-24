@@ -43,7 +43,7 @@ class MilvusRetriever:
         self,
         query: str,
         top_k: int | None = None,
-        doc_id: str | None = None,
+        doc_ids: list[str] | None = None,
     ) -> list[dict]:
         """执行向量检索 + 可选重排序。
 
@@ -53,9 +53,9 @@ class MilvusRetriever:
         3. 否则直接返回 Top-top_k
 
         Args:
-            query:  自然语言查询文本。
-            top_k:  最终返回结果数，默认使用初始化时的值。
-            doc_id: 可选，仅检索指定文档的内容。
+            query:   自然语言查询文本。
+            top_k:   最终返回结果数，默认使用初始化时的值。
+            doc_ids: 可选，仅在选定的文档列表中检索。
 
         Returns:
             排序后的检索结果列表，每项包含：
@@ -64,8 +64,8 @@ class MilvusRetriever:
         final_k = top_k or self.top_k
 
         print(f"\n🔍 查询: \"{query}\"")
-        if doc_id:
-            print(f"   📎 限定文档: {doc_id}")
+        if doc_ids:
+            print(f"   📎 限定文档: {doc_ids}")
 
         # 1. 生成查询嵌入
         query_embedding = self._embedder.embed([query])
@@ -75,7 +75,7 @@ class MilvusRetriever:
         search_params = {"metric_type": "L2", "params": {"nprobe": 16}}
 
         # 3. 构建过滤表达式
-        expr = f'doc_id == "{doc_id}"' if doc_id else None
+        expr = f"doc_id in {doc_ids}" if doc_ids else None
 
         # 4. 执行 Milvus 搜索（搜索 Top-retrieval_top_k）
         retrieval_k = self.retrieval_top_k if self.enable_reranker else final_k

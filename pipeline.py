@@ -146,20 +146,20 @@ class RAGPipeline:
         self,
         text: str,
         top_k: int | None = None,
-        doc_id: str | None = None,
+        doc_ids: list[str] | None = None,
     ) -> list[dict]:
         """执行语义检索。
 
         Args:
-            text:   自然语言查询。
-            top_k:  返回结果数（可选）。
-            doc_id: 可选，仅检索指定文档。
+            text:    自然语言查询。
+            top_k:   返回结果数（可选）。
+            doc_ids: 可选，仅在选定的文档内检索。
 
         Returns:
             检索结果列表 [{"rank", "score", "text", "doc_id", "parent_index", ...}]
         """
         t0 = time.time()
-        results = self._retriever.search(text, top_k=top_k, doc_id=doc_id)
+        results = self._retriever.search(text, top_k=top_k, doc_ids=doc_ids)
         elapsed = time.time() - t0
         print(f"⏱️  检索耗时: {elapsed:.2f}s")
         return results
@@ -203,45 +203,71 @@ class RAGPipeline:
         self,
         text: str,
         top_k: int | None = None,
-        doc_id: str | None = None,
+        doc_ids: list[str] | None = None,
+        session_id: str | None = None,
     ) -> dict:
         """检索 + 父块替换 + LLM 非流式生成。"""
-        results = self.query(text, top_k=top_k, doc_id=doc_id)
+        results = self.query(text, top_k=top_k, doc_ids=doc_ids)
         parent_chunks = self._fetch_parent_chunks(results)
-        answer = self.llm.generate(text, parent_chunks)
+        answer = self.llm.generate(text, parent_chunks, session_id=session_id)
         return {"query": text, "results": results, "answer": answer}
 
     def query_and_generate_stream(
         self,
         text: str,
         top_k: int | None = None,
-        doc_id: str | None = None,
+        doc_ids: list[str] | None = None,
+        session_id: str | None = None,
     ) -> Generator[str, None, None]:
-        """检索 + 父块替换 + LLM 流式生成，yield SSE 格式事件。
+        """检索 + 父块替换 + LLM 流式生成，yield SSE 格式事件。"""
+        try:
+            # 1. 检索子块
+            results = self.query(text, top_k=top_k, doc_ids=doc_ids)
 
-        事件类型:
-          - event: context  — 检索到的子块（含 parent_index）
-          - event: token    — LLM 逐步生成的文本
-          - event: done     — 生成完毕
+            # 2. 发送检索结果（context 事件）
+            for r in results:
+                data = json.dumps(r, ensure_ascii=False)
+                yield f"event: context\ndata: {data}\n\n"
 
-        Yields:
-            SSE 格式的字符串（每条以 ``\\n\\n`` 结尾）。
-        """
-        # 1. 检索子块
-        results = self.query(text, top_k=top_k, doc_id=doc_id)
+            # 3. 获取父块文本
+            parent_chunks = self._fetch_parent_chunks(results)
 
-        # 2. 发送检索结果（context 事件）
-        for r in results:
-            data = json.dumps(r, ensure_ascii=False)
-            yield f"event: context\ndata: {data}\n\n"
+            # 4. LLM 流式生成（用父块文本作为上下文）
+            for token in self.llm.generate_stream(text, parent_chunks, session_id=session_id):
+                data = json.dumps({"content": token}, ensure_ascii=False)
+                yield f"event: token\ndata: {data}\n\n"
 
-        # 3. 获取父块文本
-        parent_chunks = self._fetch_parent_chunks(results)
+            # 5. 完成事件
+            yield "event: done\ndata: {}\n\n"
+        except Exception as e:
+            import traceback
+            tb = traceback.format_exc()
+            print(f"Streaming error: {tb}")
+            data = json.dumps({"error": str(e), "traceback": tb}, ensure_ascii=False)
+            yield f"event: error\ndata: {data}\n\n"
 
-        # 4. LLM 流式生成（用父块文本作为上下文）
-        for token in self.llm.generate_stream(text, parent_chunks):
-            data = json.dumps({"content": token}, ensure_ascii=False)
-            yield f"event: token\ndata: {data}\n\n"
-
-        # 5. 完成事件
-        yield "event: done\ndata: {}\n\n"
+    def delete_document(self, doc_id: str) -> bool:
+        """根据 doc_id 测试删除文档记录（跨 Milvus 和 PostgreSQL）。"""
+        t0 = time.time()
+        print(f"\n🗑️ 开始删除文档: doc_id={doc_id}")
+        
+        # 1. 删除 Milvus 里的向量子块
+        self._store.delete_by_doc_id(doc_id)
+            
+        # 2. 删除 PostgreSQL 里的记录
+        try:
+            with get_session() as session:
+                session.query(ParentChunk).filter_by(doc_id=doc_id).delete()
+                result_doc = session.query(Document).filter_by(doc_id=doc_id).delete()
+                session.commit()
+                if result_doc > 0:
+                    print("  - PostgreSQL 删除完成")
+                else:
+                    print(f"  - PostgreSQL 中未找到 doc_id={doc_id} 的文档")
+        except Exception as e:
+            print(f"  - PostgreSQL 删除失败: {e}")
+            return False
+            
+        elapsed = time.time() - t0
+        print(f"✅ 文档删除流程完成: doc_id={doc_id}, 耗时 {elapsed:.2f}s")
+        return True

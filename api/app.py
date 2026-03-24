@@ -16,9 +16,15 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import StreamingResponse
+from fastapi.middleware.cors import CORSMiddleware
 
-from api.schemas import QueryRequest, QueryResponse, SearchResult, UploadResponse
+from api.schemas import (
+    QueryRequest, QueryResponse, SearchResult, 
+    UploadResponse, DeleteResponse, DocumentItem
+)
 from core.db_init import init_db
+from core.database import get_session
+from core.models import Document
 from pipeline import RAGPipeline
 
 
@@ -40,11 +46,38 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# 允许跨域请求 (CORS)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Pipeline 单例（复用连接和 client）
 _pipeline = RAGPipeline()
 
 
 # ── 路由 ────────────────────────────────────────
+
+@app.get("/documents", response_model=list[DocumentItem], summary="获取所有文档列表")
+async def get_documents():
+    """获取系统内已入库的所有文档基础信息。"""
+    try:
+        with get_session() as session:
+            docs = session.query(Document).order_by(Document.created_at.desc()).all()
+            return [
+                DocumentItem(
+                    id=doc.doc_id,
+                    name=doc.filename,
+                    timestamp=doc.created_at.isoformat(),
+                    chunk_count=doc.chunk_count
+                )
+                for doc in docs
+            ]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"获取文档列表失败: {str(e)}")
 
 @app.post("/upload", response_model=UploadResponse, summary="上传文档并入库")
 async def upload_document(file: UploadFile = File(..., description="PDF 文件")):
@@ -80,9 +113,9 @@ async def upload_document(file: UploadFile = File(..., description="PDF 文件")
 
 @app.post("/query", response_model=QueryResponse, summary="语义检索")
 async def query_documents(req: QueryRequest):
-    """对已入库的文档执行语义检索，返回 Top-K 匹配结果。支持 doc_id 过滤。"""
+    """对已入库的文档执行语义检索，返回 Top-K 匹配结果。支持 doc_ids 过滤。"""
     try:
-        results = _pipeline.query(req.query, top_k=req.top_k, doc_id=req.doc_id)
+        results = _pipeline.query(req.query, top_k=req.top_k, doc_ids=req.doc_ids)
     except Exception as e:
         raise HTTPException(
             status_code=500,
@@ -105,6 +138,18 @@ async def query_documents(req: QueryRequest):
     )
 
 
+@app.delete("/documents/{doc_id}", response_model=DeleteResponse, summary="删除已入库文档")
+async def delete_document(doc_id: str):
+    """彻底删除文档的所有碎片（包含 PostgreSQL 元数据及 Milvus 向量子块）。"""
+    success = _pipeline.delete_document(doc_id)
+    if not success:
+        raise HTTPException(status_code=500, detail=f"删除文档 {doc_id} 失败或未完全成功。")
+    return DeleteResponse(
+        doc_id=doc_id,
+        success=True,
+        message="文档删除成功"
+    )
+
 @app.post("/query/stream", summary="语义检索 + LLM 流式回答 (SSE)")
 async def query_stream(req: QueryRequest):
     """检索文档 + 父块文本替换 + LLM 流式生成回答。
@@ -116,7 +161,7 @@ async def query_stream(req: QueryRequest):
     """
     try:
         event_stream = _pipeline.query_and_generate_stream(
-            req.query, top_k=req.top_k, doc_id=req.doc_id
+            req.query, top_k=req.top_k, doc_ids=req.doc_ids, session_id=req.session_id
         )
     except Exception as e:
         raise HTTPException(

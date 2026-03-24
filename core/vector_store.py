@@ -149,6 +149,17 @@ class MilvusStore:
             self._collection.load()
         return self._collection
 
+    def delete_by_doc_id(self, doc_id: str) -> None:
+        """根据 doc_id 彻底删除属于该文档的所有向量。"""
+        self.ensure_connected()
+        if self._collection is None:
+            self.get_or_create_collection()
+        try:
+            res = self._collection.delete(expr=f'doc_id == "{doc_id}"')
+            print(f"🗑️ 已通过 doc_id='{doc_id}' 删除向量记录，结果: {res}")
+        except Exception as e:
+            print(f"⚠️ 删除 doc_id='{doc_id}' 时发生异常: {e}")
+
     # ── 私有方法 ────────────────────────────────
 
     def _build_schema(self) -> CollectionSchema:

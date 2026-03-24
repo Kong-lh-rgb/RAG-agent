@@ -65,6 +65,28 @@ class Settings:
     llm_max_tokens: int = int(os.getenv("LLM_MAX_TOKENS", "1024"))
     llm_temperature: float = float(os.getenv("LLM_TEMPERATURE", "0.7"))
 
+    # ── Redis ───────────────────────────────────
+    redis_host: str = field(
+        default_factory=lambda: os.getenv("REDIS_HOST", "localhost")
+    )
+    redis_port: str = field(
+        default_factory=lambda: os.getenv("REDIS_PORT", "6379")
+    )
+    redis_password: str = field(
+        default_factory=lambda: os.getenv("REDIS_PASSWORD", "")
+    )
+    redis_db: str = field(
+        default_factory=lambda: os.getenv("REDIS_DB", "0")
+    )
+    history_max_turns: int = int(os.getenv("HISTORY_MAX_TURNS", "3"))
+
+    @property
+    def redis_url(self) -> str:
+        """Redis 连接串。"""
+        if self.redis_password:
+            return f"redis://:{self.redis_password}@{self.redis_host}:{self.redis_port}/{self.redis_db}"
+        return f"redis://{self.redis_host}:{self.redis_port}/{self.redis_db}"
+
     # ── Milvus ──────────────────────────────────
     milvus_host: str = field(
         default_factory=lambda: os.getenv("MILVUS_HOST", "localhost")

@@ -8,7 +8,6 @@ hf_token = os.getenv("HUGGINGFACE_API_KEY")
 
 from sentence_transformers import SentenceTransformer
 
-from sentence_transformers import SentenceTransformer
 
 from config.settings import settings
 

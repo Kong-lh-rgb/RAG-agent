@@ -54,17 +54,18 @@ class LLMClient:
 
     # ── 公开方法 ────────────────────────────────
 
-    def generate(self, query: str, context_chunks: list[dict]) -> str:
+    def generate(self, query: str, context_chunks: list[dict], session_id: str | None = None) -> str:
         """非流式生成回答。
 
         Args:
             query:           用户查询。
             context_chunks:  检索结果列表，每项含 rank/score/text。
+            session_id:      可选的会话标识，用于多轮对话上下文。
 
         Returns:
             LLM 生成的完整回答文本。
         """
-        messages = self._build_messages(query, context_chunks)
+        messages = self._build_messages(query, context_chunks, session_id)
         response = self._client.chat.completions.create(
             model=self.model,
             messages=messages,
@@ -72,21 +73,31 @@ class LLMClient:
             temperature=self.temperature,
             stream=False,
         )
-        return response.choices[0].message.content or ""
+        answer = response.choices[0].message.content or ""
+        
+        # 记录到会话历史
+        if session_id:
+            from core.memory import get_redis_history
+            history = get_redis_history(session_id)
+            history.add_user_message(query)
+            history.add_ai_message(answer)
+            
+        return answer
 
     def generate_stream(
-        self, query: str, context_chunks: list[dict]
+        self, query: str, context_chunks: list[dict], session_id: str | None = None
     ) -> Generator[str, None, None]:
         """流式生成回答，逐 token 返回。
 
         Args:
             query:           用户查询。
             context_chunks:  检索结果列表。
+            session_id:      可选的会话标识。
 
         Yields:
             逐步生成的文本片段（delta content）。
         """
-        messages = self._build_messages(query, context_chunks)
+        messages = self._build_messages(query, context_chunks, session_id)
         stream = self._client.chat.completions.create(
             model=self.model,
             messages=messages,
@@ -95,19 +106,44 @@ class LLMClient:
             stream=True,
         )
 
+        answer_parts = []
         for chunk in stream:
             if chunk.choices and chunk.choices[0].delta.content:
-                yield chunk.choices[0].delta.content
+                text = chunk.choices[0].delta.content
+                answer_parts.append(text)
+                yield text
+                
+        # 记录到会话历史
+        if session_id:
+            from core.memory import get_redis_history
+            history = get_redis_history(session_id)
+            history.add_user_message(query)
+            history.add_ai_message("".join(answer_parts))
 
     # ── 私有方法 ────────────────────────────────
 
     def _build_messages(
-        self, query: str, context_chunks: list[dict]
+        self, query: str, context_chunks: list[dict], session_id: str | None = None
     ) -> list[dict]:
         """构建 ChatCompletion 的 messages 列表。"""
         context = _build_context(context_chunks)
         system_prompt = _SYSTEM_TEMPLATE.format(context=context)
-        return [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": query},
-        ]
+        messages = [{"role": "system", "content": system_prompt}]
+        
+        if session_id:
+            from core.memory import get_redis_history
+            history = get_redis_history(session_id)
+            
+            # 使用滑动窗口策略截断历史记录（避免 Token 爆炸）
+            # 一轮对话 = 1 个 user + 1 个 assistant，所以保留历史数为 max_turns * 2
+            max_messages = settings.history_max_turns * 2
+            recent_messages = history.messages[-max_messages:] if history.messages else []
+            
+            for msg in recent_messages:
+                if msg.type == "human":
+                    messages.append({"role": "user", "content": msg.content})
+                elif msg.type in ("ai", "assistant"):
+                    messages.append({"role": "assistant", "content": msg.content})
+
+        messages.append({"role": "user", "content": query})
+        return messages

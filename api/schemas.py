@@ -13,7 +13,24 @@ class QueryRequest(BaseModel):
     """检索请求。"""
     query: str = Field(..., description="查询文本", examples=["什么是RAG"])
     top_k: int = Field(default=3, ge=1, le=20, description="返回结果数")
-    doc_id: str | None = Field(default=None, description="可选，仅检索指定文档")
+    doc_ids: list[str] = Field(default_factory=list, description="可选，仅在选定的文档列表内检索")
+    session_id: str | None = Field(default=None, description="会话ID，用于多轮对话关联")
+
+
+# ── 响应模型 ────────────────────────────────────
+
+class DocumentItem(BaseModel):
+    """文档列表项。"""
+    id: str = Field(..., description="文档ID")
+    name: str = Field(..., description="文件名")
+    timestamp: str = Field(..., description="入库时间（ISO格式 / 或预留文本）")
+    chunk_count: int = Field(..., description="子块数量")
+
+class DeleteResponse(BaseModel):
+    """文档删除响应。"""
+    doc_id: str = Field(..., description="删除的文档唯一标识")
+    success: bool = Field(..., description="是否删除成功")
+    message: str = Field(..., description="删除结果说明")
 
 
 # ── 响应模型 ────────────────────────────────────

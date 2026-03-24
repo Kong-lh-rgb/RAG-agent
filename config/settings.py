@@ -65,6 +65,11 @@ class Settings:
     llm_max_tokens: int = int(os.getenv("LLM_MAX_TOKENS", "1024"))
     llm_temperature: float = float(os.getenv("LLM_TEMPERATURE", "0.7"))
 
+    # ── 外部工具 (Tools) ─────────────────────────
+    brave_search_api_key: str = field(
+        default_factory=lambda: os.getenv("BRAVE_SEARCH_API_KEY", "")
+    )
+
     # ── Redis ───────────────────────────────────
     redis_host: str = field(
         default_factory=lambda: os.getenv("REDIS_HOST", "localhost")

@@ -9,9 +9,16 @@ export interface DocumentItem {
   chunk_count: number;
 }
 
+export interface AgentThought {
+  tool: string;
+  input?: string;
+  action: "start" | "finish";
+}
+
 export interface ChatMessage {
   role: "user" | "assistant";
   content: string;
+  thoughts?: AgentThought[];
 }
 
 export async function fetchDocuments(): Promise<DocumentItem[]> {
@@ -53,8 +60,9 @@ export async function streamChat(
   session_id: string, 
   doc_ids: string[], 
   onMessage: (content: string) => void,
-  onDone: () => void,
-  onError: (err: any) => void
+  onThought?: (thought: AgentThought) => void,
+  onDone?: () => void,
+  onError?: (err: any) => void
 ) {
   const ctrl = new AbortController();
   
@@ -81,14 +89,23 @@ export async function streamChat(
           } catch (e) {
             console.error("Parse error on token", e);
           }
+        } else if (event.event === "thought") {
+          try {
+            const data = JSON.parse(event.data);
+            if (onThought) {
+              onThought(data);
+            }
+          } catch (e) {
+            console.error("Parse error on thought", e);
+          }
         } else if (event.event === "done") {
-          onDone();
+          if (onDone) onDone();
           ctrl.abort();
         }
         // "context" event could be used if we want to show references
       },
       onerror(err) {
-        onError(err);
+        if (onError) onError(err);
         throw err; // Stop retrying
       }
     });

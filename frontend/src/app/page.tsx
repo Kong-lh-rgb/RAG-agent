@@ -49,10 +49,21 @@ export default function Home() {
           assistantContent += token;
           setMessages((prev) => {
             const newMsgs = [...prev];
-            newMsgs[newMsgs.length - 1] = { role: "assistant", content: assistantContent };
+            // Guard against race conditions (e.g. user starts a new chat mid-stream).
+            if (newMsgs.length === 0) {
+              return [{ role: "assistant", content: assistantContent }];
+            }
+
+            const lastIndex = newMsgs.length - 1;
+            if (newMsgs[lastIndex].role !== "assistant") {
+              newMsgs.push({ role: "assistant", content: assistantContent });
+            } else {
+              newMsgs[lastIndex] = { role: "assistant", content: assistantContent };
+            }
             return newMsgs;
           });
         },
+        undefined,
         () => {
           setIsStreaming(false);
         },

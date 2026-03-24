@@ -160,8 +160,12 @@ async def query_stream(req: QueryRequest):
       - event: done     — 生成完毕
     """
     try:
-        event_stream = _pipeline.query_and_generate_stream(
-            req.query, top_k=req.top_k, doc_ids=req.doc_ids, session_id=req.session_id
+        from core.agent import build_agent_stream
+        event_stream = build_agent_stream(
+            _pipeline,
+            req.query,
+            session_id=req.session_id,
+            doc_ids=req.doc_ids
         )
     except Exception as e:
         raise HTTPException(

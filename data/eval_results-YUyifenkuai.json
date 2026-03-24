@@ -1,0 +1,432 @@
+{
+  "timestamp": "2026-03-24T07:50:42.200503+00:00",
+  "sample_count": 30,
+  "scores": {
+    "faithfulness": 0.8087823287823288,
+    "answer_relevancy": 0.7688827440745803,
+    "llm_context_precision_with_reference": 0.7972222221843056,
+    "context_recall": 0.8666666666666667
+  },
+  "details": [
+    {
+      "user_input": "流式传输（Streaming）为何对基于 LLM 构建的应用程序至关重要？",
+      "retrieved_contexts": [
+        "Core component s\nS t r e a m i n gCop y p age\nLangChain implement s a streaming syst em to surface real-time updat es. Streaming is crucial f or enhancing the r esponsiv eness of applic ations buil t on LLMs.",
+        "By\ndisplaying output pr ogressively, even before a complet e response is r eady, streaming\nsignificantly improves user e xperience (UX), p articularly when de aling with the lat ency of\nLLMs. Overview\nLangChain ʼs streaming syst em lets you surface live feedback from agent runs t o your\napplication. Whatʼs possible with LangChain str eaming:\nSee the  section belo w for additional end-t o-end examples. Supported stream modes —get state updates after each agent st ep. —stream language model t okens as the yʼre generat ed.",
+        "—choose fr om updates (agent pr ogress), messages\n(LLM tokens + met adata), or custom (arbitrary user dat a). Stream agent progress\nStream LLM tokens\nStream thinking / reasoning tokens\nStream custom updates\nStream multiple modes\ncommon p att er nsCore component sStreaming\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 1/27\nPass one or mor e of the f ollowing str eam modes as a list t o the  or \nmethods:\nMode Descr iption\nupdatesStreams state updates after each agent st ep. If mul tiple updat es are made in\nthe same st ep (e.g., mul tiple nodes ar e run), those updat es are streamed\nseparately. messagesStreams tuples of (token, metadata) from any graph nodes wher e an LLM is\ninvoked. custom Streams cust om data from inside y our graph nodes using the str eam writer. Agent progress"
+      ],
+      "response": "流式传输（Streaming）对基于 LLM 构建的应用程序至关重要，因为它能够在完整响应尚未生成完毕时就逐步显示输出内容，从而显著提升应用程序的响应速度和用户体验（UX），尤其是在应对大语言模型（LLM）固有的延迟问题时效果尤为明显。",
+      "reference": "流式传输能够在完整响应准备好之前逐步显示输出，从而显著提升了处理 LLM 延迟时的用户体验。",
+      "faithfulness": 0.8,
+      "answer_relevancy": 0.8225917433639438,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "LangChain 的流式传输系统支持哪三种主要的流模式？",
+      "retrieved_contexts": [
+        "By\ndisplaying output pr ogressively, even before a complet e response is r eady, streaming\nsignificantly improves user e xperience (UX), p articularly when de aling with the lat ency of\nLLMs. Overview\nLangChain ʼs streaming syst em lets you surface live feedback from agent runs t o your\napplication. Whatʼs possible with LangChain str eaming:\nSee the  section belo w for additional end-t o-end examples. Supported stream modes —get state updates after each agent st ep. —stream language model t okens as the yʼre generat ed.",
+        "if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\nnode: model\ncontent: [{'type': 'tool_call_chunk', 'id': 'call_vbCyBcP8VuneUzyYlSBZZsVa', 'n\nnode: model\ncontent: [{'type': 'tool_call_chunk', 'id': None, 'name': None, 'args': '{\"', \nget_stream_writer\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 4/27\nIf y ou add  inside y our t ool, y ou w on ʼ t be able t o in v ok e the t ool\nout side of a LangGraph e x ecution cont e x t. Stream multiple modes\nStr e aming cust om updat es\nOutputfrom langchain.agents import create_agent\ndef get_weather(city: str) -> str:\n    \"\"\"Get weather for a given city.\"\"\"\n    # stream any arbitrary data\n    writer(f\"Looking up data for city: {city}\")\n    writer(f\"Acquired data for city: {city}\")\n    return f\"It's always sunny in {city}!\"\nagent = create_agent(",
+        "—choose fr om updates (agent pr ogress), messages\n(LLM tokens + met adata), or custom (arbitrary user dat a). Stream agent progress\nStream LLM tokens\nStream thinking / reasoning tokens\nStream custom updates\nStream multiple modes\ncommon p att er nsCore component sStreaming\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 1/27\nPass one or mor e of the f ollowing str eam modes as a list t o the  or \nmethods:\nMode Descr iption\nupdatesStreams state updates after each agent st ep. If mul tiple updat es are made in\nthe same st ep (e.g., mul tiple nodes ar e run), those updat es are streamed\nseparately. messagesStreams tuples of (token, metadata) from any graph nodes wher e an LLM is\ninvoked. custom Streams cust om data from inside y our graph nodes using the str eam writer. Agent progress"
+      ],
+      "response": "LangChain 的流式传输系统支持以下三种主要的流模式：\n\n1. **updates**：在每个 agent 步骤后流式传输状态更新。\n2. **messages**：流式传输语言模型生成的 token 及其元数据。\n3. **custom**：从图节点内部流式传输用户自定义的数据。",
+      "reference": "系统支持的流模式包括 updates、messages 和 custom。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9821065608859999,
+      "llm_context_precision_with_reference": 0.5833333333041666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在流式传输中，updates 模式的具体作用是什么？",
+      "retrieved_contexts": [
+        "if isinstance(message, ToolMessage):\n        print(f\"Tool response: {message.content_blocks}\")\ninput_message = {\"role\": \"user\", \"content\": \"What is the weather in Boston?\"}\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n):\n        if isinstance(token, AIMessageChunk):    stream_mode=[\"messages\", \"updates\"],\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n            _render_message_chunk(token)\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 10/27\nAccessing co mple ted m essages\nIf complet ed messages ar e track ed in an agentʼ s , y ou c an use stream_mode=\n[\"messages\", \"updates\"]  as demonstrat ed in the  section t o access\ncomplet ed messages dur ing str e aming.",
+        "We collect int errupts generat ed during the \"updates\" stream mode\n3. We respond t o those int errupts with a input_message = {\"role\": \"user\", \"content\": \"What is the weather in Boston?\"}\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n    stream_mode=[\"messages\", \"updates\"],\n):\n        if isinstance(token, AIMessageChunk):\n            _render_message_chunk(token)\n            if source == \"tools\":\n                _render_completed_message(update[\"messages\"][-1])full_message = None",
+        "Stream writer\nStream real-time updat es from tools dur ing execution. This is useful f or providing\nprogress feedback to users dur ing long-running operations. Use runtime.stream_writer to emit cust om updat es:\nSee all 42 linesresult = agent.invoke(\n    {\"messages\": [{\"role\": \"user\", \"content\": \"What's my current balance?\"}]},\n    context=UserContext(user_id=\"user123\")\n)\nfrom typing import Any\nfrom langgraph.store.memory import InMemoryStore\nfrom langchain.agents import create_agent"
+      ],
+      "response": "在流式传输中，**updates 模式**的作用是**实时捕获和处理代理（agent）执行过程中的中间更新信息**，例如工具调用（tool calls）、状态变化或人为干预（human-in-the-loop）等。\n\n具体来说：\n\n- 当使用 `stream_mode=[\"messages\", \"updates\"]` 时，除了获取完整的消息（messages），还可以通过 `\"updates\"` 获取来自不同来源（如 tools、agent 等）的增量更新。\n- 在 `\"updates\"` 流中，每个 chunk 包含一个字典，其键为数据来源（如 `\"tools\"`），值为该来源产生的更新内容（如新生成的消息或工具调用结果）。\n- 这对于实现**实时反馈**（如显示工具正在运行、进度提示）或**支持人工介入**（如暂停等待用户输入）非常有用。\n\n例如，在文档片段中提到：\n> “We collect interrupts generated during the 'updates' stream mode”  \n> “Stream real-time updates from tools during execution. This is useful for providing progress feedback to users during long-running operations.”\n\n因此，**updates 模式主要用于获取执行过程中的动态、细粒度的中间状态，而非仅等待最终完整消息。**",
+      "reference": "它会在每个代理（Agent）步骤之后单独流式传输状态更新。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9702962841315739,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果在同一个代理步骤中进行了多次更新，updates 模式会如何处理？",
+      "retrieved_contexts": [
+        "'edited_action': {\n                     'name': 'get_weather',\n                     'args': {'city': 'Boston, U.K.'}\n                 }\n            },\n            {'type': 'approve'},\n        ]\n    }\n}\ninterrupts = []\nfor chunk in agent.stream(\n    config=config,\n    stream_mode=[\"messages\", \"updates\"],\n):\n    # Streaming loop is unchanged\n        if isinstance(token, AIMessageChunk):\n            _render_message_chunk(token)\n            if source in (\"model\", \"tools\"):\n                _render_completed_message(update[\"messages\"][-1])\n            if source == \"__interrupt__\":\n                interrupts.extend(update)\n                _render_interrupt(update[0])    Command(resume=decisions),\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n    elif chunk[\"type\"] == \"updates\":",
+        "_render_message_chunk(token)\n            if source in (\"model\", \"tools\"):\n                _render_completed_message(update[\"messages\"][-1])    for request in interrupts[\"action_requests\"]:\n        print(request[\"description\"])\nconfig = {\"configurable\": {\"thread_id\": \"some_id\"}}\ninterrupts = []\n    config=config,\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n            if source == \"__interrupt__\":\n                interrupts.extend(update)\n                _render_interrupt(update[0])\n[{'name': 'get_weather', 'args': '', 'id': 'call_GOwNaQHeqMixay2qy80padfE', 'in\n[{'name': None, 'args': '{\"ci', 'id': None, 'index': 0, 'type': 'tool_call_chun\n[{'name': None, 'args': 'ty\": ', 'id': None, 'index': 0, 'type': 'tool_call_chu",
+        "Invocation\nY ou c an in v ok e an agent b y p assing an updat e t o it s . All agent s include a\n in their st at e; t o in v ok e the agent, p ass a ne w message:\nF or str e aming st eps and / or t ok ens fr om the agent, r ef er t o the  guide. Other wise, the agent f ollo ws the LangGraph  and suppor t s all associat ed\nmethods, such as stream  and invoke ."
+      ],
+      "response": "在 LangGraph 中，当使用 `stream_mode=[\"updates\"]` 时，如果在同一个代理步骤中进行了多次更新，`updates` 模式会为每次状态更新生成一个独立的更新事件（update event），并按顺序流式输出。\n\n具体来说：\n\n- 每个更新事件是一个字典，其键是触发更新的节点名称（如 `\"model\"`、`\"tools\"` 或 `\"__interrupt__\"`），值是该节点产生的状态更新内容。\n- 即使这些更新发生在同一个逻辑步骤内（例如，工具调用后紧接着模型响应），只要状态被多次修改，就会产生多个 `update` 项。\n- 在流式处理循环中，你可以通过遍历 `chunk[\"data\"].items()` 来分别处理每个来源（source）的更新。\n\n例如：\n```python\nfor chunk in agent.stream(..., stream_mode=[\"updates\"]):\n    if chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n            # 每个 source-update 对应一次状态变更\n            handle_update(source, update)\n```\n\n因此，**多次更新会被分别捕获和返回，确保不会丢失中间状态变化**。",
+      "reference": "这些更新将会被分别单独进行流式传输。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7858566694679983,
+      "llm_context_precision_with_reference": 0.49999999995,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "messages 流模式输出的数据结构是什么？",
+      "retrieved_contexts": [
+        "if isinstance(message, ToolMessage):\n        print(f\"Tool response: {message.content_blocks}\")\ninput_message = {\"role\": \"user\", \"content\": \"What is the weather in Boston?\"}\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n):\n        if isinstance(token, AIMessageChunk):    stream_mode=[\"messages\", \"updates\"],\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n            _render_message_chunk(token)\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 10/27\nAccessing co mple ted m essages\nIf complet ed messages ar e track ed in an agentʼ s , y ou c an use stream_mode=\n[\"messages\", \"updates\"]  as demonstrat ed in the  section t o access\ncomplet ed messages dur ing str e aming.",
+        "print(f\"Tool calls: {message.tool_calls}\")\n    if isinstance(message, ToolMessage):\n        print(f\"Tool response: {message.content_blocks}\")\ninput_message = {\"role\": \"user\", \"content\": \"What is the weather in Boston?\"}\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n):\n        if isinstance(token, AIMessageChunk):\n            _render_message_chunk(token)    middleware=[safety_guardrail],\n    stream_mode=[\"messages\", \"updates\", \"custom\"],\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n    elif chunk[\"type\"] == \"updates\":\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 14/27\nAlternatively, if you arenʼt able to add cust om events to the str eam, you can aggregate\nmessage chunks within the str eaming loop:\nOutput",
+        "We collect int errupts generat ed during the \"updates\" stream mode\n3. We respond t o those int errupts with a input_message = {\"role\": \"user\", \"content\": \"What is the weather in Boston?\"}\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n    stream_mode=[\"messages\", \"updates\"],\n):\n        if isinstance(token, AIMessageChunk):\n            _render_message_chunk(token)\n            if source == \"tools\":\n                _render_completed_message(update[\"messages\"][-1])full_message = None"
+      ],
+      "response": "在 LangChain 的 `stream_mode=[\"messages\"]` 流模式下，输出的数据结构是一个包含 `\"type\"` 和 `\"data\"` 字段的字典：\n\n- `\"type\"`：值为 `\"messages\"`，表示该 chunk 属于消息流类型。\n- `\"data\"`：是一个元组 `(token, metadata)`，其中：\n  - `token` 是一个消息块（如 `AIMessageChunk`），代表模型生成的部分内容；\n  - `metadata` 包含与该消息相关的元数据信息。\n\n例如：\n```python\n{\n    \"type\": \"messages\",\n    \"data\": (token, metadata)\n}\n```\n\n这种结构允许在流式传输过程中逐块获取模型生成的消息内容。",
+      "reference": "它会从任何调用了 LLM 的图节点中流式传输（token，metadata）元组。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.6822315962086511,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "custom 流模式允许用户执行什么操作？",
+      "retrieved_contexts": [
+        "—choose fr om updates (agent pr ogress), messages\n(LLM tokens + met adata), or custom (arbitrary user dat a). Stream agent progress\nStream LLM tokens\nStream thinking / reasoning tokens\nStream custom updates\nStream multiple modes\ncommon p att er nsCore component sStreaming\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 1/27\nPass one or mor e of the f ollowing str eam modes as a list t o the  or \nmethods:\nMode Descr iption\nupdatesStreams state updates after each agent st ep. If mul tiple updat es are made in\nthe same st ep (e.g., mul tiple nodes ar e run), those updat es are streamed\nseparately. messagesStreams tuples of (token, metadata) from any graph nodes wher e an LLM is\ninvoked. custom Streams cust om data from inside y our graph nodes using the str eam writer. Agent progress",
+        "class CustomState(AgentState):\n    user_preferences: dict\nagent = create_agent(\n    model,\n    tools=[tool1, tool2],\n    state_schema=CustomState\n)\n# The agent can now track additional state beyond messages\nresult = agent.invoke({\n    \"messages\": [{\"role\": \"user\", \"content\": \"I prefer technical explanations\"}\n    \"user_preferences\": {\"style\": \"technical\", \"verbosity\": \"detailed\"},\n})\nv1 migration guide\nstate_schema\ncreate_agent\nstate_schema create_agent\nMemor y\nLong-t er m memor y\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 15/17\nF or mor e det ails on str e aming, see . Middleware\n pr o vides po w er ful e x t ensibilit y f or cust omizing agent beha vior at dif f er ent\nst ages of e x ecution.",
+        "custom Streams cust om data from inside y our graph nodes using the str eam writer. Agent progress\nTo stream agent pr ogress, use the  or  methods with\nstream_mode=\"updates\". This emit s an event after every agent st ep. For example, if y ou have an agent that c alls a tool once, y ou should see the f ollowing\nupdates:\nLLM node:  with tool call requests\nTool node:  with execution r esult\nLLM node: Final AI r esponsestream astream\nstream astream\nAIMessage\nToolMessage\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 2/27\nLLM tokens\nTo stream tokens as the y are produced b y the LLM, use stream_mode=\"messages\". Below you can see the output of the agent str eaming tool calls and the final r esponse."
+      ],
+      "response": "custom 流模式允许用户从图节点（graph nodes）内部使用流写入器（stream writer）流式传输自定义数据。",
+      "reference": "它允许用户使用流写入器从图节点内部流式传输自定义数据。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.42238911895921044,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "要流式传输代理的执行进度，应该调用哪些方法及参数？",
+      "retrieved_contexts": [
+        "custom Streams cust om data from inside y our graph nodes using the str eam writer. Agent progress\nTo stream agent pr ogress, use the  or  methods with\nstream_mode=\"updates\". This emit s an event after every agent st ep. For example, if y ou have an agent that c alls a tool once, y ou should see the f ollowing\nupdates:\nLLM node:  with tool call requests\nTool node:  with execution r esult\nLLM node: Final AI r esponsestream astream\nstream astream\nAIMessage\nToolMessage\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 2/27\nLLM tokens\nTo stream tokens as the y are produced b y the LLM, use stream_mode=\"messages\". Below you can see the output of the agent str eaming tool calls and the final r esponse.",
+        "—choose fr om updates (agent pr ogress), messages\n(LLM tokens + met adata), or custom (arbitrary user dat a). Stream agent progress\nStream LLM tokens\nStream thinking / reasoning tokens\nStream custom updates\nStream multiple modes\ncommon p att er nsCore component sStreaming\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 1/27\nPass one or mor e of the f ollowing str eam modes as a list t o the  or \nmethods:\nMode Descr iption\nupdatesStreams state updates after each agent st ep. If mul tiple updat es are made in\nthe same st ep (e.g., mul tiple nodes ar e run), those updat es are streamed\nseparately. messagesStreams tuples of (token, metadata) from any graph nodes wher e an LLM is\ninvoked. custom Streams cust om data from inside y our graph nodes using the str eam writer. Agent progress",
+        "if isinstance(message, ToolMessage):\n        print(f\"Tool response: {message.content_blocks}\")\ninput_message = {\"role\": \"user\", \"content\": \"What is the weather in Boston?\"}\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n):\n        if isinstance(token, AIMessageChunk):    stream_mode=[\"messages\", \"updates\"],\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n            _render_message_chunk(token)\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 10/27\nAccessing co mple ted m essages\nIf complet ed messages ar e track ed in an agentʼ s , y ou c an use stream_mode=\n[\"messages\", \"updates\"]  as demonstrat ed in the  section t o access\ncomplet ed messages dur ing str e aming."
+      ],
+      "response": "要流式传输代理（agent）的执行进度，应使用 `stream` 或 `astream` 方法，并设置参数 `stream_mode=\"updates\"`。\n\n该模式会在每个代理步骤（agent step）后发出一个事件，例如：\n\n- LLM 节点生成工具调用请求；\n- 工具节点返回执行结果；\n- LLM 节点生成最终 AI 响应。\n\n示例代码如下：\n\n```python\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n    stream_mode=\"updates\"\n):\n    # 处理每一步的更新\n    for source, update in chunk[\"data\"].items():\n        ...\n```\n\n参考资料来自 LangChain 官方文档关于 Streaming 的说明。",
+      "reference": "应该使用 stream 或 astream 方法，并设置 stream_mode=\"updates\"。",
+      "faithfulness": 0.8461538461538461,
+      "answer_relevancy": 0.6891885920770258,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "当代理调用工具并完成后，工具节点（Tool node）通常会返回什么消息？",
+      "retrieved_contexts": [
+        "You can return a Command with or without including a\nToolMessage. If the model needs t o see that the t ool succeeded (f or example, t o confirm\na preference change ), include a ToolMessage in the updat e, using\nruntime.tool_call_id for the tool_call_id parameter. Behavior:\nUse this when the t ool is not just r eturning dat a, but also mut ating agent st ate.The command updat es state using update.",
+        "Behavior:\nUse this when the r esult is naturall y human-r eadable t ext. Return an ob ject\nReturn an object (f or example, a dict) when y our tool produces structur ed data that the\nmodel should inspect. Behavior:The return value is con verted to a ToolMessage. The model sees that t ext and decides what t o do next. No agent st ate fields ar e changed unless the model or another t ool does so lat er. The object is ser ialized and sent b ack as tool output.",
+        "The model decides when t o invoke a tool based on the"
+      ],
+      "response": "当代理调用工具并完成后，工具节点（Tool node）通常会返回一个 **ToolMessage**。\n\n根据 LangChain 的文档：\n\n- 如果工具返回的是一个字符串（str），它会被转换为 ToolMessage，内容为该字符串。\n- 如果工具返回的是一个结构化对象（如 dict），该对象会被序列化后作为 ToolMessage 的内容返回。\n- ToolMessage 会被送回给模型，供其读取结果并决定下一步操作。\n\n因此，工具节点的典型返回是 **ToolMessage**，其中包含工具执行的结果（无论是文本还是结构化数据）。",
+      "reference": "工具节点会返回包含执行结果的 ToolMessage。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7993593975708839,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在代理流式进度中，LLM 节点在需要调用工具时会发出什么？",
+      "retrieved_contexts": [
+        "custom Streams cust om data from inside y our graph nodes using the str eam writer. Agent progress\nTo stream agent pr ogress, use the  or  methods with\nstream_mode=\"updates\". This emit s an event after every agent st ep. For example, if y ou have an agent that c alls a tool once, y ou should see the f ollowing\nupdates:\nLLM node:  with tool call requests\nTool node:  with execution r esult\nLLM node: Final AI r esponsestream astream\nstream astream\nAIMessage\nToolMessage\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 2/27\nLLM tokens\nTo stream tokens as the y are produced b y the LLM, use stream_mode=\"messages\". Below you can see the output of the agent str eaming tool calls and the final r esponse.",
+        "The model decides when t o invoke a tool based on the",
+        "See the  API reference for all options. Route with tools_condition\nUse  for conditional r outing b ased on whether the LLM made t ool calls:from langgraph.prebuilt import ToolNode\n# Default: catch invocation errors, re-raise execution errors\ntool_node = ToolNode(tools)\n# Catch all errors and return error message to LLM\ntool_node = ToolNode(tools, handle_tool_errors=True)\n# Custom error message\ntool_node = ToolNode(tools, handle_tool_errors=\"Something went wrong, please tr\n# Custom error handler\ndef handle_error(e: ValueError) -> str:\n    return f\"Invalid input: {e}\"\ntool_node = ToolNode(tools, handle_tool_errors=handle_error)\n# Only catch specific exception types\ntool_node = ToolNode(tools, handle_tool_errors=(ValueError, TypeError))\nfrom langgraph.prebuilt import ToolNode, tools_condition"
+      ],
+      "response": "在代理流式进度中，当 LLM 节点需要调用工具时，会发出包含工具调用请求的 **AIMessage**。",
+      "reference": "LLM 节点会发出带有工具调用请求的 AIMessage。",
+      "faithfulness": 0.6666666666666666,
+      "answer_relevancy": 0.9202303578595264,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果开发者想要查看 LLM 逐个生成的 token，应使用哪种流模式？",
+      "retrieved_contexts": [
+        "—choose fr om updates (agent pr ogress), messages\n(LLM tokens + met adata), or custom (arbitrary user dat a). Stream agent progress\nStream LLM tokens\nStream thinking / reasoning tokens\nStream custom updates\nStream multiple modes\ncommon p att er nsCore component sStreaming\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 1/27\nPass one or mor e of the f ollowing str eam modes as a list t o the  or \nmethods:\nMode Descr iption\nupdatesStreams state updates after each agent st ep. If mul tiple updat es are made in\nthe same st ep (e.g., mul tiple nodes ar e run), those updat es are streamed\nseparately. messagesStreams tuples of (token, metadata) from any graph nodes wher e an LLM is\ninvoked. custom Streams cust om data from inside y our graph nodes using the str eam writer. Agent progress",
+        "custom Streams cust om data from inside y our graph nodes using the str eam writer. Agent progress\nTo stream agent pr ogress, use the  or  methods with\nstream_mode=\"updates\". This emit s an event after every agent st ep. For example, if y ou have an agent that c alls a tool once, y ou should see the f ollowing\nupdates:\nLLM node:  with tool call requests\nTool node:  with execution r esult\nLLM node: Final AI r esponsestream astream\nstream astream\nAIMessage\nToolMessage\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 2/27\nLLM tokens\nTo stream tokens as the y are produced b y the LLM, use stream_mode=\"messages\". Below you can see the output of the agent str eaming tool calls and the final r esponse.",
+        "token, metadata = chunk[\"data\"]\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():command\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 20/27\nStreaming from sub-agents\nWhen ther e are multiple LLMs at an y point in an agent, itʼ s often necessar y to\ndisambiguat e the sour ce of messages as the y are generat ed. To do this, p ass a  to each agent when cr eating it."
+      ],
+      "response": "开发者应使用 `stream_mode=\"messages\"` 来查看 LLM 逐个生成的 token。",
+      "reference": "开发者应该使用 stream_mode=\"messages\"。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7617325961448866,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "什么内置函数允许在工具执行期间流式传输自定义的更新状态？",
+      "retrieved_contexts": [
+        "Stream writer\nStream real-time updat es from tools dur ing execution. This is useful f or providing\nprogress feedback to users dur ing long-running operations. Use runtime.stream_writer to emit cust om updat es:\nSee all 42 linesresult = agent.invoke(\n    {\"messages\": [{\"role\": \"user\", \"content\": \"What's my current balance?\"}]},\n    context=UserContext(user_id=\"user123\")\n)\nfrom typing import Any\nfrom langgraph.store.memory import InMemoryStore\nfrom langchain.agents import create_agent",
+        "if isinstance(message, ToolMessage):\n        print(f\"Tool response: {message.content_blocks}\")\ninput_message = {\"role\": \"user\", \"content\": \"What is the weather in Boston?\"}\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n):\n        if isinstance(token, AIMessageChunk):    stream_mode=[\"messages\", \"updates\"],\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n            _render_message_chunk(token)\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 10/27\nAccessing co mple ted m essages\nIf complet ed messages ar e track ed in an agentʼ s , y ou c an use stream_mode=\n[\"messages\", \"updates\"]  as demonstrat ed in the  section t o access\ncomplet ed messages dur ing str e aming.",
+        "print(f\"Tool calls: {message.tool_calls}\")\n    if isinstance(message, ToolMessage):\n        print(f\"Tool response: {message.content_blocks}\")\ninput_message = {\"role\": \"user\", \"content\": \"What is the weather in Boston?\"}\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n):\n        if isinstance(token, AIMessageChunk):\n            _render_message_chunk(token)    middleware=[safety_guardrail],\n    stream_mode=[\"messages\", \"updates\", \"custom\"],\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n    elif chunk[\"type\"] == \"updates\":\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 14/27\nAlternatively, if you arenʼt able to add cust om events to the str eam, you can aggregate\nmessage chunks within the str eaming loop:\nOutput"
+      ],
+      "response": "根据提供的文档片段，**`runtime.stream_writer`** 是用于在工具执行期间流式传输自定义更新状态的内置函数。\n\n文档中提到：\n\n> Use `runtime.stream_writer` to emit custom updates.\n\n这表明你可以使用 `runtime.stream_writer` 来发送自定义的实时更新，适用于在长时间运行的操作中向用户提供进度反馈。",
+      "reference": "get_stream_writer 函数可以实现流式传输任意数据。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.26850187236944384,
+      "llm_context_precision_with_reference": 0.3333333333,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "在工具内部添加 get_stream_writer 会带来什么调用限制？",
+      "retrieved_contexts": [
+        "Stream writer\nStream real-time updat es from tools dur ing execution. This is useful f or providing\nprogress feedback to users dur ing long-running operations. Use runtime.stream_writer to emit cust om updat es:\nSee all 42 linesresult = agent.invoke(\n    {\"messages\": [{\"role\": \"user\", \"content\": \"What's my current balance?\"}]},\n    context=UserContext(user_id=\"user123\")\n)\nfrom typing import Any\nfrom langgraph.store.memory import InMemoryStore\nfrom langchain.agents import create_agent",
+        "result = model_with_tools.invoke(\n        [\n            {\n                \"role\": \"system\",\n                \"content\": \"Evaluate this AI response as generally safe or unsa\n            },\n            {\n                \"role\": \"user\",\n                \"content\": f\"AI response: {last_message.text}\"\n            }\n        ]\n    )from langgraph.config import get_stream_writer  \n    stream_writer = get_stream_writer()\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 12/27\nWe can then incor porate this middle ware into our agent and include it s custom stream\nevents:\n    tool_call = result.tool_calls[0]\n    if tool_call[\"args\"][\"evaluation\"] == \"unsafe\":\n        last_message.content = \"I cannot provide that response. Please rephrase\n    return None    stream_writer(result)\n2026/3/21 17:14 Streaming - Docs by LangChain",
+        "from langgraph.store.memory import InMemoryStore\nfrom langchain.agents import create_agent\nfrom langchain.tools import tool, ToolRuntime\n# Access memoryBaseStore\nPostgresStore\nmemor y document ation\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 9/16\nIf y ou use runtime.stream_writer  inside y our t ool, the t ool must be in v ok ed within a\nLangGraph e x ecution cont e x t. See  f or mor e det ails. ToolNode\n is a prebuilt node that e xecutes tools in LangGraph w orkflows. It handles\nparallel tool execution, er ror handling, and st ate injection aut omatically."
+      ],
+      "response": "在工具内部使用 `get_stream_writer`（或 `runtime.stream_writer`）会带来一个关键调用限制：**该工具必须在 LangGraph 的执行上下文（execution context）中被调用**。\n\n如果在非 LangGraph 执行环境中调用此类工具（例如直接在普通 Python 脚本或非 LangGraph 工作流中调用），将无法获取有效的 stream writer，可能导致运行时错误或流式更新失效。\n\n相关文档说明：\n> “If you use runtime.stream_writer inside your tool, the tool must be invoked within a LangGraph execution context.”",
+      "reference": "该工具将无法在 LangGraph 执行上下文之外被独立调用。",
+      "faithfulness": 0.6666666666666666,
+      "answer_relevancy": 0.7199698266077225,
+      "llm_context_precision_with_reference": 0.5833333333041666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "当同时流式传输多种模式时，如何确定当前接收的数据块属于哪种流模式？",
+      "retrieved_contexts": [
+        "Use\nchunk[\"type\"] to determine the str eam mode and chunk[\"data\"] to access the\npayload.",
+        "if isinstance(message, ToolMessage):\n        print(f\"Tool response: {message.content_blocks}\")\ninput_message = {\"role\": \"user\", \"content\": \"What is the weather in Boston?\"}\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n):\n        if isinstance(token, AIMessageChunk):    stream_mode=[\"messages\", \"updates\"],\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n            _render_message_chunk(token)\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 10/27\nAccessing co mple ted m essages\nIf complet ed messages ar e track ed in an agentʼ s , y ou c an use stream_mode=\n[\"messages\", \"updates\"]  as demonstrat ed in the  section t o access\ncomplet ed messages dur ing str e aming.",
+        "if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\nnode: model\ncontent: [{'type': 'tool_call_chunk', 'id': 'call_vbCyBcP8VuneUzyYlSBZZsVa', 'n\nnode: model\ncontent: [{'type': 'tool_call_chunk', 'id': None, 'name': None, 'args': '{\"', \nget_stream_writer\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 4/27\nIf y ou add  inside y our t ool, y ou w on ʼ t be able t o in v ok e the t ool\nout side of a LangGraph e x ecution cont e x t. Stream multiple modes\nStr e aming cust om updat es\nOutputfrom langchain.agents import create_agent\ndef get_weather(city: str) -> str:\n    \"\"\"Get weather for a given city.\"\"\"\n    # stream any arbitrary data\n    writer(f\"Looking up data for city: {city}\")\n    writer(f\"Acquired data for city: {city}\")\n    return f\"It's always sunny in {city}!\"\nagent = create_agent("
+      ],
+      "response": "当同时流式传输多种模式时（例如 `stream_mode=[\"messages\", \"updates\", \"custom\"]`），可以通过检查每个数据块（chunk）中的 `\"type\"` 键来确定其所属的流模式。\n\n根据文档说明：\n- 每个流式数据块是一个包含 `type`、`ns` 和 `data` 键的 `StreamPart` 字典。\n- 使用 `chunk[\"type\"]` 可以判断当前块属于哪种流模式（如 `\"messages\"`、`\"updates\"` 或 `\"custom\"`）。\n- 然后通过 `chunk[\"data\"]` 访问对应的有效载荷数据。\n\n例如：\n```python\nif chunk[\"type\"] == \"messages\":\n    token, metadata = chunk[\"data\"]\nelif chunk[\"type\"] == \"updates\":\n    # 处理 updates 数据\nelif chunk[\"type\"] == \"custom\":\n    print(chunk[\"data\"])\n```",
+      "reference": "可以通过读取 chunk[\"type\"] 属性来确定流模式。",
+      "faithfulness": 0.6363636363636364,
+      "answer_relevancy": 0.823761892834499,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在多模式流式传输的数据块中，通过哪个键可以访问实际的有效载荷？",
+      "retrieved_contexts": [
+        "Use\nchunk[\"type\"] to determine the str eam mode and chunk[\"data\"] to access the\npayload.",
+        "if isinstance(message, ToolMessage):\n        print(f\"Tool response: {message.content_blocks}\")\ninput_message = {\"role\": \"user\", \"content\": \"What is the weather in Boston?\"}\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n):\n        if isinstance(token, AIMessageChunk):    stream_mode=[\"messages\", \"updates\"],\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n            _render_message_chunk(token)\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 10/27\nAccessing co mple ted m essages\nIf complet ed messages ar e track ed in an agentʼ s , y ou c an use stream_mode=\n[\"messages\", \"updates\"]  as demonstrat ed in the  section t o access\ncomplet ed messages dur ing str e aming.",
+        "—choose fr om updates (agent pr ogress), messages\n(LLM tokens + met adata), or custom (arbitrary user dat a). Stream agent progress\nStream LLM tokens\nStream thinking / reasoning tokens\nStream custom updates\nStream multiple modes\ncommon p att er nsCore component sStreaming\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 1/27\nPass one or mor e of the f ollowing str eam modes as a list t o the  or \nmethods:\nMode Descr iption\nupdatesStreams state updates after each agent st ep. If mul tiple updat es are made in\nthe same st ep (e.g., mul tiple nodes ar e run), those updat es are streamed\nseparately. messagesStreams tuples of (token, metadata) from any graph nodes wher e an LLM is\ninvoked. custom Streams cust om data from inside y our graph nodes using the str eam writer. Agent progress"
+      ],
+      "response": "在多模式流式传输的数据块中，可以通过 **`\"data\"`** 键访问实际的有效载荷。\n\n根据文档描述，每个流式数据块（StreamPart dict）包含 `type`、`ns` 和 `data` 键，其中 `chunk[\"data\"]` 用于访问有效载荷。",
+      "reference": "可以通过 chunk[\"data\"] 键来访问实际的有效载荷。",
+      "faithfulness": 0.8,
+      "answer_relevancy": 0.9537984681270449,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "为了流式传输模型内部产生的“思考（thinking）”或“推理”标记，应过滤哪种内容块类型？",
+      "retrieved_contexts": [
+        "https://docs.langchain.com/oss/python/langchain/streaming 6/27\nCommon patterns\nBelow are examples sho wing common use c ases for streaming. Streaming thinking / reasoning tokens\nSome models per form internal reasoning bef ore producing a final answ er. You can stream\nthese thinking / r easoning t okens as the yʼre generat ed by filtering \n for the type \"reasoning\". R e asoning output must be enabled on the model. See the  and y our  f or configuration det ails.",
+        "T o quickl y check a modelʼ s r e asoning suppor t, see . To stream thinking t okens from an agent, use stream_mode=\"messages\" and filter for\nreasoning cont ent blocks:\nOutput\nstream_mode: updates\ncontent: {'model': {'messages': [AIMessage(content='', response_metadata={'toke\nstream_mode: custom\ncontent: Looking up data for city: San Francisco\nstream_mode: custom\ncontent: Acquired data for city: San Francisco\nstream_mode: updates",
+        "token, metadata = chunk[\"data\"]\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():command\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 20/27\nStreaming from sub-agents\nWhen ther e are multiple LLMs at an y point in an agent, itʼ s often necessar y to\ndisambiguat e the sour ce of messages as the y are generat ed. To do this, p ass a  to each agent when cr eating it."
+      ],
+      "response": "为了流式传输模型内部产生的“思考（thinking）”或“推理”标记，应过滤类型为 **\"reasoning\"** 的内容块。",
+      "reference": "应在使用 messages 模式时，过滤类型为 \"reasoning\" 的标准内容块。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7784169207174668,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "流式传输推理 token 前，必须在模型端确认什么前提条件？",
+      "retrieved_contexts": [
+        "The model decides when t o invoke a tool based on the",
+        "T o quickl y check a modelʼ s r e asoning suppor t, see . To stream thinking t okens from an agent, use stream_mode=\"messages\" and filter for\nreasoning cont ent blocks:\nOutput\nstream_mode: updates\ncontent: {'model': {'messages': [AIMessage(content='', response_metadata={'toke\nstream_mode: custom\ncontent: Looking up data for city: San Francisco\nstream_mode: custom\ncontent: Acquired data for city: San Francisco\nstream_mode: updates",
+        "if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\nnode: model\ncontent: [{'type': 'tool_call_chunk', 'id': 'call_vbCyBcP8VuneUzyYlSBZZsVa', 'n\nnode: model\ncontent: [{'type': 'tool_call_chunk', 'id': None, 'name': None, 'args': '{\"', \nget_stream_writer\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 4/27\nIf y ou add  inside y our t ool, y ou w on ʼ t be able t o in v ok e the t ool\nout side of a LangGraph e x ecution cont e x t. Stream multiple modes\nStr e aming cust om updat es\nOutputfrom langchain.agents import create_agent\ndef get_weather(city: str) -> str:\n    \"\"\"Get weather for a given city.\"\"\"\n    # stream any arbitrary data\n    writer(f\"Looking up data for city: {city}\")\n    writer(f\"Acquired data for city: {city}\")\n    return f\"It's always sunny in {city}!\"\nagent = create_agent("
+      ],
+      "response": "在流式传输推理（reasoning）token 之前，必须在模型端确认**已启用推理输出（reasoning output）功能**。",
+      "reference": "前提是该模型必须已启用推理输出（Reasoning output）功能。",
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.7943088465068824,
+      "llm_context_precision_with_reference": 0.49999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "LangChain 是如何统一不同模型提供商的专有推理输出格式的？",
+      "retrieved_contexts": [
+        "Structured outputagent = create_agent(\n    model,\n    tools,\n    name=\"research_assistant\"\n)\nresult = agent.invoke(\n    {\"messages\": [{\"role\": \"user\", \"content\": \"What's the weather in San Franci\n)name\nmul ti-agent syst ems\nt ool names\nState\nsequence of messages\nstr e aming\nGraph API\nLangSmith\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 11/17\nIn some situations, y ou ma y want the agent t o r etur n an output in a specific f or mat. LangChain pr o vides strat egies f or structur ed output via the  p aramet er .",
+        "4567')response_format\nProviderStrategy\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 12/17\nAs of langchain 1.0 , simpl y p assing a schema ( e.g., response_format=ContactInfo )\nwill def aul t t o ProviderStrategy  if the model suppor t s nativ e structur ed output. I t will f all\nb ack t o ToolStrategy  other wise.",
+        "if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\nnode: model\ncontent: [{'type': 'tool_call_chunk', 'id': 'call_vbCyBcP8VuneUzyYlSBZZsVa', 'n\nnode: model\ncontent: [{'type': 'tool_call_chunk', 'id': None, 'name': None, 'args': '{\"', \nget_stream_writer\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 4/27\nIf y ou add  inside y our t ool, y ou w on ʼ t be able t o in v ok e the t ool\nout side of a LangGraph e x ecution cont e x t. Stream multiple modes\nStr e aming cust om updat es\nOutputfrom langchain.agents import create_agent\ndef get_weather(city: str) -> str:\n    \"\"\"Get weather for a given city.\"\"\"\n    # stream any arbitrary data\n    writer(f\"Looking up data for city: {city}\")\n    writer(f\"Acquired data for city: {city}\")\n    return f\"It's always sunny in {city}!\"\nagent = create_agent("
+      ],
+      "response": "LangChain 通过 **结构化输出（Structured Output）策略** 来统一不同模型提供商的专有推理输出格式。主要采用两种策略：\n\n1. **ProviderStrategy**：当模型支持原生结构化输出（如通过 `response_format` 参数指定 JSON Schema 等）时，LangChain 默认使用该模型提供商自身的机制来生成结构化输出。\n\n2. **ToolStrategy**：当模型不支持或不可靠地支持原生结构化输出时，LangChain 使用“人工工具调用”（artificial tool calling）的方式，通过模拟工具调用来强制模型按照指定格式输出。\n\n从 LangChain 1.0 开始，用户只需传入一个 schema（例如 `response_format=ContactInfo`），LangChain 会自动优先尝试使用 ProviderStrategy，若不可用则回退到 ToolStrategy，从而在不同模型之间提供统一、可靠的结构化输出接口。",
+      "reference": "LangChain 会通过 content_blocks 属性将它们标准化为统一的 \"reasoning\" 内容块类型。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.6890645526084117,
+      "llm_context_precision_with_reference": 0.0,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "如果想在流式传输时同时访问增量消息和由状态追踪的完整解析消息，应如何设置流模式？",
+      "retrieved_contexts": [
+        "if isinstance(message, ToolMessage):\n        print(f\"Tool response: {message.content_blocks}\")\ninput_message = {\"role\": \"user\", \"content\": \"What is the weather in Boston?\"}\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n):\n        if isinstance(token, AIMessageChunk):    stream_mode=[\"messages\", \"updates\"],\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n            _render_message_chunk(token)\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 10/27\nAccessing co mple ted m essages\nIf complet ed messages ar e track ed in an agentʼ s , y ou c an use stream_mode=\n[\"messages\", \"updates\"]  as demonstrat ed in the  section t o access\ncomplet ed messages dur ing str e aming.",
+        "—choose fr om updates (agent pr ogress), messages\n(LLM tokens + met adata), or custom (arbitrary user dat a). Stream agent progress\nStream LLM tokens\nStream thinking / reasoning tokens\nStream custom updates\nStream multiple modes\ncommon p att er nsCore component sStreaming\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 1/27\nPass one or mor e of the f ollowing str eam modes as a list t o the  or \nmethods:\nMode Descr iption\nupdatesStreams state updates after each agent st ep. If mul tiple updat es are made in\nthe same st ep (e.g., mul tiple nodes ar e run), those updat es are streamed\nseparately. messagesStreams tuples of (token, metadata) from any graph nodes wher e an LLM is\ninvoked. custom Streams cust om data from inside y our graph nodes using the str eam writer. Agent progress",
+        "_render_completed_message(update[\"messages\"][-1])full_message = None\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n            full_message = token if full_message is None else full_message + to\n            if token.chunk_position == \"last\":\n                if full_message.tool_calls:\n                    print(f\"Tool calls: {full_message.tool_calls}\")\n                full_message = None\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\nint er rupt s abo v e e xample\nhuman-in-the-loop middle war e and a checkpoint er\ncommand\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 16/27\nfrom typing import Any\nfrom langchain.agents import create_agent\nfrom langchain.agents.middleware import HumanInTheLoopMiddleware"
+      ],
+      "response": "应设置 `stream_mode=[\"messages\", \"updates\"]`。\n\n- `\"messages\"` 模式用于流式传输 LLM 生成的增量消息（即 token 及其元数据）。\n- `\"updates\"` 模式用于访问代理在每个步骤后产生的状态更新，其中包括由状态追踪的完整解析消息。\n\n这样可以在流式传输过程中同时获取增量内容和完整的已完成消息。",
+      "reference": "应将流模式设置为 stream_mode=[\"messages\", \"updates\"]。",
+      "faithfulness": 0.7142857142857143,
+      "answer_relevancy": 0.8184627222945473,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果已完成的消息没有被反映在状态更新中，开发者可以采取哪两种方式访问它们？",
+      "retrieved_contexts": [
+        "if isinstance(message, ToolMessage):\n        print(f\"Tool response: {message.content_blocks}\")\ninput_message = {\"role\": \"user\", \"content\": \"What is the weather in Boston?\"}\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n):\n        if isinstance(token, AIMessageChunk):    stream_mode=[\"messages\", \"updates\"],\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n            _render_message_chunk(token)\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 10/27\nAccessing co mple ted m essages\nIf complet ed messages ar e track ed in an agentʼ s , y ou c an use stream_mode=\n[\"messages\", \"updates\"]  as demonstrat ed in the  section t o access\ncomplet ed messages dur ing str e aming.",
+        "_render_completed_message(update[\"messages\"][-1])full_message = None\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n            full_message = token if full_message is None else full_message + to\n            if token.chunk_position == \"last\":\n                if full_message.tool_calls:\n                    print(f\"Tool calls: {full_message.tool_calls}\")\n                full_message = None\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\nint er rupt s abo v e e xample\nhuman-in-the-loop middle war e and a checkpoint er\ncommand\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 16/27\nfrom typing import Any\nfrom langchain.agents import create_agent\nfrom langchain.agents.middleware import HumanInTheLoopMiddleware",
+        "_render_message_chunk(token)\n            if source in (\"model\", \"tools\"):\n                _render_completed_message(update[\"messages\"][-1])    for request in interrupts[\"action_requests\"]:\n        print(request[\"description\"])\nconfig = {\"configurable\": {\"thread_id\": \"some_id\"}}\ninterrupts = []\n    config=config,\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n            if source == \"__interrupt__\":\n                interrupts.extend(update)\n                _render_interrupt(update[0])\n[{'name': 'get_weather', 'args': '', 'id': 'call_GOwNaQHeqMixay2qy80padfE', 'in\n[{'name': None, 'args': '{\"ci', 'id': None, 'index': 0, 'type': 'tool_call_chun\n[{'name': None, 'args': 'ty\": ', 'id': None, 'index': 0, 'type': 'tool_call_chu"
+      ],
+      "response": "根据提供的文档片段，开发者可以采取以下两种方式访问已完成的消息：\n\n1. 使用 `stream_mode=[\"messages\", \"updates\"]` 进行流式处理，在流中通过 `\"messages\"` 类型的 chunk 获取已完成的消息。\n2. 在 `\"messages\"` 流中，通过累积 `AIMessageChunk` 并检查 `token.chunk_position == \"last\"` 来识别并访问完整的消息。",
+      "reference": "可以使用自定义更新，或者在流式传输循环中聚合消息块。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8114152641057071,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在聚合消息块以获取完整工具调用时，应该检查 token 的哪个属性是否为 \"last\"？",
+      "retrieved_contexts": [
+        "_render_completed_message(update[\"messages\"][-1])full_message = None\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n            full_message = token if full_message is None else full_message + to\n            if token.chunk_position == \"last\":\n                if full_message.tool_calls:\n                    print(f\"Tool calls: {full_message.tool_calls}\")\n                full_message = None\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\nint er rupt s abo v e e xample\nhuman-in-the-loop middle war e and a checkpoint er\ncommand\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 16/27\nfrom typing import Any\nfrom langchain.agents import create_agent\nfrom langchain.agents.middleware import HumanInTheLoopMiddleware",
+        "if latest_message.content:\n        if isinstance(latest_message, HumanMessage):\n            print(f\"User: {latest_message.content}\")\n        elif isinstance(latest_message, AIMessage):\n            print(f\"Agent: {latest_message.content}\")\n    elif latest_message.tool_calls:\n        print(f\"Calling tools: {[tc['name'] for tc in latest_message.tool_calls\nStr e aming\nMiddle war e\n@before_model\n@after_model @wrap_tool_call Middle war e\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 16/17\nCore component s\nToolsCop y p age\nTools extend what  can do—letting them f etch real-time dat a, execute code, quer y\nexternal databases, and t ake actions in the w orld. Under the hood, t ools are callable functions with w ell-defined input s and output s that get\npassed to a .",
+        "_render_message_chunk(token)\n            if source in (\"model\", \"tools\"):\n                _render_completed_message(update[\"messages\"][-1])    for request in interrupts[\"action_requests\"]:\n        print(request[\"description\"])\nconfig = {\"configurable\": {\"thread_id\": \"some_id\"}}\ninterrupts = []\n    config=config,\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n            if source == \"__interrupt__\":\n                interrupts.extend(update)\n                _render_interrupt(update[0])\n[{'name': 'get_weather', 'args': '', 'id': 'call_GOwNaQHeqMixay2qy80padfE', 'in\n[{'name': None, 'args': '{\"ci', 'id': None, 'index': 0, 'type': 'tool_call_chun\n[{'name': None, 'args': 'ty\": ', 'id': None, 'index': 0, 'type': 'tool_call_chu"
+      ],
+      "response": "在聚合消息块以获取完整工具调用时，应检查 token 的 **`chunk_position`** 属性是否为 `\"last\"`。",
+      "reference": "应该检查 token.chunk_position 属性是否等于 \"last\"。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8403032367072498,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "为代理添加人类在环（human-in-the-loop）中断功能时，必须配置哪两个组件？",
+      "retrieved_contexts": [
+        "[{'name': None, 'args': '\"}', 'id': None, 'index': 0, 'type': 'tool_call_chunk\nTool calls: [{'name': 'get_weather', 'args': {'city': 'Boston'}, 'id': 'call_je\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 15/27\nStreaming with human-in-the-loop\nTo handle human-in-the-loop , we build on the :\n1. We configur e the agent with \n2.",
+        "_render_completed_message(update[\"messages\"][-1])full_message = None\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n            full_message = token if full_message is None else full_message + to\n            if token.chunk_position == \"last\":\n                if full_message.tool_calls:\n                    print(f\"Tool calls: {full_message.tool_calls}\")\n                full_message = None\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\nint er rupt s abo v e e xample\nhuman-in-the-loop middle war e and a checkpoint er\ncommand\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 16/27\nfrom typing import Any\nfrom langchain.agents import create_agent\nfrom langchain.agents.middleware import HumanInTheLoopMiddleware",
+        "base_prompt = \"You are a helpful assistant.\"\n    if user_role == \"expert\":\n        return f\"{base_prompt} Provide detailed technical responses.\"\n    elif user_role == \"beginner\":\n        return f\"{base_prompt} Explain concepts simply and avoid jargon.\"\n    return base_prompt\nagent = create_agent(\n    model=\"gpt-4.1\",\n    tools=[web_search],\n    middleware=[user_role_prompt],\n    context_schema=Context\n)\n# The system prompt will be set dynamically based on context\nresult = agent.invoke(\n    {\"messages\": [{\"role\": \"user\", \"content\": \"Explain machine learning\"}]},\n    context={\"user_role\": \"expert\"}\n)\nMessages\nMiddle war e\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 10/17\nSet an optional  f or the agent. This is used as the node identifier when adding the\nagent as a subgraph in :"
+      ],
+      "response": "为代理添加人类在环（human-in-the-loop）中断功能时，必须配置以下两个组件：\n\n1. **HumanInTheLoopMiddleware**（人类在环中间件）  \n2. **检查点器（checkpointing）**\n\n这两个组件共同支持在流式处理过程中捕获中断并等待人工输入。",
+      "reference": "必须配置人类在环中间件和检查点（checkpointer）。",
+      "faithfulness": 0.4,
+      "answer_relevancy": 0.9810940650693294,
+      "llm_context_precision_with_reference": 0.49999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在使用“人类在环”工作流时，中断事件是在哪种流模式期间被收集的？",
+      "retrieved_contexts": [
+        "print(f\"Tool calls: {message.tool_calls}\")\n    if isinstance(message, ToolMessage):\n        print(f\"Tool response: {message.content_blocks}\")    middleware=[\n        HumanInTheLoopMiddleware(interrupt_on={\"get_weather\": True}),\n    ],\n    checkpointer=checkpointer,\ndef _render_interrupt(interrupt: Interrupt) -> None:\n    interrupts = interrupt.value  \n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 17/27\nOutput\nSee all 21 linesinput_message = {\n    \"role\": \"user\",\n    \"content\": (\n        \"Can you look up the weather in Boston and San Francisco?\"\n    ),\n}\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n    stream_mode=[\"messages\", \"updates\"],\n):\n        if isinstance(token, AIMessageChunk):\n            _render_message_chunk(token)\n            if source in (\"model\", \"tools\"):",
+        "[{'name': None, 'args': '\"}', 'id': None, 'index': 0, 'type': 'tool_call_chunk\nTool calls: [{'name': 'get_weather', 'args': {'city': 'Boston'}, 'id': 'call_je\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 15/27\nStreaming with human-in-the-loop\nTo handle human-in-the-loop , we build on the :\n1. We configur e the agent with \n2.",
+        "[{'name': None, 'args': 'ty\": ', 'id': None, 'index': 0, 'type': 'tool_call_chu\n[{'name': None, 'args': '\"Bosto', 'id': None, 'index': 0, 'type': 'tool_call_ch\n[{'name': None, 'args': 'n\"}', 'id': None, 'index': 0, 'type': 'tool_call_chunk\n[{'name': 'get_weather', 'args': '', 'id': 'call_Ndb4jvWm2uMA0JDQXu37wDH6', 'in\n[{'name': None, 'args': '{\"ci', 'id': None, 'index': 1, 'type': 'tool_call_chun\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 18/27\nWe next collect a  for each interrupt. Impor tantly, the order of decisions must\nmatch the or der of actions w e collect ed."
+      ],
+      "response": "在使用“人类在环”（human-in-the-loop）工作流时，中断事件是在 **\"updates\" 流模式** 期间被收集的。",
+      "reference": "中断事件是在 \"updates\" 流模式期间生成的。",
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.9290765157683591,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "当系统中有多个子代理参与时，如何消除所生成消息的来源歧义？",
+      "retrieved_contexts": [
+        "token, metadata = chunk[\"data\"]\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():command\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 20/27\nStreaming from sub-agents\nWhen ther e are multiple LLMs at an y point in an agent, itʼ s often necessar y to\ndisambiguat e the sour ce of messages as the y are generat ed. To do this, p ass a  to each agent when cr eating it.",
+        "This p aramet er is a v ailable on all chat\nmodels via the b ase class. Output\nSee all 30 lines\nWorking with  systems to control which agent s stream their output\nMixing models that suppor t streaming with those that do not\nDeploying to  and wanting t o prevent certain model output s from being\nstreamed to the client🤖 supervisor:\n[{'name': 'call_weather_agent', 'args': '', 'id': 'call_asorzUf0mB6sb7MiKfgojp7",
+        "):\n        if isinstance(token, AIMessage):\n            _render_message_chunk(token)\n            if source in (\"model\", \"tools\"):\n                _render_completed_message(update[\"messages\"][-1])current_agent = None\n    subgraphs=True,\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n        if agent_name := metadata.get(\"lc_agent_name\"):\n            if agent_name != current_agent:\n                print(f\"🤖 {agent_name}: \")\n                current_agent = agent_name  \n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 23/27\nDisable streaming\nIn some applic ations you might need t o disable str eaming of individual t okens for a given\nmodel. This is useful when:"
+      ],
+      "response": "当系统中有多个子代理（sub-agents）参与时，可以通过在创建每个代理时为其指定一个名称（name），从而消除所生成消息的来源歧义。\n\n具体做法如下：\n\n- 在创建每个 agent 时传入一个 name 参数；\n- 当以 \"messages\" 模式进行流式输出（streaming）时，该名称会通过 metadata 中的 `lc_agent_name` 键提供；\n- 在处理流式输出时，可检查 `metadata.get(\"lc_agent_name\")` 来识别当前消息来自哪个代理，并据此区分不同代理的输出。\n\n这种方法使得在多个 LLM 或子代理同时工作时，能够清晰地追踪每条消息的来源。",
+      "reference": "可以在创建每个代理时为其传递一个特定的名称。",
+      "faithfulness": 0.8333333333333334,
+      "answer_relevancy": 0.7607712692276287,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "代理名称被设置后，可以通过 metadata 中的哪个键在消息流中识别它？",
+      "retrieved_contexts": [
+        "This name is then a vailable in\nmetadata via the lc_agent_name key when str eaming in \"messages\" mode. Below, we update the  example:\n1. We replace our t ool with a call_weather_agent tool that in vokes an agent\ninternally\n2. We add a name to each agent\n3. We specify  when cr eating the str eam\n4. Our stream processing is identic al to before, but w e add logic t o keep track of what",
+        "base_prompt = \"You are a helpful assistant.\"\n    if user_role == \"expert\":\n        return f\"{base_prompt} Provide detailed technical responses.\"\n    elif user_role == \"beginner\":\n        return f\"{base_prompt} Explain concepts simply and avoid jargon.\"\n    return base_prompt\nagent = create_agent(\n    model=\"gpt-4.1\",\n    tools=[web_search],\n    middleware=[user_role_prompt],\n    context_schema=Context\n)\n# The system prompt will be set dynamically based on context\nresult = agent.invoke(\n    {\"messages\": [{\"role\": \"user\", \"content\": \"Explain machine learning\"}]},\n    context={\"user_role\": \"expert\"}\n)\nMessages\nMiddle war e\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 10/17\nSet an optional  f or the agent. This is used as the node identifier when adding the\nagent as a subgraph in :",
+        "token, metadata = chunk[\"data\"]\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():command\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 20/27\nStreaming from sub-agents\nWhen ther e are multiple LLMs at an y point in an agent, itʼ s often necessar y to\ndisambiguat e the sour ce of messages as the y are generat ed. To do this, p ass a  to each agent when cr eating it."
+      ],
+      "response": "代理名称被设置后，可以通过 metadata 中的 **`lc_agent_name`** 键在消息流中识别它。",
+      "reference": "可以通过 metadata 中的 lc_agent_name 键来识别。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7742332331457583,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果要实现子图（子代理）的流式传输，必须在创建流时指定什么参数？",
+      "retrieved_contexts": [
+        "Pass version=\"v2\" to stream() or astream() to get a unified output f ormat.",
+        "1. Pass version=\"v2\" to stream() or astream() to get a unified output f ormat. Every",
+        "model. This is useful when:\nSet streaming=False when initializing the model. When deplo ying t o LangSmith, set streaming=False  on an y models whose output y ou\ndon ʼ t want str e amed t o the client. This is configur ed in y our graph code bef or e deplo yment. Not all chat model int egrations suppor t the streaming  p aramet er . If y our model doesn ʼ t\nsuppor t it, use disable_streaming=True  inst e ad."
+      ],
+      "response": "要实现子图（子代理）的流式传输，必须在调用 `stream()` 或 `astream()` 时指定参数 `version=\"v2\"`。\n\n根据文档，v2 流式格式（requires LangGraph >= 1.1）支持子图流式传输，并提供统一的输出格式。",
+      "reference": "必须在创建流时指定 subgraphs=True。",
+      "faithfulness": 0.4,
+      "answer_relevancy": 0.4650472899104742,
+      "llm_context_precision_with_reference": 0.0,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "为一个代理设置了名称后，该名称对该代理生成的 AIMessage 有什么影响？",
+      "retrieved_contexts": [
+        "This name is then a vailable in\nmetadata via the lc_agent_name key when str eaming in \"messages\" mode. Below, we update the  example:\n1. We replace our t ool with a call_weather_agent tool that in vokes an agent\ninternally\n2. We add a name to each agent\n3. We specify  when cr eating the str eam\n4. Our stream processing is identic al to before, but w e add logic t o keep track of what",
+        "Our stream processing is identic al to before, but w e add logic t o keep track of what\nagent is activ e using create_agentʼs name parameter\nWhen y ou set a name  on an agent, that name is also att ached t o an y AIMessage s\ngenerat ed b y that agent. First we construct the agent:\nOutput\nTool response: [{'type': 'text', 'text': \"It's always sunny in Boston, U.K.!\"}]\nTool response: [{'type': 'text', 'text': \"It's always sunny in San Francisco!\"}\n-| **|Boston|**|:| It|'s| always| sunny| in| Boston|,| U|.K|.|\n|-| **|San| Francisco|**|:| It|'s| always| sunny| in| San| Francisco|!|\nname\nstr e aming t ool c alls\nsubgraphs=True\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 21/27\nNext, we add logic t o the str eaming loop t o report which agent is emitting t okens:from typing import Any\nfrom langchain.agents import create_agent",
+        "Using these names will c ause runtime er rors."
+      ],
+      "response": "为一个代理设置了名称后，该名称会附加到该代理生成的任何 AIMessage 上，通过 metadata 中的 `lc_agent_name` 键可访问。这有助于在流式传输（streaming）过程中识别消息来源，特别是在使用多个子代理时区分不同代理生成的内容。",
+      "reference": "该名称也会被附加到由该代理生成的所有 AIMessage 上。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.6452021057514484,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在某些场景下需要禁用特定模型的令牌流式传输时，应在初始化时如何设置？",
+      "retrieved_contexts": [
+        "model. This is useful when:\nSet streaming=False when initializing the model. When deplo ying t o LangSmith, set streaming=False  on an y models whose output y ou\ndon ʼ t want str e amed t o the client. This is configur ed in y our graph code bef or e deplo yment. Not all chat model int egrations suppor t the streaming  p aramet er . If y our model doesn ʼ t\nsuppor t it, use disable_streaming=True  inst e ad.",
+        "):\n        if isinstance(token, AIMessage):\n            _render_message_chunk(token)\n            if source in (\"model\", \"tools\"):\n                _render_completed_message(update[\"messages\"][-1])current_agent = None\n    subgraphs=True,\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n        if agent_name := metadata.get(\"lc_agent_name\"):\n            if agent_name != current_agent:\n                print(f\"🤖 {agent_name}: \")\n                current_agent = agent_name  \n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 23/27\nDisable streaming\nIn some applic ations you might need t o disable str eaming of individual t okens for a given\nmodel. This is useful when:",
+        "from langchain.agents.middleware import AgentMiddleware\nfrom typing import Any\nclass CustomState(AgentState):\n    user_preferences: dict\nclass CustomMiddleware(AgentMiddleware):\n    state_schema = CustomState\n    tools = [tool1, tool2]\n    def before_model(self, state: CustomState, runtime) -> dict[str, Any] | Non\n        ... agent = create_agent(\n    model,\n    tools=tools,\n    middleware=[CustomMiddleware()]\n)\n# The agent can now track additional state beyond messages\nresult = agent.invoke({\n    \"messages\": [{\"role\": \"user\", \"content\": \"I prefer technical explanations\"}\n    \"user_preferences\": {\"style\": \"technical\", \"verbosity\": \"detailed\"},\n})\nstate_schema\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 14/17\nAs of langchain 1.0 , cust om st at e schemas must  be TypedDict  t ypes."
+      ],
+      "response": "在需要禁用特定模型的令牌流式传输时，应在初始化模型时设置 `streaming=False`。  \n\n如果所使用的模型不支持 `streaming` 参数，则应使用 `disable_streaming=True` 代替。",
+      "reference": "应在初始化模型时设置 streaming=False。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.860945368447298,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果部署到 LangSmith 并希望防止某些模型输出流向客户端，需要在哪个阶段配置 streaming=False？",
+      "retrieved_contexts": [
+        "model. This is useful when:\nSet streaming=False when initializing the model. When deplo ying t o LangSmith, set streaming=False  on an y models whose output y ou\ndon ʼ t want str e amed t o the client. This is configur ed in y our graph code bef or e deplo yment. Not all chat model int egrations suppor t the streaming  p aramet er . If y our model doesn ʼ t\nsuppor t it, use disable_streaming=True  inst e ad.",
+        "):\n        if isinstance(token, AIMessage):\n            _render_message_chunk(token)\n            if source in (\"model\", \"tools\"):\n                _render_completed_message(update[\"messages\"][-1])current_agent = None\n    subgraphs=True,\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n        if agent_name := metadata.get(\"lc_agent_name\"):\n            if agent_name != current_agent:\n                print(f\"🤖 {agent_name}: \")\n                current_agent = agent_name  \n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 23/27\nDisable streaming\nIn some applic ations you might need t o disable str eaming of individual t okens for a given\nmodel. This is useful when:",
+        "result = model_with_tools.invoke(\n        [\n            {\n                \"role\": \"system\",\n                \"content\": \"Evaluate this AI response as generally safe or unsa\n            },\n            {\n                \"role\": \"user\",\n                \"content\": f\"AI response: {last_message.text}\"\n            }\n        ]\n    )from langgraph.config import get_stream_writer  \n    stream_writer = get_stream_writer()\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 12/27\nWe can then incor porate this middle ware into our agent and include it s custom stream\nevents:\n    tool_call = result.tool_calls[0]\n    if tool_call[\"args\"][\"evaluation\"] == \"unsafe\":\n        last_message.content = \"I cannot provide that response. Please rephrase\n    return None    stream_writer(result)\n2026/3/21 17:14 Streaming - Docs by LangChain"
+      ],
+      "response": "需要在**部署前的图（graph）代码中**配置 `streaming=False`。",
+      "reference": "需要在部署之前的图形代码（graph code）中进行配置。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.5920752861357833,
+      "llm_context_precision_with_reference": 0.9999999999,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果某个特定的聊天模型集成不支持 streaming 参数，开发者应该使用哪个参数替代？",
+      "retrieved_contexts": [
+        "model. This is useful when:\nSet streaming=False when initializing the model. When deplo ying t o LangSmith, set streaming=False  on an y models whose output y ou\ndon ʼ t want str e amed t o the client. This is configur ed in y our graph code bef or e deplo yment. Not all chat model int egrations suppor t the streaming  p aramet er . If y our model doesn ʼ t\nsuppor t it, use disable_streaming=True  inst e ad.",
+        "result = model_with_tools.invoke(\n        [\n            {\n                \"role\": \"system\",\n                \"content\": \"Evaluate this AI response as generally safe or unsa\n            },\n            {\n                \"role\": \"user\",\n                \"content\": f\"AI response: {last_message.text}\"\n            }\n        ]\n    )from langgraph.config import get_stream_writer  \n    stream_writer = get_stream_writer()\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 12/27\nWe can then incor porate this middle ware into our agent and include it s custom stream\nevents:\n    tool_call = result.tool_calls[0]\n    if tool_call[\"args\"][\"evaluation\"] == \"unsafe\":\n        last_message.content = \"I cannot provide that response. Please rephrase\n    return None    stream_writer(result)\n2026/3/21 17:14 Streaming - Docs by LangChain",
+        "This p aramet er is a v ailable on all chat\nmodels via the b ase class. Output\nSee all 30 lines\nWorking with  systems to control which agent s stream their output\nMixing models that suppor t streaming with those that do not\nDeploying to  and wanting t o prevent certain model output s from being\nstreamed to the client🤖 supervisor:\n[{'name': 'call_weather_agent', 'args': '', 'id': 'call_asorzUf0mB6sb7MiKfgojp7"
+      ],
+      "response": "如果某个特定的聊天模型集成不支持 `streaming` 参数，开发者应使用 `disable_streaming=True` 作为替代。",
+      "reference": "应该使用该基础类提供的 disable_streaming=True 参数。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9010534830432547,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "为了获得统一的 type、ns 和 data 键的块格式，应当在调用流方法时传递什么参数？",
+      "retrieved_contexts": [
+        "Use\nchunk[\"type\"] to determine the str eam mode and chunk[\"data\"] to access the\npayload.",
+        "Every\nchunk is a StreamPart dict with type, ns, and data keys — the same shape\nregardless of str eam mode or number of modes:\nThe v2 f ormat also impr oves invoke() — it returns a GraphOutput object with\n.value and .interrupts attributes, cleanly separating st ate from interrupt met adata:\nSee the  for more details on the v2 f ormat, including t ype\nnarrowing, Py dantic/dat aclass coer cion, and subgraph str eaming. Related\n# Unified format — no more tuple unpacking\nfor chunk in agent.stream(\n    {\"messages\": [{\"role\": \"user\", \"content\": \"What is the weather in SF?\"}]},\n    stream_mode=[\"updates\", \"custom\"],\n    version=\"v2\",\n):\n    print(chunk[\"type\"])  # \"updates\" or \"custom\"\n    print(chunk[\"data\"])  # payload\nresult = agent.invoke(\n    {\"messages\": [{\"role\": \"user\", \"content\": \"Hello\"}]},\n    version=\"v2\",\n)",
+        "1. Pass version=\"v2\" to stream() or astream() to get a unified output f ormat. Every"
+      ],
+      "response": "为了获得统一的 `type`、`ns` 和 `data` 键的块格式，应当在调用流方法（如 `stream()` 或 `astream()`）时传递参数 `version=\"v2\"`。",
+      "reference": "应当传递 version=\"v2\" 参数。",
+      "faithfulness": 0.5,
+      "answer_relevancy": 0.8229971861893989,
+      "llm_context_precision_with_reference": 0.5833333333041666,
+      "context_recall": 1.0
+    }
+  ]
+}

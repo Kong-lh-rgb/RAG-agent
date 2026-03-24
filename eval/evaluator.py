@@ -28,7 +28,7 @@ class FallbackChatOpenAI(ChatOpenAI):
     当主模型（如因额度耗尽）抛出异常时，自动回退到备用模型继续执行，
     并将模型的名称更新为备用模型，之后的所有请求将直接使用备用模型。
     """
-    fallback_model_name: str = "qwen3.5-397b-a17b"
+    fallback_model_name: str = "kimi-k2.5"
 
     def _generate(
         self,
@@ -57,6 +57,8 @@ class FallbackChatOpenAI(ChatOpenAI):
             logger.warning(f"模型 {self.model_name} 发生异常: {e}。切换至备用模型: {self.fallback_model_name}")
             self.model_name = self.fallback_model_name
             return await super()._agenerate(messages, stop, run_manager, **kwargs)
+
+            
 from ragas.llms import LangchainLLMWrapper
 from ragas.embeddings import LangchainEmbeddingsWrapper
 from ragas.metrics import (
@@ -87,7 +89,7 @@ class RAGEvaluator:
         ))
         # 评测用 Embedding（复用现有 OpenAI Embedding）
         self._embeddings = LangchainEmbeddingsWrapper(OpenAIEmbeddings(
-            model=settings.embedding_model,
+            model=settings.eval_embedding_model,
             api_key=settings.openai_api_key,
             base_url=settings.openai_base_url,
         ))

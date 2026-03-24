@@ -1,0 +1,1412 @@
+{
+  "timestamp": "2026-03-22T11:36:06.185538+00:00",
+  "sample_count": 100,
+  "scores": {
+    "faithfulness": 0.9008683473389356,
+    "answer_relevancy": 0.5570607861220653,
+    "llm_context_precision_with_reference": 0.8566666666235,
+    "context_recall": 0.89
+  },
+  "details": [
+    {
+      "user_input": "流式传输（Streaming）为何对基于 LLM 构建的应用程序至关重要？",
+      "retrieved_contexts": [
+        "Core component s\nS t r e a m i n gCop y p age\nLangChain implement s a streaming syst em to surface real-time updat es.\nStreaming is crucial f or enhancing the r esponsiv eness of applic ations buil t on LLMs. By\ndisplaying output pr ogressively, even before a complet e response is r eady, streaming\nsignificantly improves user e xperience (UX), p articularly when de aling with the lat ency of\nLLMs.\nOverview\nLangChain ʼs streaming syst em lets you surface live feedback from agent runs t o your\napp",
+        "LLM tokens + met adata), or custom (arbitrary user dat a).\nStream agent progress\nStream LLM tokens\nStream thinking / reasoning tokens\nStream custom updates\nStream multiple modes\ncommon p att er nsCore component sStreaming\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 1/27\nPass one or mor e of the f ollowing str eam modes as a list t o the  or \nmethods:\nMode Descr iption\nupdatesStreams state updates after each agent st ep. If mul tiple upd",
+        "surface live feedback from agent runs t o your\napplication.\nWhatʼs possible with LangChain str eaming:\nSee the  section belo w for additional end-t o-end examples.\nSupported stream modes —get state updates after each agent st ep.\n —stream language model t okens as the yʼre generat ed.\n —surface model r easoning as itʼ s generat ed.\n —emit user -defined signals ( e.g., \"Fetched 10/100\nrecords\").\n —choose fr om updates (agent pr ogress), messages\n(LLM tokens + met adata), or custom (arbitrary user"
+      ],
+      "response": "根据文档内容，流式传输对基于 LLM 构建的应用程序至关重要，主要体现在以下几个方面：\n\n1.  **增强响应能力**：它能够显著提升应用程序的响应速度。\n2.  **改善用户体验 (UX)**：通过在完整响应准备好之前就渐进式显示输出，让用户能实时看到进度。\n3.  **处理延迟**：特别是在处理 LLM（大语言模型）的延迟问题时，流式传输能有效缓解等待感。",
+      "reference": "流式传输能够在完整响应准备好之前逐步显示输出，从而显著提升了处理 LLM 延迟时的用户体验。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.882235080377536,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "LangChain 的流式传输系统支持哪三种主要的流模式？",
+      "retrieved_contexts": [
+        "surface live feedback from agent runs t o your\napplication.\nWhatʼs possible with LangChain str eaming:\nSee the  section belo w for additional end-t o-end examples.\nSupported stream modes —get state updates after each agent st ep.\n —stream language model t okens as the yʼre generat ed.\n —surface model r easoning as itʼ s generat ed.\n —emit user -defined signals ( e.g., \"Fetched 10/100\nrecords\").\n —choose fr om updates (agent pr ogress), messages\n(LLM tokens + met adata), or custom (arbitrary user",
+        "LLM tokens + met adata), or custom (arbitrary user dat a).\nStream agent progress\nStream LLM tokens\nStream thinking / reasoning tokens\nStream custom updates\nStream multiple modes\ncommon p att er nsCore component sStreaming\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 1/27\nPass one or mor e of the f ollowing str eam modes as a list t o the  or \nmethods:\nMode Descr iption\nupdatesStreams state updates after each agent st ep. If mul tiple upd",
+        "Core component s\nS t r e a m i n gCop y p age\nLangChain implement s a streaming syst em to surface real-time updat es.\nStreaming is crucial f or enhancing the r esponsiv eness of applic ations buil t on LLMs. By\ndisplaying output pr ogressively, even before a complet e response is r eady, streaming\nsignificantly improves user e xperience (UX), p articularly when de aling with the lat ency of\nLLMs.\nOverview\nLangChain ʼs streaming syst em lets you surface live feedback from agent runs t o your\napp"
+      ],
+      "response": "根据文档片段，LangChain 的流式传输系统支持以下三种主要的流模式：\n\n1.  **updates**（代理进度）：在每一步代理步骤后流式传输状态更新。\n2.  **messages**（LLM tokens + 元数据）：流式传输生成的语言模型 token 及其元数据。\n3.  **custom**（任意用户数据）：发出用户定义的信号或任意数据。",
+      "reference": "系统支持的流模式包括 updates、messages 和 custom。",
+      "faithfulness": 0.6666666666666666,
+      "answer_relevancy": 1.0,
+      "llm_context_precision_with_reference": 0.9999999999,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在流式传输中，updates 模式的具体作用是什么？",
+      "retrieved_contexts": [
+        "e updates after each agent st ep. If mul tiple updat es are made in\nthe same st ep (e.g., mul tiple nodes ar e run), those updat es are streamed\nsepar",
+        "e\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 23/27\nDisable streaming\nIn some applic ations you might need t o disable str eaming of individual t okens for a given\nmodel. This is useful when:\nSet streaming=False when initializing the model.\nWhen deplo ying t o LangSmith, set streaming=False  on an y models whose output y ou\ndon ʼ t want str e amed t o the client. This",
+        "a\nToolMessage. If the model needs t o see that the t ool succeeded (f or example, t o confirm\na preference change ), include a ToolMessage in the updat e, using\nruntime.tool_call_id for the tool_call_id parameter.\nBehavior:\nUse this when the t ool is not just r eturning dat a, but also mut ating agent st ate.The command updat es state using update.\nUpdated state is available to subsequent st eps in the same run.\nUse reducers f or fields that ma y be updat ed by parallel tool calls.from langchai"
+      ],
+      "response": "根据文档片段，在流式传输中，`updates` 模式的具体作用是：\n\n**在每个代理步骤之后流式传输状态更新。** 如果在同一步骤中进行了多次更新（例如运行了多个节点），这些更新会被单独流式传输。",
+      "reference": "它会在每个代理（Agent）步骤之后单独流式传输状态更新。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9824906263730769,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果在同一个代理步骤中进行了多次更新，updates 模式会如何处理？",
+      "retrieved_contexts": [
+        "e updates after each agent st ep. If mul tiple updat es are made in\nthe same st ep (e.g., mul tiple nodes ar e run), those updat es are streamed\nsepar",
+        "a\nToolMessage. If the model needs t o see that the t ool succeeded (f or example, t o confirm\na preference change ), include a ToolMessage in the updat e, using\nruntime.tool_call_id for the tool_call_id parameter.\nBehavior:\nUse this when the t ool is not just r eturning dat a, but also mut ating agent st ate.The command updat es state using update.\nUpdated state is available to subsequent st eps in the same run.\nUse reducers f or fields that ma y be updat ed by parallel tool calls.from langchai",
+        "at es are made in\nthe same st ep (e.g., mul tiple nodes ar e run), those updat es are streamed\nseparately.\nmessagesStreams tuples of (token, metadata) from any graph nodes wher e an LLM is\ninvoked.\ncustom Streams cust om data from inside y our graph nodes using the str eam writer.\nAgent progress\nTo stream agent pr ogress, use the  or  methods with\nstream_mode=\"updates\". This emit s an event after every agent st ep.\nFor example, if y ou have an agent that c alls a tool once, y ou should see the f"
+      ],
+      "response": "根据文档片段，如果在同一个代理步骤中进行了多次更新（例如，运行了多个节点），`updates` 模式会将这些更新**单独流式传输**（separately）。",
+      "reference": "这些更新将会被分别单独进行流式传输。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9572210407532703,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "messages 流模式输出的数据结构是什么？",
+      "retrieved_contexts": [
+        "nt, use stream_mode=\"messages\" and filter for\nreasoning cont ent blocks:\nOutput\nstream_mode: updates\ncontent: {'model': {'messages': [AIMessage(content='', response_metadata={'toke\nstream_mode: custom\ncontent: Looking up data for city: San Francisco\nstream_mode: custom\ncontent: Acquired data for city: San Francisco\nstream_mode: updates\ncontent: {'tools': {'messages': [ToolMessage(content=\"It's always sunny in San \nstream_mode: updates\ncontent: {'model': {'messages': [AIMessage(content='San Franc",
+        "Common patterns\nBelow are examples sho wing common use c ases for streaming.\nStreaming thinking / reasoning tokens\nSome models per form internal reasoning bef ore producing a final answ er. You can stream\nthese thinking / r easoning t okens as the yʼre generat ed by filtering \n for the type \"reasoning\".\nR e asoning output must be enabled on the model.\nSee the  and y our  f or configuration det ails.\nT o quickl y check a modelʼ s r e asoning suppor t, see .\nTo stream thinking t okens from an age",
+        "data['messages'][-1].content_blocks}\")for chunk in agent.stream(\n    version=\"v2\",\n    if chunk[\"type\"] == \"updates\":\n        for step, data in chunk[\"data\"].items():\nstep: model\ncontent: [{'type': 'tool_call', 'name': 'get_weather', 'args': {'city': 'San Fr\nstep: tools\ncontent: [{'type': 'text', 'text': \"It's always sunny in San Francisco!\"}]\nstep: model\ncontent: [{'type': 'text', 'text': 'It's always sunny in San Francisco!'}]\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchai"
+      ],
+      "response": "",
+      "reference": "它会从任何调用了 LLM 的图节点中流式传输（token，metadata）元组。",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.0,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "custom 流模式允许用户执行什么操作？",
+      "retrieved_contexts": [
+        "at ors lik e ,\n, and , see .Pr ocess st at e bef or e the model is c alled ( e.g., message tr imming, cont e x t injection)\nModify or v alidat e the modelʼ s r esponse ( e.g., guar drails, cont ent fil t er ing)\nHandle t ool e x ecution er r ors with cust om logic\nImplement d ynamic model selection b ased on st at e or cont e x t\nAdd cust om logging, monit or ing, or anal y ticsfrom langchain.messages import AIMessage, HumanMessage\nfor chunk in agent.stream({\n    \"messages\": [{\"role\": \"user\", \"c",
+        "surface live feedback from agent runs t o your\napplication.\nWhatʼs possible with LangChain str eaming:\nSee the  section belo w for additional end-t o-end examples.\nSupported stream modes —get state updates after each agent st ep.\n —stream language model t okens as the yʼre generat ed.\n —surface model r easoning as itʼ s generat ed.\n —emit user -defined signals ( e.g., \"Fetched 10/100\nrecords\").\n —choose fr om updates (agent pr ogress), messages\n(LLM tokens + met adata), or custom (arbitrary user",
+        ". These r eady-to-use tools\ncan be dir ectly integrated into your agent s without wr iting cust om code.\nSee the  integration p age for a complet e list of a vailable tools organized\nby category.\nServer-side tool use\nSome chat models f eature built-in tools that ar e executed server-side by the model\nprovider. These include c apabilities lik e web search and code int erpreters that don ʼt\nrequire you to define or host the t ool logic.\nRefer to the individual  and the \nfor details on enabling and"
+      ],
+      "response": "根据检索到的文档片段，`custom` 流模式允许用户**发出用户定义的信号**。\n\n例如，它可以用于显示进度，如“已获取 10/100 条记录”（\"Fetched 10/100 records\"）。",
+      "reference": "它允许用户使用流写入器从图节点内部流式传输自定义数据。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.6154527168827328,
+      "llm_context_precision_with_reference": 0.49999999995,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "要流式传输代理的执行进度，应该调用哪些方法及参数？",
+      "retrieved_contexts": [
+        "surface live feedback from agent runs t o your\napplication.\nWhatʼs possible with LangChain str eaming:\nSee the  section belo w for additional end-t o-end examples.\nSupported stream modes —get state updates after each agent st ep.\n —stream language model t okens as the yʼre generat ed.\n —surface model r easoning as itʼ s generat ed.\n —emit user -defined signals ( e.g., \"Fetched 10/100\nrecords\").\n —choose fr om updates (agent pr ogress), messages\n(LLM tokens + met adata), or custom (arbitrary user",
+        "LLM tokens + met adata), or custom (arbitrary user dat a).\nStream agent progress\nStream LLM tokens\nStream thinking / reasoning tokens\nStream custom updates\nStream multiple modes\ncommon p att er nsCore component sStreaming\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 1/27\nPass one or mor e of the f ollowing str eam modes as a list t o the  or \nmethods:\nMode Descr iption\nupdatesStreams state updates after each agent st ep. If mul tiple upd",
+        "17\nF or mor e det ails on str e aming, see .\nMiddleware\n pr o vides po w er ful e x t ensibilit y f or cust omizing agent beha vior at dif f er ent\nst ages of e x ecution. Y ou c an use middle war e t o:\nMiddle war e int egrat es se amlessl y int o the agentʼ s e x ecution, allo wing y ou t o int er cept\nand modify dat a flo w at k e y point s without changing the cor e agent logic.\nF or compr ehensiv e middle war e document ation including decorat ors lik e ,\n, and , see .Pr ocess st at e bef o"
+      ],
+      "response": "",
+      "reference": "应该使用 stream 或 astream 方法，并设置 stream_mode=\"updates\"。",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "当代理调用工具并完成后，工具节点（Tool node）通常会返回什么消息？",
+      "retrieved_contexts": [
+        "a\nToolMessage. If the model needs t o see that the t ool succeeded (f or example, t o confirm\na preference change ), include a ToolMessage in the updat e, using\nruntime.tool_call_id for the tool_call_id parameter.\nBehavior:\nUse this when the t ool is not just r eturning dat a, but also mut ating agent st ate.The command updat es state using update.\nUpdated state is available to subsequent st eps in the same run.\nUse reducers f or fields that ma y be updat ed by parallel tool calls.from langchai",
+        "r mor e det ails.\nToolNode\n is a prebuilt node that e xecutes tools in LangGraph w orkflows. It handles\nparallel tool execution, er ror handling, and",
+        "print(f\"Calling tools: {[tc['name'] for tc in latest_message.tool_calls\nStr e aming\nMiddle war e\n@before_model\n@after_model @wrap_tool_call Middle war e\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 16/17\nCore component s\nToolsCop y p age\nTools extend what  can do—letting them f etch real-time dat a, execute code, quer y\nexternal databases, and t ake actions in the w orld.\nUnder the hood, t ools are callable functions with w ell-defined in"
+      ],
+      "response": "",
+      "reference": "工具节点会返回包含执行结果的 ToolMessage。",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在代理流式进度中，LLM 节点在需要调用工具时会发出什么？",
+      "retrieved_contexts": [
+        "ent that c alls a tool once, y ou should see the f ollowing\nupdates:\nLLM node:  with tool call requests\nTool node:  with execution r esult\nLLM node: Final AI r esponsestream astream\nstream astream\nAIMessage\nToolMessage\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 2/27\nLLM tokens\nTo stream tokens as the y are produced b y the LLM, use stream_mode=\"messages\".\nBelow you can see the output of the agent str eaming tool calls and the final r e",
+        "LLM tokens + met adata), or custom (arbitrary user dat a).\nStream agent progress\nStream LLM tokens\nStream thinking / reasoning tokens\nStream custom updates\nStream multiple modes\ncommon p att er nsCore component sStreaming\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 1/27\nPass one or mor e of the f ollowing str eam modes as a list t o the  or \nmethods:\nMode Descr iption\nupdatesStreams state updates after each agent st ep. If mul tiple upd",
+        "le\nLLMs.\nOutput\n[thinking] The user is asking about the weather in San Francisco. I have a tool\n[thinking]  available to get this information. Let me call the get_weather tool\n[thinking]  with \"San Francisco\" as the city parameter.\nThe weather in San Francisco is: It's always sunny in San Francisco!\ncontent_blocks\nstr e aming\nwith chat models\nt ool c alls\nstream_mode=\"messages\" message chunks\nst at e create_agent\nst at e updat es\ncust om updat es\nne x t section\nstr e aming fr om sub-agent s\n2026"
+      ],
+      "response": "在代理流式进度（使用 `stream_mode=\"updates\"`）中，当 LLM 节点需要调用工具时，它会发出带有工具调用请求的 `AIMessage`。",
+      "reference": "LLM 节点会发出带有工具调用请求的 AIMessage。",
+      "faithfulness": 0.5,
+      "answer_relevancy": 0.8945158512609944,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果开发者想要查看 LLM 逐个生成的 token，应使用哪种流模式？",
+      "retrieved_contexts": [
+        "LLM tokens + met adata), or custom (arbitrary user dat a).\nStream agent progress\nStream LLM tokens\nStream thinking / reasoning tokens\nStream custom updates\nStream multiple modes\ncommon p att er nsCore component sStreaming\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 1/27\nPass one or mor e of the f ollowing str eam modes as a list t o the  or \nmethods:\nMode Descr iption\nupdatesStreams state updates after each agent st ep. If mul tiple upd",
+        "ent that c alls a tool once, y ou should see the f ollowing\nupdates:\nLLM node:  with tool call requests\nTool node:  with execution r esult\nLLM node: Final AI r esponsestream astream\nstream astream\nAIMessage\nToolMessage\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 2/27\nLLM tokens\nTo stream tokens as the y are produced b y the LLM, use stream_mode=\"messages\".\nBelow you can see the output of the agent str eaming tool calls and the final r e",
+        "Core component s\nS t r e a m i n gCop y p age\nLangChain implement s a streaming syst em to surface real-time updat es.\nStreaming is crucial f or enhancing the r esponsiv eness of applic ations buil t on LLMs. By\ndisplaying output pr ogressively, even before a complet e response is r eady, streaming\nsignificantly improves user e xperience (UX), p articularly when de aling with the lat ency of\nLLMs.\nOverview\nLangChain ʼs streaming syst em lets you surface live feedback from agent runs t o your\napp"
+      ],
+      "response": "根据文档，如果开发者想要查看 LLM 逐个生成的 token，应使用 **`stream_mode=\"messages\"`**。\n\n该模式用于从调用 LLM 的图节点流式传输 (token, metadata) 元组。",
+      "reference": "开发者应该使用 stream_mode=\"messages\"。",
+      "faithfulness": 0.5,
+      "answer_relevancy": 0.7433937040429905,
+      "llm_context_precision_with_reference": 0.49999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "什么内置函数允许在工具执行期间流式传输自定义的更新状态？",
+      "retrieved_contexts": [
+        "a\nToolMessage. If the model needs t o see that the t ool succeeded (f or example, t o confirm\na preference change ), include a ToolMessage in the updat e, using\nruntime.tool_call_id for the tool_call_id parameter.\nBehavior:\nUse this when the t ool is not just r eturning dat a, but also mut ating agent st ate.The command updat es state using update.\nUpdated state is available to subsequent st eps in the same run.\nUse reducers f or fields that ma y be updat ed by parallel tool calls.from langchai",
+        "real-time updat es during tool executionShow progress for long-\nrunning operations\nConfig  for the executionAccess c allbacks, tags, and\nmetadata\nTool",
+        "Updat e state\nUse  to update the agentʼ s state. This is useful f or tools that need t o update\ncustom state fields:from langchain.tools import tool,"
+      ],
+      "response": "根据检索到的文档片段，允许在工具执行期间流式传输自定义更新状态的组件是 **Stream Writer**。\n\n它可以通过 `ToolRuntime` 访问，用于在工具执行期间发出实时更新（例如显示长时间运行操作的进度）。",
+      "reference": "get_stream_writer 函数可以实现流式传输任意数据。",
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.5921274874990067,
+      "llm_context_precision_with_reference": 0.49999999995,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "在工具内部添加 get_stream_writer 会带来什么调用限制？",
+      "retrieved_contexts": [
+        "e can then incor porate this middle ware into our agent and include it s custom stream\nevents:\n    tool_call = result.tool_calls[0]\n    if tool_call[\"args\"][\"evaluation\"] == \"unsafe\":\n        last_message.content = \"I cannot provide that response. Please rephrase\n    return null    stream_writer(result)\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 13/27\nfrom typing import Any\nfrom langchain.agents import create_agent\nfrom langchain.messa",
+        "riter()\n    stream_mode=\"custom\",\n    version=\"v2\",\n    if chunk[\"type\"] == \"custom\":\n        print(chunk[\"data\"])\nLooking up data for city: San Francisco\nAcquired data for city: San Francisco\nget_stream_writer\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 5/27\nYou can specify mul tiple streaming modes b y passing str eam mode as a list:\nstream_mode=[\"updates\", \"custom\"].\nEach str eamed chunk is a StreamPart dict with type, ns, and data k",
+        "ent that c alls a tool once, y ou should see the f ollowing\nupdates:\nLLM node:  with tool call requests\nTool node:  with execution r esult\nLLM node: Final AI r esponsestream astream\nstream astream\nAIMessage\nToolMessage\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 2/27\nLLM tokens\nTo stream tokens as the y are produced b y the LLM, use stream_mode=\"messages\".\nBelow you can see the output of the agent str eaming tool calls and the final r e"
+      ],
+      "response": "根据检索到的文档片段，如果在工具内部添加 `get_stream_writer`，会带来以下调用限制：\n\n你将**无法在 LangGraph 执行上下文之外调用该工具**。",
+      "reference": "该工具将无法在 LangGraph 执行上下文之外被独立调用。",
+      "faithfulness": 0.5,
+      "answer_relevancy": 0.7960084935964481,
+      "llm_context_precision_with_reference": 0.0,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "当同时流式传输多种模式时，如何确定当前接收的数据块属于哪种流模式？",
+      "retrieved_contexts": [
+        "riter()\n    stream_mode=\"custom\",\n    version=\"v2\",\n    if chunk[\"type\"] == \"custom\":\n        print(chunk[\"data\"])\nLooking up data for city: San Francisco\nAcquired data for city: San Francisco\nget_stream_writer\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 5/27\nYou can specify mul tiple streaming modes b y passing str eam mode as a list:\nstream_mode=[\"updates\", \"custom\"].\nEach str eamed chunk is a StreamPart dict with type, ns, and data k",
+        "LLM tokens + met adata), or custom (arbitrary user dat a).\nStream agent progress\nStream LLM tokens\nStream thinking / reasoning tokens\nStream custom updates\nStream multiple modes\ncommon p att er nsCore component sStreaming\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 1/27\nPass one or mor e of the f ollowing str eam modes as a list t o the  or \nmethods:\nMode Descr iption\nupdatesStreams state updates after each agent st ep. If mul tiple upd",
+        "t. Every\nchunk is a StreamPart dict with type, ns, and data keys — the same shape\nregardless of str eam mode or number of modes:\nThe v2 f ormat also impr oves invoke() — it returns a GraphOutput object with\n.value and .interrupts attributes, cleanly separating st ate from interrupt met adata:\nSee the  for more details on the v2 f ormat, including t ype\nnarrowing, Py dantic/dat aclass coer cion, and subgraph str eaming.\nRelated\n# Unified format — no more tuple unpacking\nfor chunk in agent.stream("
+      ],
+      "response": "当同时流式传输多种模式时，每个接收到的数据块（chunk）都是一个包含 `type`、`ns` 和 `data` 键的字典（即 `StreamPart`）。\n\n您可以通过访问 **`chunk[\"type\"]`** 来确定当前数据块属于哪种流模式。\n\n例如：\n```python\nfor chunk in agent.stream(..., stream_mode=[\"updates\", \"custom\"], version=\"v2\"):\n    print(chunk[\"type\"])  # 输出 \"updates\" 或 \"custom\" 等，指示模式类型\n    print(chunk[\"data\"])  # 获取具体的数据内容\n```\n\n无论指定了多少种流模式，数据块的形状都是统一的，通过 `type` 字段即可区分。",
+      "reference": "可以通过读取 chunk[\"type\"] 属性来确定流模式。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.904175674566396,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在多模式流式传输的数据块中，通过哪个键可以访问实际的有效载荷？",
+      "retrieved_contexts": [
+        "LLM tokens + met adata), or custom (arbitrary user dat a).\nStream agent progress\nStream LLM tokens\nStream thinking / reasoning tokens\nStream custom updates\nStream multiple modes\ncommon p att er nsCore component sStreaming\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 1/27\nPass one or mor e of the f ollowing str eam modes as a list t o the  or \nmethods:\nMode Descr iption\nupdatesStreams state updates after each agent st ep. If mul tiple upd",
+        "nt(f\"step: {step}\")\n            print(f\"content: {data['messages'][-1].content_blocks}\")for chunk in agent.stream(\n    version=\"v2\",\n    if chunk[\"typ",
+        "have\naccess t o the agent int ernals, you can use  to access these messages\nduring streaming. Other wise, you can aggregate message chunks in the str eaming loop\n(see belo w).\nConsider the belo w example, wher e we incorporate a  into a simplified\n. This middle ware demonstrat es tool calling to generat e a structur ed\n“safe / unsaf e” evaluation ( one could also use  for this):\nOutput\nSee all 9 lines            if source in (\"model\", \"tools\"):  # `source` captures node name\n                _ren"
+      ],
+      "response": "在多模式流式传输的数据块中，可以通过键 **\"data\"** 来访问实际的有效载荷。\n\n例如，在文档片段的代码示例中：\n*   当 `chunk[\"type\"]` 为 \"messages\" 时，通过 `chunk[\"data\"]` 获取 `(token, metadata)`。\n*   当 `chunk[\"type\"]` 为 \"updates\" 时，通过 `chunk[\"data\"]` 获取包含节点更新内容的字典。",
+      "reference": "可以通过 chunk[\"data\"] 键来访问实际的有效载荷。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9537923442166968,
+      "llm_context_precision_with_reference": 0.5833333333041666,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "为了流式传输模型内部产生的“思考（thinking）”或“推理”标记，应过滤哪种内容块类型？",
+      "retrieved_contexts": [
+        "Common patterns\nBelow are examples sho wing common use c ases for streaming.\nStreaming thinking / reasoning tokens\nSome models per form internal reasoning bef ore producing a final answ er. You can stream\nthese thinking / r easoning t okens as the yʼre generat ed by filtering \n for the type \"reasoning\".\nR e asoning output must be enabled on the model.\nSee the  and y our  f or configuration det ails.\nT o quickl y check a modelʼ s r e asoning suppor t, see .\nTo stream thinking t okens from an age",
+        "ageChunk):\n        continue\n    reasoning = [b for b in token.content_blocks if b[\"type\"] == \"reasoning\"]\n    text = [b for b in token.content_blocks if b[\"type\"] == \"text\"]\n    if reasoning:\n        print(f\"[thinking] {reasoning[0]['reasoning']}\", end=\"\")\n    if text:\n        print(text[0][\"text\"], end=\"\")    stream_mode=\"messages\",\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 8/27\nThis works the same wa y regardless of the model pr ovi",
+        "or t, see .\nTo stream thinking t okens from an agent, use stream_mode=\"messages\" and filter for\nreasoning cont ent blocks:\nOutput\nstream_mode: updates"
+      ],
+      "response": "应过滤类型为 **\"reasoning\"** 的内容块。",
+      "reference": "应在使用 messages 模式时，过滤类型为 \"reasoning\" 的标准内容块。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "流式传输推理 token 前，必须在模型端确认什么前提条件？",
+      "retrieved_contexts": [
+        "Common patterns\nBelow are examples sho wing common use c ases for streaming.\nStreaming thinking / reasoning tokens\nSome models per form internal reasoning bef ore producing a final answ er. You can stream\nthese thinking / r easoning t okens as the yʼre generat ed by filtering \n for the type \"reasoning\".\nR e asoning output must be enabled on the model.\nSee the  and y our  f or configuration det ails.\nT o quickl y check a modelʼ s r e asoning suppor t, see .\nTo stream thinking t okens from an age",
+        "ageChunk):\n        continue\n    reasoning = [b for b in token.content_blocks if b[\"type\"] == \"reasoning\"]\n    text = [b for b in token.content_blocks if b[\"type\"] == \"text\"]\n    if reasoning:\n        print(f\"[thinking] {reasoning[0]['reasoning']}\", end=\"\")\n    if text:\n        print(text[0][\"text\"], end=\"\")    stream_mode=\"messages\",\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 8/27\nThis works the same wa y regardless of the model pr ovi",
+        "works the same wa y regardless of the model pr ovider—LangChain nor malizes\nprovider-specific f ormats (Anthropic thinking blocks, OpenAI reasoning summar ies,\netc.) into a standard \"reasoning\" content block t ype via the  property.\nTo stream reasoning t okens directly from a chat model (without an agent), see \n.\nStreaming tool calls\nYou may want to stream both:\n1. Partial JSON as  are generat ed\n2. The complet ed, parsed tool calls that ar e executed\nSpecifying  will stream incremental  generat"
+      ],
+      "response": "根据文档片段，流式传输推理 token 前，必须在模型端**启用推理输出**。",
+      "reference": "前提是该模型必须已启用推理输出（Reasoning output）功能。",
+      "faithfulness": 0.5,
+      "answer_relevancy": 0.8132436436193377,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "LangChain 是如何统一不同模型提供商的专有推理输出格式的？",
+      "retrieved_contexts": [
+        "works the same wa y regardless of the model pr ovider—LangChain nor malizes\nprovider-specific f ormats (Anthropic thinking blocks, OpenAI reasoning summar ies,\netc.) into a standard \"reasoning\" content block t ype via the  property.\nTo stream reasoning t okens directly from a chat model (without an agent), see \n.\nStreaming tool calls\nYou may want to stream both:\n1. Partial JSON as  are generat ed\n2. The complet ed, parsed tool calls that ar e executed\nSpecifying  will stream incremental  generat",
+        "human-in-the-loop\nLangGraph str e aming\nEdit this p age on GitHub file an issue\nConnect these docs\nResources\nForum\nChangelog\nLangChain Ac ademyCompany\nHome\nAbout\nCareers\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 26/27\nCor e component s\nAgentsCop y p age\nAgent s combine language models with  t o cr e at e syst ems that c an r e ason about\nt asks, decide which t ools t o use, and it erativ el y w or k t o war ds solutions.\n pr o vides a",
+        "and t oolkit s\nchat model int egration p ages t ool c alling document ation\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/p"
+      ],
+      "response": "LangChain 通过将特定于提供商的格式（例如 Anthropic thinking blocks 或 OpenAI reasoning summaries）规范化为标准的“reasoning”内容块类型来实现统一。这样，无论使用哪个模型提供商，开发者都可以通过相同的方式访问和处理推理输出。",
+      "reference": "LangChain 会通过 content_blocks 属性将它们标准化为统一的 \"reasoning\" 内容块类型。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9020587676603302,
+      "llm_context_precision_with_reference": 0.9999999999,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果想在流式传输时同时访问增量消息和由状态追踪的完整解析消息，应如何设置流模式？",
+      "retrieved_contexts": [
+        "nfig=config,\n    stream_mode=[\"messages\", \"updates\"],\n):\n    # Streaming loop is unchanged\n        if isinstance(token, AIMessageChunk):\n            _render_message_chunk(token)\n            if source in (\"model\", \"tools\"):\n                _render_completed_message(update[\"messages\"][-1])\n            if source == \"__interrupt__\":\n                interrupts.extend(update)\n                _render_interrupt(update[0])    Command(resume=decisions),\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\"",
+        "nt, use stream_mode=\"messages\" and filter for\nreasoning cont ent blocks:\nOutput\nstream_mode: updates\ncontent: {'model': {'messages': [AIMessage(content='', response_metadata={'toke\nstream_mode: custom\ncontent: Looking up data for city: San Francisco\nstream_mode: custom\ncontent: Acquired data for city: San Francisco\nstream_mode: updates\ncontent: {'tools': {'messages': [ToolMessage(content=\"It's always sunny in San \nstream_mode: updates\ncontent: {'model': {'messages': [AIMessage(content='San Franc",
+        "or t, see .\nTo stream thinking t okens from an agent, use stream_mode=\"messages\" and filter for\nreasoning cont ent blocks:\nOutput\nstream_mode: updates"
+      ],
+      "response": "如果想在流式传输时同时访问增量消息和由状态追踪的完整解析消息，应将 `stream_mode` 参数设置为一个包含 `\"messages\"` 和 `\"updates\"` 的列表。\n\n示例代码如下：\n```python\nfor chunk in agent.stream(\n    config=config,\n    stream_mode=[\"messages\", \"updates\"],\n):\n    # ...\n```\n在流式循环中，可以通过 `chunk[\"type\"]` 来区分当前块是消息（`messages`）还是更新（`updates`）。",
+      "reference": "应将流模式设置为 stream_mode=[\"messages\", \"updates\"]。",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.8537273143230056,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果已完成的消息没有被反映在状态更新中，开发者可以采取哪两种方式访问它们？",
+      "retrieved_contexts": [
+        "a\nToolMessage. If the model needs t o see that the t ool succeeded (f or example, t o confirm\na preference change ), include a ToolMessage in the updat e, using\nruntime.tool_call_id for the tool_call_id parameter.\nBehavior:\nUse this when the t ool is not just r eturning dat a, but also mut ating agent st ate.The command updat es state using update.\nUpdated state is available to subsequent st eps in the same run.\nUse reducers f or fields that ma y be updat ed by parallel tool calls.from langchai",
+        "for source, update in chunk[\"data\"].items():\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 10/27\nAccessing co mple ted m essages\nIf complet ed messages ar e track ed in an agentʼ s , y ou c an use stream_mode=\n[\"messages\", \"updates\"]  as demonstrat ed in the  section t o access\ncomplet ed messages dur ing str e aming.\nIn some c ases, complet ed messages ar e not reflected in . If you have\naccess t o the agent int ernals, you can use",
+        "real-time updat es during tool executionShow progress for long-\nrunning operations\nConfig  for the executionAccess c allbacks, tags, and\nmetadata\nTool"
+      ],
+      "response": "",
+      "reference": "可以使用自定义更新，或者在流式传输循环中聚合消息块。",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在聚合消息块以获取完整工具调用时，应该检查 token 的哪个属性是否为 \"last\"？",
+      "retrieved_contexts": [
+        "isinstance(token, AIMessageChunk):\n            _render_message_chunk(token)\n            if source == \"tools\":\n                _render_completed_message(update[\"messages\"][-1])full_message = null\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n            full_message = token if full_message is null else full_message + to\n            if token.chunk_position == \"last\":\n                if full_message.tool_calls:\n                    print(f\"Tool calls:",
+        "his is useful f or tools that need t o update\ncustom state fields:from langchain.tools import tool, ToolRuntime\nfrom langchain.messages import HumanMessage\n@tool\ndef get_last_user_message(runtime: ToolRuntime) -> str:\n    \"\"\"Get the most recent message from the user.\"\"\"\n    messages = runtime.state[\"messages\"]\n    # Find the last human message\n    for message in reversed(messages):\n        if isinstance(message, HumanMessage):\n            return message.content\n    return \"No user messages found",
+        "print(f\"Calling tools: {[tc['name'] for tc in latest_message.tool_calls\nStr e aming\nMiddle war e\n@before_model\n@after_model @wrap_tool_call Middle war e\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 16/17\nCore component s\nToolsCop y p age\nTools extend what  can do—letting them f etch real-time dat a, execute code, quer y\nexternal databases, and t ake actions in the w orld.\nUnder the hood, t ools are callable functions with w ell-defined in"
+      ],
+      "response": "应该检查 token 的 `chunk_position` 属性。\n\n根据文档片段中的代码：\n`if token.chunk_position == \"last\":`\n\n当该属性为 `\"last\"` 时，表示消息块接收完毕，此时可以获取完整的工具调用信息。",
+      "reference": "应该检查 token.chunk_position 属性是否等于 \"last\"。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.6813423218566712,
+      "llm_context_precision_with_reference": 0.9999999999,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "为代理添加人类在环（human-in-the-loop）中断功能时，必须配置哪两个组件？",
+      "retrieved_contexts": [
+        "human-in-the-loop\nLangGraph str e aming\nEdit this p age on GitHub file an issue\nConnect these docs\nResources\nForum\nChangelog\nLangChain Ac ademyCompany\nHome\nAbout\nCareers\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 26/27\nCor e component s\nAgentsCop y p age\nAgent s combine language models with  t o cr e at e syst ems that c an r e ason about\nt asks, decide which t ools t o use, and it erativ el y w or k t o war ds solutions.\n pr o vides a",
+        "node (which e x ecut es t ools), or middle war e.\nLe ar n mor e about the .\nCore componentsaction obser v ation finishinput\nmodel\nt ools outputt ools\ncreate_agent\nAn LLM Agent runs t ools in a loop t o achie v e a go al\ncreate_agent LangGraph\nGraph APICor e component s Agent s\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 1/17\nModel\nThe  is the r e asoning engine of y our agent. I t c an be specified in mul tiple wa ys,\nsuppor ting both st atic",
+        "by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 15/27\nStreaming with human-in-the-loop\nTo handle human-in-the-loop , we build on the :\n1. We configur e the agent with \n2. We collect int errupts generat ed during the \"updates\" stream mode\n3. We respond t o those int errupts with a input_message = {\"role\": \"user\", \"content\": \"What is the weather in Boston?\"}\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n    stream_mode=[\"messages\", \"updates\"],\n):\n        if i"
+      ],
+      "response": "",
+      "reference": "必须配置人类在环中间件和检查点（checkpointer）。",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.3333333333,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在使用“人类在环”工作流时，中断事件是在哪种流模式期间被收集的？",
+      "retrieved_contexts": [
+        "by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 15/27\nStreaming with human-in-the-loop\nTo handle human-in-the-loop , we build on the :\n1. We configur e the agent with \n2. We collect int errupts generat ed during the \"updates\" stream mode\n3. We respond t o those int errupts with a input_message = {\"role\": \"user\", \"content\": \"What is the weather in Boston?\"}\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n    stream_mode=[\"messages\", \"updates\"],\n):\n        if i",
+        "e=[\n        HumanInTheLoopMiddleware(interrupt_on={\"get_weather\": True}),\n    ],\n    checkpointer=checkpointer,\ndef _render_interrupt(interrupt: Interrupt) -> null:\n    interrupts = interrupt.value  \n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 17/27\nOutput\nSee all 21 linesinput_message = {\n    \"role\": \"user\",\n    \"content\": (\n        \"Can you look up the weather in Boston and San Francisco?\"\n    ),\n}\nfor chunk in agent.stream(\n    {\"mes",
+        "an then r esume b y passing a  into the same str eaming loop:\nOutput\n{\n    'a96c40474e429d661b5b32a8d86f0f3e': {\n        'decisions': [\n            {\n                'type': 'edit',\n                 'edited_action': {\n                     'name': 'get_weather',\n                     'args': {'city': 'Boston, U.K.'}\n                 }\n            },\n            {'type': 'approve'},\n        ]\n    }\n}\ninterrupts = []\nfor chunk in agent.stream(\n    config=config,\n    stream_mode=[\"messages\", \"updates"
+      ],
+      "response": "根据文档片段，在使用“人类在环”工作流时，中断事件是在 **\"updates\"** 流模式期间被收集的。\n\n文档中明确提到：“We collect interrupts generated during the 'updates' stream mode”。",
+      "reference": "中断事件是在 \"updates\" 流模式期间生成的。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.999999638904174,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "当系统中有多个子代理参与时，如何消除所生成消息的来源歧义？",
+      "retrieved_contexts": [
+        "cuted\nSpecifying  will stream incremental  generat ed\nby all LLM c alls in the agent. T o access the complet ed messages with p arsed tool calls:\n1. If those messages ar e tracked in the  (as in the model node of ),\nuse stream_mode=[\"messages\", \"updates\"] to access complet ed messages\nthrough  (demonstrat ed below).\n2. If those messages ar e not track ed in the st ate, use  or aggregate the\nchunks dur ing the str eaming loop ( ).\nR ef er t o the section belo w on  if y our agent includes mul tip",
+        "at ors lik e ,\n, and , see .Pr ocess st at e bef or e the model is c alled ( e.g., message tr imming, cont e x t injection)\nModify or v alidat e the modelʼ s r esponse ( e.g., guar drails, cont ent fil t er ing)\nHandle t ool e x ecution er r ors with cust om logic\nImplement d ynamic model selection b ased on st at e or cont e x t\nAdd cust om logging, monit or ing, or anal y ticsfrom langchain.messages import AIMessage, HumanMessage\nfor chunk in agent.stream({\n    \"messages\": [{\"role\": \"user\", \"c",
+        "or t, see .\nTo stream thinking t okens from an agent, use stream_mode=\"messages\" and filter for\nreasoning cont ent blocks:\nOutput\nstream_mode: updates"
+      ],
+      "response": "",
+      "reference": "可以在创建每个代理时为其传递一个特定的名称。",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.9999999999,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "代理名称被设置后，可以通过 metadata 中的哪个键在消息流中识别它？",
+      "retrieved_contexts": [
+        "agent when cr eating it. This name is then a vailable in\nmetadata via the lc_agent_name key when str eaming in \"messages\" mode.\nBelow, we update the  example:\n1. We replace our t ool with a call_weather_agent tool that in vokes an agent\ninternally\n2. We add a name to each agent\n3. We specify  when cr eating the str eam\n4. Our stream processing is identic al to before, but w e add logic t o keep track of what\nagent is activ e using create_agentʼs name parameter\nWhen y ou set a name  on an agent,",
+        ":\n        token, metadata = chunk[\"data\"]\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():command\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 20/27\nStreaming from sub-agents\nWhen ther e are multiple LLMs at an y point in an agent, itʼ s often necessar y to\ndisambiguat e the sour ce of messages as the y are generat ed.\nTo do this, p ass a  to each agent when cr eating it. This name is then a vaila",
+        "],\n)\n    {\"messages\": [{\"role\": \"user\", \"content\": \"What is the weather in SF?\"}]},\n    stream_mode=\"messages\",\n):\n        print(f\"node: {metadata['langgraph_node']}\")\n        print(f\"content: {token.content_blocks}\")\n        print(\"\\n\")for chunk in agent.stream(\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\nnode: model\ncontent: [{'type': 'tool_call_chunk', 'id': 'call_vbCyBcP8VuneUzyYlSBZZsVa', 'n\nnode: model\ncontent: [{'type': 'tool_call_chunk',"
+      ],
+      "response": "`lc_agent_name`",
+      "reference": "可以通过 metadata 中的 lc_agent_name 键来识别。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果要实现子图（子代理）的流式传输，必须在创建流时指定什么参数？",
+      "retrieved_contexts": [
+        "LLM tokens + met adata), or custom (arbitrary user dat a).\nStream agent progress\nStream LLM tokens\nStream thinking / reasoning tokens\nStream custom updates\nStream multiple modes\ncommon p att er nsCore component sStreaming\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 1/27\nPass one or mor e of the f ollowing str eam modes as a list t o the  or \nmethods:\nMode Descr iption\nupdatesStreams state updates after each agent st ep. If mul tiple upd",
+        "y ou\ndon ʼ t want str e amed t o the client. This is configur ed in y our graph code bef or e deplo yment.\nNot all chat model int egrations suppor t t",
+        "t. Every\nchunk is a StreamPart dict with type, ns, and data keys — the same shape\nregardless of str eam mode or number of modes:\nThe v2 f ormat also impr oves invoke() — it returns a GraphOutput object with\n.value and .interrupts attributes, cleanly separating st ate from interrupt met adata:\nSee the  for more details on the v2 f ormat, including t ype\nnarrowing, Py dantic/dat aclass coer cion, and subgraph str eaming.\nRelated\n# Unified format — no more tuple unpacking\nfor chunk in agent.stream("
+      ],
+      "response": "",
+      "reference": "必须在创建流时指定 subgraphs=True。",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.3333333333,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "为一个代理设置了名称后，该名称对该代理生成的 AIMessage 有什么影响？",
+      "retrieved_contexts": [
+        "name parameter\nWhen y ou set a name  on an agent, that name is also att ached t o an y AIMessage s\ngenerat ed b y that agent.\nFirst we construct the agent:\nOutput\nTool response: [{'type': 'text', 'text': \"It's always sunny in Boston, U.K.!\"}]\nTool response: [{'type': 'text', 'text': \"It's always sunny in San Francisco!\"}\n-| **|Boston|**|:| It|'s| always| sunny| in| Boston|,| U|.K|.|\n|-| **|San| Francisco|**|:| It|'s| always| sunny| in| San| Francisco|!|\nname\nstr e aming t ool c alls\nsubgraphs=Tr",
+        "agent when cr eating it. This name is then a vailable in\nmetadata via the lc_agent_name key when str eaming in \"messages\" mode.\nBelow, we update the  example:\n1. We replace our t ool with a call_weather_agent tool that in vokes an agent\ninternally\n2. We add a name to each agent\n3. We specify  when cr eating the str eam\n4. Our stream processing is identic al to before, but w e add logic t o keep track of what\nagent is activ e using create_agentʼs name parameter\nWhen y ou set a name  on an agent,",
+        "ssages\": [{\"role\": \"user\", \"content\": \"Explain machine learning\"}]},\n    context={\"user_role\": \"expert\"}\n)\nMessages\nMiddle war e\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 10/17\nSet an optional  f or the agent. This is used as the node identifier when adding the\nagent as a subgraph in :\nPr ef er snake_case  f or agent names ( e.g., research_assistant  inst e ad of Research\nAssistant ). Some model pr o viders r eject names cont aining sp aces"
+      ],
+      "response": "当为代理设置名称后，该名称会附加到该代理生成的任何 AIMessage 上。此外，在 \"messages\" 模式下进行流式传输时，可以通过元数据中的 `lc_agent_name` 键获取该名称。",
+      "reference": "该名称也会被附加到由该代理生成的所有 AIMessage 上。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7349410295299575,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在某些场景下需要禁用特定模型的令牌流式传输时，应在初始化时如何设置？",
+      "retrieved_contexts": [
+        "ef er t o the  t o see a full list of model identifier str ing\nmappings.\nF or mor e contr ol o v er the model configuration, initializ e a model inst ance dir ectl y using\nthe pr o vider p ackage. In this e xample, w e use . See  f or other\na v ailable chat model classes.\nModel inst ances giv e y ou complet e contr ol o v er configuration. Use them when y ou need\nt o set specific  lik e temperature , max_tokens , timeouts , base_url , andfrom langchain.agents import create_agent\nagent = create_a",
+        "ified in mul tiple wa ys,\nsuppor ting both st atic and d ynamic model selection.\nStatic m odel\nSt atic models ar e configur ed once when cr e ating the agent and r emain unchanged\nthr oughout e x ecution. This is the most common and straight f or war d appr o ach.\nT o initializ e a st atic model fr om a model identifier str ing :\nModel identifier str ings suppor t aut omatic inf er ence ( e.g., \"gpt-5\"  will be inf er r ed as\n\"openai:gpt-5\" ). R ef er t o the  t o see a full list of model identi",
+        "is configur ed in y our graph code bef or e deplo yment.\nNot all chat model int egrations suppor t the streaming  p aramet er . If y our model doesn ʼ t\nsuppor t it, use disable_streaming=True  inst e ad. This p aramet er is a v ailable on all chat\nmodels via the b ase class.\nOutput\nSee all 30 lines\nWorking with  systems to control which agent s stream their output\nMixing models that suppor t streaming with those that do not\nDeploying to  and wanting t o prevent certain model output s from being"
+      ],
+      "response": "根据文档片段，如果需要禁用特定模型的令牌流式传输，应在初始化模型时设置参数 `disable_streaming=True`。\n\n文档中提到，该参数通过基类在所有聊天模型上均可用。",
+      "reference": "应在初始化模型时设置 streaming=False。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8762575482538537,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果部署到 LangSmith 并希望防止某些模型输出流向客户端，需要在哪个阶段配置 streaming=False？",
+      "retrieved_contexts": [
+        "e\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 23/27\nDisable streaming\nIn some applic ations you might need t o disable str eaming of individual t okens for a given\nmodel. This is useful when:\nSet streaming=False when initializing the model.\nWhen deplo ying t o LangSmith, set streaming=False  on an y models whose output y ou\ndon ʼ t want str e amed t o the client. This",
+        "is configur ed in y our graph code bef or e deplo yment.\nNot all chat model int egrations suppor t the streaming  p aramet er . If y our model doesn ʼ t\nsuppor t it, use disable_streaming=True  inst e ad. This p aramet er is a v ailable on all chat\nmodels via the b ase class.\nOutput\nSee all 30 lines\nWorking with  systems to control which agent s stream their output\nMixing models that suppor t streaming with those that do not\nDeploying to  and wanting t o prevent certain model output s from being",
+        "by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 15/27\nStreaming with human-in-the-loop\nTo handle human-in-the-loop , we build on the :\n1. We configur e the agent with \n2. We collect int errupts generat ed during the \"updates\" stream mode\n3. We respond t o those int errupts with a input_message = {\"role\": \"user\", \"content\": \"What is the weather in Boston?\"}\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n    stream_mode=[\"messages\", \"updates\"],\n):\n        if i"
+      ],
+      "response": "根据文档，这需要在**部署之前**，在你的**图代码**中进行配置。",
+      "reference": "需要在部署之前的图形代码（graph code）中进行配置。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果某个特定的聊天模型集成不支持 streaming 参数，开发者应该使用哪个参数替代？",
+      "retrieved_contexts": [
+        "is configur ed in y our graph code bef or e deplo yment.\nNot all chat model int egrations suppor t the streaming  p aramet er . If y our model doesn ʼ t\nsuppor t it, use disable_streaming=True  inst e ad. This p aramet er is a v ailable on all chat\nmodels via the b ase class.\nOutput\nSee all 30 lines\nWorking with  systems to control which agent s stream their output\nMixing models that suppor t streaming with those that do not\nDeploying to  and wanting t o prevent certain model output s from being",
+        "works the same wa y regardless of the model pr ovider—LangChain nor malizes\nprovider-specific f ormats (Anthropic thinking blocks, OpenAI reasoning summar ies,\netc.) into a standard \"reasoning\" content block t ype via the  property.\nTo stream reasoning t okens directly from a chat model (without an agent), see \n.\nStreaming tool calls\nYou may want to stream both:\n1. Partial JSON as  are generat ed\n2. The complet ed, parsed tool calls that ar e executed\nSpecifying  will stream incremental  generat",
+        "Common patterns\nBelow are examples sho wing common use c ases for streaming.\nStreaming thinking / reasoning tokens\nSome models per form internal reasoning bef ore producing a final answ er. You can stream\nthese thinking / r easoning t okens as the yʼre generat ed by filtering \n for the type \"reasoning\".\nR e asoning output must be enabled on the model.\nSee the  and y our  f or configuration det ails.\nT o quickl y check a modelʼ s r e asoning suppor t, see .\nTo stream thinking t okens from an age"
+      ],
+      "response": "如果某个特定的聊天模型集成不支持 `streaming` 参数，开发者应该使用 `disable_streaming=True`。",
+      "reference": "应该使用该基础类提供的 disable_streaming=True 参数。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.889147109802773,
+      "llm_context_precision_with_reference": 0.9999999999,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "为了获得统一的 type、ns 和 data 键的块格式，应当在调用流方法时传递什么参数？",
+      "retrieved_contexts": [
+        "t. Every\nchunk is a StreamPart dict with type, ns, and data keys — the same shape\nregardless of str eam mode or number of modes:\nThe v2 f ormat also impr oves invoke() — it returns a GraphOutput object with\n.value and .interrupts attributes, cleanly separating st ate from interrupt met adata:\nSee the  for more details on the v2 f ormat, including t ype\nnarrowing, Py dantic/dat aclass coer cion, and subgraph str eaming.\nRelated\n# Unified format — no more tuple unpacking\nfor chunk in agent.stream(",
+        "ream() or astream() to get a unified output f ormat. Every\nchunk is a StreamPart dict with type, ns, and data keys — the same shape\nregardless of str",
+        "unk is a StreamPart dict with type, ns, and data keys. Use\nchunk[\"type\"] to determine the str eam mode and chunk[\"data\"] to access the\npayload.\nStr e"
+      ],
+      "response": "为了获得统一的 `type`、`ns` 和 `data` 键的块格式，应当在调用 `stream()` 或 `astream()` 方法时传递参数 `version=\"v2\"`。\n\n此外，使用 v2 格式需要 LangGraph 版本大于等于 1.1。",
+      "reference": "应当传递 version=\"v2\" 参数。",
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.4832915652589562,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在 v2 版本格式中，invoke() 方法的返回值是什么对象？",
+      "retrieved_contexts": [
+        "/docs.langchain.com/oss/python/langchain/tools 11/16\nBehavior:\nUse this when the r esult is naturall y human-r eadable t ext.\nReturn an ob ject\nReturn an object (f or example, a dict) when y our tool produces structur ed data that the\nmodel should inspect.\nBehavior:The return value is con verted to a ToolMessage.\nThe model sees that t ext and decides what t o do next.\nNo agent st ate fields ar e changed unless the model or another t ool does so lat er.\nThe object is ser ialized and sent b ack as",
+        "ion=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n    elif chunk[\"type\"] == \"updates\":\n        for source, update in chunk[\"data\"].items():\n            if source == \"__interrupt__\":\n                interrupts.extend(update)\n                _render_interrupt(update[0])\n[{'name': 'get_weather', 'args': '', 'id': 'call_GOwNaQHeqMixay2qy80padfE', 'in\n[{'name': null, 'args': '{\"ci', 'id': null, 'index': 0, 'type': 'tool_call_chun\n[{'name': null, 'args': 'ty\": ', 'i",
+        "int(result.interrupts)  # tuple of Interrupt objects (empty if none)LangGraph str e aming guide\nv2 (ne w)v1 (current default)\nLangGraph str e aming docs\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 25/27\nW as this p age helpful?\n Y es\n No or .\n t o Claude, VSCode, and mor e via MCP f or r e al-time answ ers.—Build R eact UIs with useStream for real-time agent\ninteractions\n—Stream tokens directly from a chat model without using\nan agent o"
+      ],
+      "response": "在 v2 版本格式中，`invoke()` 方法返回一个 **`GraphOutput`** 对象。\n\n该对象包含 `.value` 和 `.interrupts` 属性，用于将状态与中断元数据分离开来。",
+      "reference": "它返回一个 GraphOutput 对象。",
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.8003814994754375,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "GraphOutput 对象包含哪两个属性来将状态与中断元数据干净地分离开来？",
+      "retrieved_contexts": [
+        "ess for long-\nrunning operations\nConfig  for the executionAccess c allbacks, tags, and\nmetadata\nTool Call IDUnique identifier f or the cur rent tool\ninvocationCorrelate tool calls for logs\nand model in vocationsToolRuntime\nRunnableConfig\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 4/16\nShort-term memory (State)\nState represents short-term memor y that exists for the duration of a con versation. I t\nincludes the message hist ory and an y custom",
+        "meState AccessContext Access\nStore Access\nStream WriterMessages\nCustom StateUser IDSession Inf o\nLong-term Memor yUser PreferencesContext-Aware Tools\nStateful Tools\nMemory-Enabled T ools\nStreaming Tools\ngraph st at e\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 5/16\nThe runtime  p aramet er is hidden fr om the model. F or the e xample abo v e, the model onl y\nsees pref_name  in the t ool schema.\nUpdat e state\nUse  to update the agentʼ s state. T",
+        "t. Every\nchunk is a StreamPart dict with type, ns, and data keys — the same shape\nregardless of str eam mode or number of modes:\nThe v2 f ormat also impr oves invoke() — it returns a GraphOutput object with\n.value and .interrupts attributes, cleanly separating st ate from interrupt met adata:\nSee the  for more details on the v2 f ormat, including t ype\nnarrowing, Py dantic/dat aclass coer cion, and subgraph str eaming.\nRelated\n# Unified format — no more tuple unpacking\nfor chunk in agent.stream("
+      ],
+      "response": "GraphOutput 对象包含 `.value` 和 `.interrupts` 这两个属性。",
+      "reference": "它包含 .value 和 .interrupts 属性。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.6911067802346104,
+      "llm_context_precision_with_reference": 0.3333333333,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "LangChain 代理（Agents）的核心是将什么和工具结合起来？",
+      "retrieved_contexts": [
+        "node (which e x ecut es t ools), or middle war e.\nLe ar n mor e about the .\nCore componentsaction obser v ation finishinput\nmodel\nt ools outputt ools\ncreate_agent\nAn LLM Agent runs t ools in a loop t o achie v e a go al\ncreate_agent LangGraph\nGraph APICor e component s Agent s\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 1/17\nModel\nThe  is the r e asoning engine of y our agent. I t c an be specified in mul tiple wa ys,\nsuppor ting both st atic",
+        "human-in-the-loop\nLangGraph str e aming\nEdit this p age on GitHub file an issue\nConnect these docs\nResources\nForum\nChangelog\nLangChain Ac ademyCompany\nHome\nAbout\nCareers\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 26/27\nCor e component s\nAgentsCop y p age\nAgent s combine language models with  t o cr e at e syst ems that c an r e ason about\nt asks, decide which t ools t o use, and it erativ el y w or k t o war ds solutions.\n pr o vides a",
+        "ools\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 6/17\nT o le ar n mor e about t ools, see .\nTool err or han dling\nT o cust omiz e ho w t ool er r ors ar e handled, use the  decorat or t o cr e at e\nmiddle war e:\nThe agent will r etur n a  with the cust om er r or message when a t ool f ails:from langchain.agents import create_agent\nfrom langchain.agents.middleware import wrap_tool_call\nfrom langchain.messages import ToolMessage\n@wrap_tool_ca"
+      ],
+      "response": "LangChain 代理的核心是将**语言模型**和工具结合起来。",
+      "reference": "它将语言模型与工具结合了起来以创建能够推理和执行任务的系统。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8473999357953179,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "一个代理会一直执行工具循环直至触发什么条件？",
+      "retrieved_contexts": [
+        "atur es lik e :Example of R e Act loop\n[\n    ...\n    ToolMessage(\n        content=\"Tool error: Please check your input and try again. (division b\n        tool_call_id=\"...\"\n    ),\n    ...\n]\nagent = create_agent(\n    model,\n    tools,\n    system_prompt=\"You are a helpful assistant. Be concise and accurate.\"\n)system_prompt\nsystem_prompt\nsystem_prompt SystemMessage\nAnthr opic ʼ s pr ompt c aching\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 8/17",
+        "agent and r emain unchanged thr oughout\ne x ecution. This is the most common and straight f or war d appr o ach.\nT o define an agent with st atic t ools, p ass a list of the t ools t o the agent.\nT ools c an be specified as plain Py thon functions or cor outines .\nThe  c an be used t o cust omiz e t ool names, descr iptions, ar gument schemas,\nand other pr oper ties.Mul tiple t ool c alls in sequence (tr igger ed b y a single pr ompt)\nParallel t ool c alls when appr opr iat e\nDynamic t ool selec",
+        "ols=[search, get_weather],\n    middleware=[handle_tool_errors]\n)T ools\n@wrap_tool_call\nToolMessage\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 7/17\nTool us e in t he ReAct loo p\nAgent s f ollo w the R e Act (“R e asoning + Acting”) p att er n, al t er nating bet w een br ief\nr e asoning st eps with t ar get ed t ool c alls and f eeding the r esul ting obser v ations int o\nsubsequent decisions until the y c an deliv er a final answ er .\nSystem"
+      ],
+      "response": "基于检索到的文档，代理会一直执行工具循环，直到它们能够提供最终答案。",
+      "reference": "直到触发停止条件，即模型发出最终输出或达到指定的迭代限制。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.6509876644959177,
+      "llm_context_precision_with_reference": 0.3333333333,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "LangChain 中用于构建生产就绪图基代理运行时的函数是什么？",
+      "retrieved_contexts": [
+        "human-in-the-loop\nLangGraph str e aming\nEdit this p age on GitHub file an issue\nConnect these docs\nResources\nForum\nChangelog\nLangChain Ac ademyCompany\nHome\nAbout\nCareers\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 26/27\nCor e component s\nAgentsCop y p age\nAgent s combine language models with  t o cr e at e syst ems that c an r e ason about\nt asks, decide which t ools t o use, and it erativ el y w or k t o war ds solutions.\n pr o vides a",
+        "Core component s\nS t r e a m i n gCop y p age\nLangChain implement s a streaming syst em to surface real-time updat es.\nStreaming is crucial f or enhancing the r esponsiv eness of applic ations buil t on LLMs. By\ndisplaying output pr ogressively, even before a complet e response is r eady, streaming\nsignificantly improves user e xperience (UX), p articularly when de aling with the lat ency of\nLLMs.\nOverview\nLangChain ʼs streaming syst em lets you surface live feedback from agent runs t o your\napp",
+        "de\ntools_condition\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 14/16\nState injection\nTools can access the cur rent graph st ate through :\nFor more details on accessing st ate, context, and long-t erm memor y from tools, see\n.\nPrebuilt tools\nLangChain pr ovides a lar ge collection of pr ebuilt tools and t oolkits for common t asks like\nweb search, code int erpretation, dat abase access, and mor e. These r eady-to-use tools\ncan be dir ectly integ"
+      ],
+      "response": "",
+      "reference": "是 create_agent 函数。",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.0,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "什么是静态模型（Static model）？",
+      "retrieved_contexts": [
+        "ified in mul tiple wa ys,\nsuppor ting both st atic and d ynamic model selection.\nStatic m odel\nSt atic models ar e configur ed once when cr e ating the agent and r emain unchanged\nthr oughout e x ecution. This is the most common and straight f or war d appr o ach.\nT o initializ e a st atic model fr om a model identifier str ing :\nModel identifier str ings suppor t aut omatic inf er ence ( e.g., \"gpt-5\"  will be inf er r ed as\n\"openai:gpt-5\" ). R ef er t o the  t o see a full list of model identi",
+        "If y ou need d ynamic model selection with structur ed output, ensur e the\nmodels p assed t o the middle war e ar e not pr e-bound.\nF or model configuration det ails, see . F or d ynamic model selection p att er ns, see\n.\nTools\nT ools giv e agent s the abilit y t o t ak e actions. Agent s go be y ond simple model-onl y t ool\nbinding b y f acilit ating:\nF or mor e inf or mation, see .\nStatic t ools\nSt atic t ools ar e defined when cr e ating the agent and r emain unchanged thr oughout\ne x ecutio",
+        "ider -specific settings. R ef er t o the  t o see a v ailable p arams and\nmethods on y our model.\nDynamic m odel\nDynamic models ar e select ed at runtime  b ased on the cur r ent st at e  and cont e x t. This\nenables sophistic at ed r outing logic and cost optimization.\nT o use a d ynamic model, cr e at e middle war e using the  decorat or that\nmodifies the model in the r equest:\nfrom langchain_openai import ChatOpenAI\nfrom langchain.agents import create_agent\nfrom langchain.agents.middleware im"
+      ],
+      "response": "根据文档，**静态模型（Static model）**是指在创建代理时配置一次，并在整个执行过程中保持不变的模型。\n\n其主要特点如下：\n1.  **配置方式**：这是最常见且最直接的方法。\n2.  **初始化方式**：\n    *   可以使用**模型标识符字符串**进行初始化（例如 `\"openai:gpt-5\"`）。\n    *   也可以使用提供商包（如 `ChatOpenAI`）直接初始化**模型实例**，以便对参数（如 temperature、max_tokens、timeouts 等）进行更精细的控制。",
+      "reference": "静态模型是在创建代理时配置一次并在整个执行过程中保持不变的模型。",
+      "faithfulness": 0.75,
+      "answer_relevancy": 0.8665197663805959,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "除了直接初始化模型实例，还可以通过传入什么类型的值来让系统自动推断并初始化静态模型？",
+      "retrieved_contexts": [
+        "ified in mul tiple wa ys,\nsuppor ting both st atic and d ynamic model selection.\nStatic m odel\nSt atic models ar e configur ed once when cr e ating the agent and r emain unchanged\nthr oughout e x ecution. This is the most common and straight f or war d appr o ach.\nT o initializ e a st atic model fr om a model identifier str ing :\nModel identifier str ings suppor t aut omatic inf er ence ( e.g., \"gpt-5\"  will be inf er r ed as\n\"openai:gpt-5\" ). R ef er t o the  t o see a full list of model identi",
+        "ider -specific settings. R ef er t o the  t o see a v ailable p arams and\nmethods on y our model.\nDynamic m odel\nDynamic models ar e select ed at runtime  b ased on the cur r ent st at e  and cont e x t. This\nenables sophistic at ed r outing logic and cost optimization.\nT o use a d ynamic model, cr e at e middle war e using the  decorat or that\nmodifies the model in the r equest:\nfrom langchain_openai import ChatOpenAI\nfrom langchain.agents import create_agent\nfrom langchain.agents.middleware im",
+        "If y ou need d ynamic model selection with structur ed output, ensur e the\nmodels p assed t o the middle war e ar e not pr e-bound.\nF or model configuration det ails, see . F or d ynamic model selection p att er ns, see\n.\nTools\nT ools giv e agent s the abilit y t o t ak e actions. Agent s go be y ond simple model-onl y t ool\nbinding b y f acilit ating:\nF or mor e inf or mation, see .\nStatic t ools\nSt atic t ools ar e defined when cr e ating the agent and r emain unchanged thr oughout\ne x ecutio"
+      ],
+      "response": "除了直接初始化模型实例，还可以通过传入**模型标识符字符串**（model identifier string）来让系统自动推断并初始化静态模型。\n\n例如，传入 `\"gpt-5\"` 会被自动推断为 `\"openai:gpt-5\"`。",
+      "reference": "可以通过传入模型标识符字符串（如 \"openai:gpt-5\"）来自动推断。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7431664104808003,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "当需要针对对话长度等条件改变当前使用的模型时，应该采用什么类型的模型配置方案？",
+      "retrieved_contexts": [
+        "t create_agent\nfrom langchain.agents.middleware import wrap_model_call, ModelRequest, ModelRes\nbasic_model = ChatOpenAI(model=\"gpt-4.1-mini\")\nadvanced_model = ChatOpenAI(model=\"gpt-4.1\")\n@wrap_model_call\ndef dynamic_model_selection(request: ModelRequest, handler) -> ModelResponse:\n    \"\"\"Choose model based on conversation complexity.\"\"\"\n    message_count = len(request.state[\"messages\"])\n    if message_count > 10:\n        # Use an advanced model for longer conversations\n        model = advanced_m",
+        "or longer conversations\n        model = advanced_model\n    else:\n        model = basic_model\n    return handler(request.override(model=model))\nagent =",
+        "ider -specific settings. R ef er t o the  t o see a v ailable p arams and\nmethods on y our model.\nDynamic m odel\nDynamic models ar e select ed at runtime  b ased on the cur r ent st at e  and cont e x t. This\nenables sophistic at ed r outing logic and cost optimization.\nT o use a d ynamic model, cr e at e middle war e using the  decorat or that\nmodifies the model in the r equest:\nfrom langchain_openai import ChatOpenAI\nfrom langchain.agents import create_agent\nfrom langchain.agents.middleware im"
+      ],
+      "response": "应该采用 **Dynamic model**（动态模型）配置方案。\n\n根据文档，动态模型是在运行时根据当前状态和上下文（例如对话长度）进行选择的，这能够实现复杂的路由逻辑和成本优化。",
+      "reference": "应该采用在运行时选择的动态模型（Dynamic models）方案。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.6854607140987699,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "为了根据对话复杂性实现动态模型选择，应该编写并使用什么类型的拦截器？",
+      "retrieved_contexts": [
+        "ider -specific settings. R ef er t o the  t o see a v ailable p arams and\nmethods on y our model.\nDynamic m odel\nDynamic models ar e select ed at runtime  b ased on the cur r ent st at e  and cont e x t. This\nenables sophistic at ed r outing logic and cost optimization.\nT o use a d ynamic model, cr e at e middle war e using the  decorat or that\nmodifies the model in the r equest:\nfrom langchain_openai import ChatOpenAI\nfrom langchain.agents import create_agent\nfrom langchain.agents.middleware im",
+        "t create_agent\nfrom langchain.agents.middleware import wrap_model_call, ModelRequest, ModelRes\nbasic_model = ChatOpenAI(model=\"gpt-4.1-mini\")\nadvanced_model = ChatOpenAI(model=\"gpt-4.1\")\n@wrap_model_call\ndef dynamic_model_selection(request: ModelRequest, handler) -> ModelResponse:\n    \"\"\"Choose model based on conversation complexity.\"\"\"\n    message_count = len(request.state[\"messages\"])\n    if message_count > 10:\n        # Use an advanced model for longer conversations\n        model = advanced_m",
+        "If y ou need d ynamic model selection with structur ed output, ensur e the\nmodels p assed t o the middle war e ar e not pr e-bound.\nF or model configuration det ails, see . F or d ynamic model selection p att er ns, see\n.\nTools\nT ools giv e agent s the abilit y t o t ak e actions. Agent s go be y ond simple model-onl y t ool\nbinding b y f acilit ating:\nF or mor e inf or mation, see .\nStatic t ools\nSt atic t ools ar e defined when cr e ating the agent and r emain unchanged thr oughout\ne x ecutio"
+      ],
+      "response": "为了根据对话复杂性实现动态模型选择，应该使用 `@wrap_model_call` 装饰器创建的中间件（middleware）。",
+      "reference": "应该使用带有 @wrap_model_call 装饰器创建的中间件。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7043931378956199,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "工具（Tools）能突破单纯的模型文字输出，为代理提供什么能力？",
+      "retrieved_contexts": [
+        "/docs.langchain.com/oss/python/langchain/tools 11/16\nBehavior:\nUse this when the r esult is naturall y human-r eadable t ext.\nReturn an ob ject\nReturn an object (f or example, a dict) when y our tool produces structur ed data that the\nmodel should inspect.\nBehavior:The return value is con verted to a ToolMessage.\nThe model sees that t ext and decides what t o do next.\nNo agent st ate fields ar e changed unless the model or another t ool does so lat er.\nThe object is ser ialized and sent b ack as",
+        "ools are callable functions with w ell-defined input s and output s that get\npassed to a . The model decides when t o invoke a tool based on the\nconversation cont ext, and what input ar guments to provide.\nF or det ails on ho w models handle t ool c alls, see .\nCreate tools\nBasic tool definition\nThe simplest wa y to create a tool is with the  decorat or. By default, the function ʼs\ndocstring becomes the t oolʼs description that helps the model underst and when t o use it:\nfrom langchain.tools i",
+        "print(f\"Calling tools: {[tc['name'] for tc in latest_message.tool_calls\nStr e aming\nMiddle war e\n@before_model\n@after_model @wrap_tool_call Middle war e\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 16/17\nCore component s\nToolsCop y p age\nTools extend what  can do—letting them f etch real-time dat a, execute code, quer y\nexternal databases, and t ake actions in the w orld.\nUnder the hood, t ools are callable functions with w ell-defined in"
+      ],
+      "response": "根据检索到的文档片段，工具扩展了代理的能力，使其能够：\n\n*   获取实时数据\n*   执行代码\n*   查询外部数据库\n*   在现实世界中采取行动",
+      "reference": "工具为代理提供了采取行动的能力，如获取实时数据或执行代码。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.4842899937768473,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果给 create_agent 传递了一个空的工具列表，生成的代理会有何特征？",
+      "retrieved_contexts": [
+        "agent and r emain unchanged thr oughout\ne x ecution. This is the most common and straight f or war d appr o ach.\nT o define an agent with st atic t ools, p ass a list of the t ools t o the agent.\nT ools c an be specified as plain Py thon functions or cor outines .\nThe  c an be used t o cust omiz e t ool names, descr iptions, ar gument schemas,\nand other pr oper ties.Mul tiple t ool c alls in sequence (tr igger ed b y a single pr ompt)\nParallel t ool c alls when appr opr iat e\nDynamic t ool selec",
+        "agent = create_agent(\n    model=\"gpt-4.1\",\n    tools=[search, get_weather],\n    middleware=[handle_tool_errors]\n)T ools\n@wrap_tool_call\nToolMessage\n2",
+        "th(\"public_\")]\n        request = request.override(tools=tools)\n    elif message_count < 5:\n        # Limit tools early in conversation\n        tools = [t for t in request.tools if t.name != \"advanced_search\"]\n        request = request.override(tools=tools)\n    return handler(request)\nagent = create_agent(\n    model=\"gpt-4.1\",\n    tools=[public_search, private_search, advanced_search],\n    middleware=[state_based_tools]\n)\nDynamic all y selecting t ools\n2026/3/21 17:08 Agents - Docs by LangChain\nh"
+      ],
+      "response": "基于提供的文档片段，无法回答该问题。\n\n文档片段主要介绍了如何定义静态工具、如何通过中间件动态选择工具以及如何处理工具错误，但没有提及当传递空工具列表给 `create_agent` 时生成的代理会有什么特征。",
+      "reference": "该代理将只包含一个无法进行工具调用的单一 LLM 节点。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "为了避免工具过多导致模型上下文过载，并适应不同对话阶段，应使用什么工具策略？",
+      "retrieved_contexts": [
+        "ls, the set of t ools a v ailable t o the agent is modified at runtime rather\nthan defined all upfr ont. Not e v er y t ool is appr opr iat e f or e v er y situation. T oo man y t ools\nma y o v er whelm the model ( o v er lo ad cont e x t) and incr e ase er r ors; t oo f e w limit\nc ap abilities. Dynamic t ool selection enables adapting the a v ailable t oolset b ased on\nauthentic ation st at e, user per missions, f e atur e flags, or con v ersation st age.\nTher e ar e t w o appr o aches dependi",
+        "/tools 1/16\nType hint s are required as they define the t oolʼs input schema. The docstr ing should be\ninformative and concise t o help the model underst and the t oolʼs purpose.\nServer-side tool use:  Some chat models f e atur e buil t -in t ools (w eb se ar ch, code\nint er pr et ers) that ar e e x ecut ed ser v er -side. See  f or det ails.\nPr ef er snake_case  f or t ool names ( e.g., web_search  inst e ad of Web Search ). Some\nmodel pr o viders ha v e issues with or r eject names cont aining",
+        "If y ou need d ynamic model selection with structur ed output, ensur e the\nmodels p assed t o the middle war e ar e not pr e-bound.\nF or model configuration det ails, see . F or d ynamic model selection p att er ns, see\n.\nTools\nT ools giv e agent s the abilit y t o t ak e actions. Agent s go be y ond simple model-onl y t ool\nbinding b y f acilit ating:\nF or mor e inf or mation, see .\nStatic t ools\nSt atic t ools ar e defined when cr e ating the agent and r emain unchanged thr oughout\ne x ecutio"
+      ],
+      "response": "应使用**动态工具**（Dynamic tools）策略。\n\n文档指出，过多的工具可能会使模型不堪重负（导致上下文过载），而动态工具选择能够根据对话阶段等条件来调整可用的工具集。",
+      "reference": "应使用动态工具（Dynamic tools）选择策略。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7007836293684772,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果编译时已知所有可能的工具但希望基于用户权限来暴露它们，采用动态工具的哪种具体方法最合适？",
+      "retrieved_contexts": [
+        "ls, the set of t ools a v ailable t o the agent is modified at runtime rather\nthan defined all upfr ont. Not e v er y t ool is appr opr iat e f or e v er y situation. T oo man y t ools\nma y o v er whelm the model ( o v er lo ad cont e x t) and incr e ase er r ors; t oo f e w limit\nc ap abilities. Dynamic t ool selection enables adapting the a v ailable t oolset b ased on\nauthentic ation st at e, user per missions, f e atur e flags, or con v ersation st age.\nTher e ar e t w o appr o aches dependi",
+        ". These r eady-to-use tools\ncan be dir ectly integrated into your agent s without wr iting cust om code.\nSee the  integration p age for a complet e list of a vailable tools organized\nby category.\nServer-side tool use\nSome chat models f eature built-in tools that ar e executed server-side by the model\nprovider. These include c apabilities lik e web search and code int erpreters that don ʼt\nrequire you to define or host the t ool logic.\nRefer to the individual  and the \nfor details on enabling and",
+        "th(\"public_\")]\n        request = request.override(tools=tools)\n    elif message_count < 5:\n        # Limit tools early in conversation\n        tools = [t for t in request.tools if t.name != \"advanced_search\"]\n        request = request.override(tools=tools)\n    return handler(request)\nagent = create_agent(\n    model=\"gpt-4.1\",\n    tools=[public_search, private_search, advanced_search],\n    middleware=[state_based_tools]\n)\nDynamic all y selecting t ools\n2026/3/21 17:08 Agents - Docs by LangChain\nh"
+      ],
+      "response": "根据文档片段，最合适的方法是 **过滤预注册工具**。\n\n文档指出，当在创建 Agent 时已知所有可能的工具时，可以预注册它们，并根据权限动态过滤暴露给模型的工具。",
+      "reference": "最合适的方法是过滤预注册工具（Filtering pre-registered tools）。",
+      "faithfulness": 0.6666666666666666,
+      "answer_relevancy": 0.47243542793428284,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "若要向模型返回自定义的工具执行错误信息，应使用哪个装饰器创建中间件？",
+      "retrieved_contexts": [
+        "angchain.messages import ToolMessage\n@wrap_tool_call\ndef handle_tool_errors(request, handler):\n    \"\"\"Handle tool execution errors with custom messages.\"\"\"\n    try:\n        return handler(request)\n    except Exception as e:\n        # Return a custom error message to the model\n        return ToolMessage(\n            content=f\"Tool error: Please check your input and try again. \n({str(e)})\",\n            tool_call_id=request.tool_call[\"id\"]\n        )\nagent = create_agent(\n    model=\"gpt-4.1\",\n    to",
+        "ools are callable functions with w ell-defined input s and output s that get\npassed to a . The model decides when t o invoke a tool based on the\nconversation cont ext, and what input ar guments to provide.\nF or det ails on ho w models handle t ool c alls, see .\nCreate tools\nBasic tool definition\nThe simplest wa y to create a tool is with the  decorat or. By default, the function ʼs\ndocstring becomes the t oolʼs description that helps the model underst and when t o use it:\nfrom langchain.tools i",
+        "/tools 1/16\nType hint s are required as they define the t oolʼs input schema. The docstr ing should be\ninformative and concise t o help the model underst and the t oolʼs purpose.\nServer-side tool use:  Some chat models f e atur e buil t -in t ools (w eb se ar ch, code\nint er pr et ers) that ar e e x ecut ed ser v er -side. See  f or det ails.\nPr ef er snake_case  f or t ool names ( e.g., web_search  inst e ad of Web Search ). Some\nmodel pr o viders ha v e issues with or r eject names cont aining"
+      ],
+      "response": "应使用 `@wrap_tool_call` 装饰器。\n\n根据文档片段，为了自定义工具错误的处理方式并返回自定义错误信息，需要使用该装饰器来创建中间件。",
+      "reference": "应使用 @wrap_tool_call 装饰器创建错误处理中间件。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.6136535234455166,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "经过自定义错误处理的工具如果发生异常，返回给模型的包含错误内容的消息是什么类型的？",
+      "retrieved_contexts": [
+        "angchain.messages import ToolMessage\n@wrap_tool_call\ndef handle_tool_errors(request, handler):\n    \"\"\"Handle tool execution errors with custom messages.\"\"\"\n    try:\n        return handler(request)\n    except Exception as e:\n        # Return a custom error message to the model\n        return ToolMessage(\n            content=f\"Tool error: Please check your input and try again. \n({str(e)})\",\n            tool_call_id=request.tool_call[\"id\"]\n        )\nagent = create_agent(\n    model=\"gpt-4.1\",\n    to",
+        "at ors lik e ,\n, and , see .Pr ocess st at e bef or e the model is c alled ( e.g., message tr imming, cont e x t injection)\nModify or v alidat e the modelʼ s r esponse ( e.g., guar drails, cont ent fil t er ing)\nHandle t ool e x ecution er r ors with cust om logic\nImplement d ynamic model selection b ased on st at e or cont e x t\nAdd cust om logging, monit or ing, or anal y ticsfrom langchain.messages import AIMessage, HumanMessage\nfor chunk in agent.stream({\n    \"messages\": [{\"role\": \"user\", \"c",
+        "on errors, re-raise execution errors\ntool_node = ToolNode(tools)\n# Catch all errors and return error message to LLM\ntool_node = ToolNode(tools, handle_tool_errors=True)\n# Custom error message\ntool_node = ToolNode(tools, handle_tool_errors=\"Something went wrong, please tr\n# Custom error handler\ndef handle_error(e: ValueError) -> str:\n    return f\"Invalid input: {e}\"\ntool_node = ToolNode(tools, handle_tool_errors=handle_error)\n# Only catch specific exception types\ntool_node = ToolNode(tools, handl"
+      ],
+      "response": "根据文档片段，经过自定义错误处理的工具如果发生异常，返回给模型的包含错误内容的消息是 **`ToolMessage`** 类型。\n\n在文档提供的示例代码中，使用 `@wrap_tool_call` 装饰器处理错误时，通过 `return ToolMessage(...)` 将自定义的错误信息返回给了模型。",
+      "reference": "是带有自定义错误消息的 ToolMessage。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9787485903407517,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "代理在运行中反复交替进行简短推理、针对性工具调用和利用观察结果的模式被称为什么？",
+      "retrieved_contexts": [
+        "agent and r emain unchanged thr oughout\ne x ecution. This is the most common and straight f or war d appr o ach.\nT o define an agent with st atic t ools, p ass a list of the t ools t o the agent.\nT ools c an be specified as plain Py thon functions or cor outines .\nThe  c an be used t o cust omiz e t ool names, descr iptions, ar gument schemas,\nand other pr oper ties.Mul tiple t ool c alls in sequence (tr igger ed b y a single pr ompt)\nParallel t ool c alls when appr opr iat e\nDynamic t ool selec",
+        "ols=[search, get_weather],\n    middleware=[handle_tool_errors]\n)T ools\n@wrap_tool_call\nToolMessage\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 7/17\nTool us e in t he ReAct loo p\nAgent s f ollo w the R e Act (“R e asoning + Acting”) p att er n, al t er nating bet w een br ief\nr e asoning st eps with t ar get ed t ool c alls and f eeding the r esul ting obser v ations int o\nsubsequent decisions until the y c an deliv er a final answ er .\nSystem",
+        "atur es lik e :Example of R e Act loop\n[\n    ...\n    ToolMessage(\n        content=\"Tool error: Please check your input and try again. (division b\n        tool_call_id=\"...\"\n    ),\n    ...\n]\nagent = create_agent(\n    model,\n    tools,\n    system_prompt=\"You are a helpful assistant. Be concise and accurate.\"\n)system_prompt\nsystem_prompt\nsystem_prompt SystemMessage\nAnthr opic ʼ s pr ompt c aching\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 8/17"
+      ],
+      "response": "这种模式被称为 **ReAct**（“推理 + 行动”）模式。",
+      "reference": "这被称为 ReAct（推理+行动）模式。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.3634145430400095,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如何最快捷地告诉代理它是一个“有用的助手并且需要保持简明扼要”？",
+      "retrieved_contexts": [
+        "s or special charact ers\nwith er r ors. Using alphanumer ic charact ers, underscor es, and h yphens onl y ensur es\ncomp atibilit y acr oss all pr o viders. The same applies t o .\nInvocation\nY ou c an in v ok e an agent b y p assing an updat e t o it s . All agent s include a\n in their st at e; t o in v ok e the agent, p ass a ne w message:\nF or str e aming st eps and / or t ok ens fr om the agent, r ef er t o the  guide.\nOther wise, the agent f ollo ws the LangGraph  and suppor t s all associat",
+        "atur es lik e :Example of R e Act loop\n[\n    ...\n    ToolMessage(\n        content=\"Tool error: Please check your input and try again. (division b\n        tool_call_id=\"...\"\n    ),\n    ...\n]\nagent = create_agent(\n    model,\n    tools,\n    system_prompt=\"You are a helpful assistant. Be concise and accurate.\"\n)system_prompt\nsystem_prompt\nsystem_prompt SystemMessage\nAnthr opic ʼ s pr ompt c aching\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 8/17",
+        "if user_role == \"expert\":\n        return f\"{base_prompt} Provide detailed technical responses.\"\n    elif user_role == \"beginner\":\n        return f\"{base_prompt} Explain concepts simply and avoid jargon.\"\n    return base_prompt\nagent = create_agent(\n    model=\"gpt-4.1\",\n    tools=[web_search],\n    middleware=[user_role_prompt],\n    context_schema=Context\n)\n# The system prompt will be set dynamically based on context\nresult = agent.invoke(\n    {\"messages\": [{\"role\": \"user\", \"content\": \"Explain mac"
+      ],
+      "response": "根据文档，最快捷的方法是在创建代理时，直接通过 `system_prompt` 参数指定相应的字符串。\n\n示例代码如下：\n\n```python\nagent = create_agent(\n    model,\n    tools,\n    system_prompt=\"You are a helpful assistant. Be concise and accurate.\"\n)\n```",
+      "reference": "可以将这段描述作为字符串传给 system_prompt 参数。",
+      "faithfulness": 0.8,
+      "answer_relevancy": 0.39325271742516454,
+      "llm_context_precision_with_reference": 0.49999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果代理在初始化时没有收到任何 system_prompt，它会如何了解自己的任务？",
+      "retrieved_contexts": [
+        "if user_role == \"expert\":\n        return f\"{base_prompt} Provide detailed technical responses.\"\n    elif user_role == \"beginner\":\n        return f\"{base_prompt} Explain concepts simply and avoid jargon.\"\n    return base_prompt\nagent = create_agent(\n    model=\"gpt-4.1\",\n    tools=[web_search],\n    middleware=[user_role_prompt],\n    context_schema=Context\n)\n# The system prompt will be set dynamically based on context\nresult = agent.invoke(\n    {\"messages\": [{\"role\": \"user\", \"content\": \"Explain mac",
+        "until the y c an deliv er a final answ er .\nSystem prompt\nY ou c an shape ho w y our agent appr o aches t asks b y pr o viding a pr ompt. The\n p aramet er c an be pr o vided as a str ing:\nWhen no  is pr o vided, the agent will inf er it s t ask fr om the messages\ndir ectl y .\nThe  p aramet er accept s either a str  or a . Using a\nSystemMessage  giv es y ou mor e contr ol o v er the pr ompt structur e, which is useful f or\npr o vider -specific f e atur es lik e :Example of R e Act loop\n[\n    ...",
+        "atur es lik e :Example of R e Act loop\n[\n    ...\n    ToolMessage(\n        content=\"Tool error: Please check your input and try again. (division b\n        tool_call_id=\"...\"\n    ),\n    ...\n]\nagent = create_agent(\n    model,\n    tools,\n    system_prompt=\"You are a helpful assistant. Be concise and accurate.\"\n)system_prompt\nsystem_prompt\nsystem_prompt SystemMessage\nAnthr opic ʼ s pr ompt c aching\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 8/17"
+      ],
+      "response": "根据文档片段，如果初始化时没有提供 `system_prompt`，代理将直接从**消息**中推断它的任务。",
+      "reference": "代理将直接从接收到的消息内容中推断出自己的任务。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7983912141694549,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "对于像 Anthropic 这样的模型，通过传入 SystemMessage 对象而不是简单字符串来设置系统提示有什么好处？",
+      "retrieved_contexts": [
+        "at ors lik e ,\n, and , see .Pr ocess st at e bef or e the model is c alled ( e.g., message tr imming, cont e x t injection)\nModify or v alidat e the modelʼ s r esponse ( e.g., guar drails, cont ent fil t er ing)\nHandle t ool e x ecution er r ors with cust om logic\nImplement d ynamic model selection b ased on st at e or cont e x t\nAdd cust om logging, monit or ing, or anal y ticsfrom langchain.messages import AIMessage, HumanMessage\nfor chunk in agent.stream({\n    \"messages\": [{\"role\": \"user\", \"c",
+        "he model r equest:from langchain.agents import create_agent\nfrom langchain.messages import SystemMessage, HumanMessage\nliterary_agent = create_agent(\n    model=\"anthropic:claude-sonnet-4-5\",\n    system_prompt=SystemMessage(\n        content=[\n            {\n                \"type\": \"text\",\n                \"text\": \"You are an AI assistant tasked with analyzing \nliterary works.\",\n            },\n            {\n                \"type\": \"text\",\n                \"text\": \"<the entire contents of 'Pride and P",
+        "until the y c an deliv er a final answ er .\nSystem prompt\nY ou c an shape ho w y our agent appr o aches t asks b y pr o viding a pr ompt. The\n p aramet er c an be pr o vided as a str ing:\nWhen no  is pr o vided, the agent will inf er it s t ask fr om the messages\ndir ectl y .\nThe  p aramet er accept s either a str  or a . Using a\nSystemMessage  giv es y ou mor e contr ol o v er the pr ompt structur e, which is useful f or\npr o vider -specific f e atur es lik e :Example of R e Act loop\n[\n    ..."
+      ],
+      "response": "根据文档片段，使用 `SystemMessage` 对象而不是简单字符串来设置系统提示的主要好处是：\n\n1.  **对提示结构有更多控制**：`SystemMessage` 允许你更精细地定义提示的结构。\n2.  **支持提供商特定特性**：这对于利用特定模型提供商的高级功能非常有用，例如 **Anthropic 的提示缓存（Prompt Caching）**。\n\n具体来说，通过 `SystemMessage`，你可以在内容块中添加 `cache_control` 字段（例如 `{\"type\": \"ephemeral\"}`），指示 Anthropic 缓存该内容。这可以降低重复请求的延迟和成本。",
+      "reference": "这让开发者有更多的控制权去配置诸如提示缓存（prompt caching）等提供商特定的功能。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8052684013775788,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在基于运行时用户角色动态更改系统提示的高级用例中，需要用到哪个装饰器？",
+      "retrieved_contexts": [
+        "a\nToolMessage. If the model needs t o see that the t ool succeeded (f or example, t o confirm\na preference change ), include a ToolMessage in the updat e, using\nruntime.tool_call_id for the tool_call_id parameter.\nBehavior:\nUse this when the t ool is not just r eturning dat a, but also mut ating agent st ate.The command updat es state using update.\nUpdated state is available to subsequent st eps in the same run.\nUse reducers f or fields that ma y be updat ed by parallel tool calls.from langchai",
+        "rs ha v e issues with or r eject names cont aining sp aces or special charact ers\nwith er r ors. Sticking t o alphanumer ic charact ers, underscor es, and h yphens helps t o\nimpr o v e comp atibilit y acr oss pr o viders.\nCustomize tool properties\nCus tom tool nam e\nBy default, the tool name comes fr om the function name. Ov erride it when y ou need\nsomething mor e descriptive:\nCus tom tool des cription\nOverride the aut o-generat ed tool descr iption for clearer model guidance:\nAdvanced schema d",
+        "real-time updat es during tool executionShow progress for long-\nrunning operations\nConfig  for the executionAccess c allbacks, tags, and\nmetadata\nTool"
+      ],
+      "response": "基于提供的文档片段，无法回答您的问题。\n\n文档中主要介绍了 `@tool` 装饰器、`Command` 对象以及如何更新状态或访问上下文，但没有提及关于“基于运行时用户角色动态更改系统提示”的相关内容或特定的装饰器。",
+      "reference": "需要用到 @dynamic_prompt 装饰器来生成动态系统提示。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.0,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "为保证在各大模型提供商上的兼容性，给代理和工具命名时应优先使用哪种命名规则？",
+      "retrieved_contexts": [
+        "rs ha v e issues with or r eject names cont aining sp aces or special charact ers\nwith er r ors. Sticking t o alphanumer ic charact ers, underscor es, and h yphens helps t o\nimpr o v e comp atibilit y acr oss pr o viders.\nCustomize tool properties\nCus tom tool nam e\nBy default, the tool name comes fr om the function name. Ov erride it when y ou need\nsomething mor e descriptive:\nCus tom tool des cription\nOverride the aut o-generat ed tool descr iption for clearer model guidance:\nAdvanced schema d",
+        "/tools 1/16\nType hint s are required as they define the t oolʼs input schema. The docstr ing should be\ninformative and concise t o help the model underst and the t oolʼs purpose.\nServer-side tool use:  Some chat models f e atur e buil t -in t ools (w eb se ar ch, code\nint er pr et ers) that ar e e x ecut ed ser v er -side. See  f or det ails.\nPr ef er snake_case  f or t ool names ( e.g., web_search  inst e ad of Web Search ). Some\nmodel pr o viders ha v e issues with or r eject names cont aining",
+        "tion for clearer model guidance:\nAdvanced schema definition\nDefine comple x inputs with Py dantic models or JSON schemas:@tool(\"web_search\")  # Custom"
+      ],
+      "response": "为保证在各大模型提供商上的兼容性，给工具命名时应优先使用 **snake_case**（例如 `web_search` 而不是 `Web Search`）。\n\n坚持使用字母数字字符、下划线和连字符有助于提高跨提供商的兼容性。",
+      "reference": "应优先使用只包含字母数字、下划线和连字符的蛇形命名法（snake_case）。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7802256966677344,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如何触发（Invoke）并运行一个已经创建好的代理？",
+      "retrieved_contexts": [
+        "odel\n    else:\n        model = basic_model\n    return handler(request.override(model=model))\nagent = create_agent(\n    model=basic_model,  # Default model\n    tools=tools,\n    middleware=[dynamic_model_selection]\n)r ef er ence\n@wrap_model_call\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 3/17\nPr e-bound models (models with  alr e ad y c alled) ar e not suppor t ed when using\nstructur ed output. If y ou need d ynamic model selection with struct",
+        "e can then incor porate this middle ware into our agent and include it s custom stream\nevents:\n    tool_call = result.tool_calls[0]\n    if tool_call[\"args\"][\"evaluation\"] == \"unsafe\":\n        last_message.content = \"I cannot provide that response. Please rephrase\n    return null    stream_writer(result)\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 13/27\nfrom typing import Any\nfrom langchain.agents import create_agent\nfrom langchain.messa",
+        "angchain/agents 5/17\nThis appr o ach is best when:\nSee  f or mor e e xamples.All possible t ools ar e kno wn at compile/st ar tup time\nY ou want t o fil t er b ased on per missions, f e atur e flags, or con v ersation st at e\nT ools ar e st atic but their a v ailabilit y is d ynamicfrom langchain.agents import create_agent\nfrom langchain.agents.middleware import wrap_model_call, ModelRequest, ModelRes\nfrom typing import Callable\n@wrap_model_call\ndef state_based_tools(\n    request: ModelRequest,"
+      ],
+      "response": "基于提供的检索文档片段，内容主要介绍了如何使用 `create_agent` 函数创建代理、定义静态工具以及配置中间件，但**没有包含关于如何触发（Invoke）或运行已创建代理的具体代码或方法说明**。\n\n因此，无法仅根据当前片段回答该问题。",
+      "reference": "通过将代表状态更新的消息传入代理即可触发运行。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.3333333333,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "当提供商原生的结构化输出不可用或不可靠时，应使用哪种策略来生成结构化数据？",
+      "retrieved_contexts": [
+        "y  should be used when pr o vider -\nnativ e structur ed output (via ) is not a v ailable or r eliable.\nProviderS trategy\nProviderStrategy  uses the mo",
+        "ur ed output (via ) is not a v ailable or r eliable.\nProviderS trategy\nProviderStrategy  uses the model pr o vider ʼ s nativ e structur ed output generation. This is\nmor e r eliable but onl y w or ks with pr o viders that suppor t nativ e structur ed output:from pydantic import BaseModel\nfrom langchain.agents import create_agent\nfrom langchain.agents.structured_output import ToolStrategy\nclass ContactInfo(BaseModel):\n    name: str\n    email: str\n    phone: str\nagent = create_agent(\n    model=\"gp",
+        "ngSmith\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 11/17\nIn some situations, y ou ma y want the agent t o r etur n an output in a specific f or mat.\nLangChain pr o vides strat egies f or structur ed output via the  p aramet er .\nToolS trategy\nToolStrategy  uses ar tificial t ool c alling t o generat e structur ed output. This w or ks with\nan y model that suppor t s t ool c alling. ToolStrategy  should be used when pr o vider -\nnativ e struct"
+      ],
+      "response": "应使用 **ToolStrategy**。\n\n根据文档，当提供商原生的结构化输出不可用或不可靠时，应该使用 **ToolStrategy**。它通过人工工具调用来生成结构化输出，适用于任何支持工具调用的模型。",
+      "reference": "应使用依赖于人工工具调用的 ToolStrategy。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8531833928370828,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果模型支持原生的结构化输出生成，直接传入 schema 会默认激活哪种响应格式策略？",
+      "retrieved_contexts": [
+        "tion for clearer model guidance:\nAdvanced schema definition\nDefine comple x inputs with Py dantic models or JSON schemas:@tool(\"web_search\")  # Custom",
+        "- Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 12/17\nAs of langchain 1.0 , simpl y p assing a schema ( e.g., response_format=ContactInfo )\nwill def aul t t o ProviderStrategy  if the model suppor t s nativ e structur ed output. I t will f all\nb ack t o ToolStrategy  other wise.\nT o le ar n about structur ed output, see .\nMemory\nAgent s maint ain con v ersation hist or y aut omatic all y thr ough the message st at e. Y ou c an\nalso configur e the agent t o use a cust o",
+        "y  should be used when pr o vider -\nnativ e structur ed output (via ) is not a v ailable or r eliable.\nProviderS trategy\nProviderStrategy  uses the mo"
+      ],
+      "response": "如果模型支持原生的结构化输出生成，直接传入 schema 会默认激活 **ProviderStrategy**。\n\n根据文档片段说明：“As of langchain 1.0, simply passing a schema (e.g., response_format=ContactInfo) will default to ProviderStrategy if the model supports native structured output.”",
+      "reference": "会默认激活 ProviderStrategy 策略。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.894279551104856,
+      "llm_context_precision_with_reference": 0.5833333333041666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "代理系统中的“短期记忆”是指存储在哪里的信息？",
+      "retrieved_contexts": [
+        "StateShort-term memor y - mutable dat a that exists\nfor the cur rent conversation (messages,\ncounters, cust om fields)Access con versation hist ory,\ntrack tool call count s\nContextImmutable configuration p assed at in vocation\ntime (user IDs, session inf o)Personaliz e responses b ased\non user identit y\nStoreLong-term memor y - persist ent data that\nsurvives across conversationsSave user pr eferences,\nmaintain knowledge b ase\nStream Writer Emit real-time updat es during tool executionShow progr",
+        "ls - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 8/16\nLong-term memory (Store)\nThe  provides persist ent storage that sur vives across conversations. Unlik e\nstate (short-term memor y), data saved to the store remains a vailable in futur e sessions.\nAccess the st ore through runtime.store. The store uses a namesp ace/key pattern to\norganize data:\nF or pr oduction deplo yment s, use a persist ent st or e implement ation lik e \ninst e ad of InMemoryStore . See the  f or",
+        "are a financial assistant.\"\n)\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 8/16\nLong-term memory ("
+      ],
+      "response": "根据文档片段，代理系统中的“短期记忆”是指存储在 **State**（状态）中的信息。\n\n具体来说，它是存在于当前对话中的可变数据，包含消息、计数器和自定义字段。",
+      "reference": "是指自动存储在对话消息状态（state）中的信息。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8166613241640556,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在构建自定义的图状态模式时，必须作为 TypedDict 扩展哪个类？",
+      "retrieved_contexts": [
+        "t  be TypedDict  t ypes. Py dantic\nmodels and dat aclasses ar e no longer suppor t ed. See the  f or mor e\ndet ails.\nDefining cust om st at e via middle war e is pr ef er r ed o v er defining it via  on\n bec ause it allo ws y ou t o k eep st at e e x t ensions conceptuall y scoped t o the\nr ele v ant middle war e and t ools.\n is still suppor t ed f or b ackwar ds comp atibilit y on .\nT o le ar n mor e about memor y , see . F or inf or mation on implementing long-t er m\nmemor y that persist s acr",
+        "m st at e schema t o r emember additional\ninf or mation dur ing the con v ersation.\nInf or mation st or ed in the st at e c an be thought of as the  of the agent:\nCust om st at e schemas must e x t end  as a TypedDict .\nTher e ar e t w o wa ys t o define cust om st at e:\n1. Via  (pr ef er r ed)\n2. Via  on \nDefining s tate via middle ware\nUse middle war e t o define cust om st at e when y our cust om st at e needs t o be accessed b y\nspecific middle war e hooks and t ools att ached t o said middl",
+        "tools,\n    middleware=[CustomMiddleware()]\n)\n# The agent can now track additional state beyond messages\nresult = agent.invoke({\n    \"messages\": [{\"role\": \"user\", \"content\": \"I prefer technical explanations\"}\n    \"user_preferences\": {\"style\": \"technical\", \"verbosity\": \"detailed\"},\n})\nstate_schema\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 14/17\nAs of langchain 1.0 , cust om st at e schemas must  be TypedDict  t ypes. Py dantic\nmodels and dat"
+      ],
+      "response": "在构建自定义的图状态模式时，必须作为 TypedDict 扩展 **AgentState** 类。\n\n文档中明确指出：“Custom state schemas must extend AgentState as a TypedDict.”",
+      "reference": "必须扩展 AgentState 类。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8187935657476367,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在 langchain 1.0 中，自定义状态模式是否依然支持 Pydantic 模型或数据类（dataclasses）？",
+      "retrieved_contexts": [
+        "tools,\n    middleware=[CustomMiddleware()]\n)\n# The agent can now track additional state beyond messages\nresult = agent.invoke({\n    \"messages\": [{\"role\": \"user\", \"content\": \"I prefer technical explanations\"}\n    \"user_preferences\": {\"style\": \"technical\", \"verbosity\": \"detailed\"},\n})\nstate_schema\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 14/17\nAs of langchain 1.0 , cust om st at e schemas must  be TypedDict  t ypes. Py dantic\nmodels and dat",
+        "- Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 12/17\nAs of langchain 1.0 , simpl y p assing a schema ( e.g., response_format=ContactInfo )\nwill def aul t t o ProviderStrategy  if the model suppor t s nativ e structur ed output. I t will f all\nb ack t o ToolStrategy  other wise.\nT o le ar n about structur ed output, see .\nMemory\nAgent s maint ain con v ersation hist or y aut omatic all y thr ough the message st at e. Y ou c an\nalso configur e the agent t o use a cust o",
+        "meState AccessContext Access\nStore Access\nStream WriterMessages\nCustom StateUser IDSession Inf o\nLong-term Memor yUser PreferencesContext-Aware Tools\nStateful Tools\nMemory-Enabled T ools\nStreaming Tools\ngraph st at e\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 5/16\nThe runtime  p aramet er is hidden fr om the model. F or the e xample abo v e, the model onl y\nsees pref_name  in the t ool schema.\nUpdat e state\nUse  to update the agentʼ s state. T"
+      ],
+      "response": "根据检索到的文档片段，在 langchain 1.0 中，自定义状态模式**不再支持** Pydantic 模型或数据类。它们必须是 **TypedDict** 类型。",
+      "reference": "不支持，Pydantic 模型和 dataclasses 已不再受支持。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8044059104145772,
+      "llm_context_precision_with_reference": 0.9999999999,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "为什么通过中间件（middleware）来定义自定义状态比通过 create_agent 上的 state_schema 更好？",
+      "retrieved_contexts": [
+        "the  p aramet er as a shor t cut t o define cust om st at e that is onl y used\nin t ools.from langchain.agents import AgentState\nfrom langchain.agents.middleware import AgentMiddleware\nfrom typing import Any\nclass CustomState(AgentState):\n    user_preferences: dict\nclass CustomMiddleware(AgentMiddleware):\n    state_schema = CustomState\n    tools = [tool1, tool2]\n    def before_model(self, state: CustomState, runtime) -> dict[str, Any] | Non\n        ...\nagent = create_agent(\n    model,\n    tools=",
+        "tools,\n    middleware=[CustomMiddleware()]\n)\n# The agent can now track additional state beyond messages\nresult = agent.invoke({\n    \"messages\": [{\"role\": \"user\", \"content\": \"I prefer technical explanations\"}\n    \"user_preferences\": {\"style\": \"technical\", \"verbosity\": \"detailed\"},\n})\nstate_schema\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 14/17\nAs of langchain 1.0 , cust om st at e schemas must  be TypedDict  t ypes. Py dantic\nmodels and dat",
+        "tomState\n)\n# The agent can now track additional state beyond messages\nresult = agent.invoke({\n    \"messages\": [{\"role\": \"user\", \"content\": \"I prefer technical explanations\"}\n    \"user_preferences\": {\"style\": \"technical\", \"verbosity\": \"detailed\"},\n})\nv1 migration guide\nstate_schema\ncreate_agent\nstate_schema create_agent\nMemor y\nLong-t er m memor y\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 15/17\nF or mor e det ails on str e aming, see .\nMiddl"
+      ],
+      "response": "根据文档，通过中间件定义自定义状态比通过 `create_agent` 上的 `state_schema` 更好，主要原因是：\n\n它允许你将状态扩展在概念上**限定于相关的中间件和工具**。\n\n这种方式特别适用于自定义状态需要被特定的中间件钩子和附加到该中间件的工具访问的场景。",
+      "reference": "因为中间件允许将状态扩展在概念上严格限制在相关的中间件和工具的作用域内。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9378519237341751,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在流式获取中间进度字典中的内容时，可以通过哪个表达式获取到最新生成的消息？",
+      "retrieved_contexts": [
+        "for source, update in chunk[\"data\"].items():\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 10/27\nAccessing co mple ted m essages\nIf complet ed messages ar e track ed in an agentʼ s , y ou c an use stream_mode=\n[\"messages\", \"updates\"]  as demonstrat ed in the  section t o access\ncomplet ed messages dur ing str e aming.\nIn some c ases, complet ed messages ar e not reflected in . If you have\naccess t o the agent int ernals, you can use",
+        "ontent\": \"Search for AI news and summarize \n}, stream_mode=\"values\"):\n    # Each chunk contains the full state at that point\n    latest_message = chunk[\"messages\"][-1]\n    if latest_message.content:\n        if isinstance(latest_message, HumanMessage):\n            print(f\"User: {latest_message.content}\")\n        elif isinstance(latest_message, AIMessage):\n            print(f\"Agent: {latest_message.content}\")\n    elif latest_message.tool_calls:\n        print(f\"Calling tools: {[tc['name'] for tc in",
+        "data['messages'][-1].content_blocks}\")for chunk in agent.stream(\n    version=\"v2\",\n    if chunk[\"type\"] == \"updates\":\n        for step, data in chunk[\"data\"].items():\nstep: model\ncontent: [{'type': 'tool_call', 'name': 'get_weather', 'args': {'city': 'San Fr\nstep: tools\ncontent: [{'type': 'text', 'text': \"It's always sunny in San Francisco!\"}]\nstep: model\ncontent: [{'type': 'text', 'text': 'It's always sunny in San Francisco!'}]\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchai"
+      ],
+      "response": "",
+      "reference": "可以通过 chunk[\"messages\"][-1] 来获取。",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "中间件允许在核心代理执行流程中的哪些关键点进行数据拦截和修改？",
+      "retrieved_contexts": [
+        "17\nF or mor e det ails on str e aming, see .\nMiddleware\n pr o vides po w er ful e x t ensibilit y f or cust omizing agent beha vior at dif f er ent\nst ages of e x ecution. Y ou c an use middle war e t o:\nMiddle war e int egrat es se amlessl y int o the agentʼ s e x ecution, allo wing y ou t o int er cept\nand modify dat a flo w at k e y point s without changing the cor e agent logic.\nF or compr ehensiv e middle war e document ation including decorat ors lik e ,\n, and , see .Pr ocess st at e bef o",
+        "at ors lik e ,\n, and , see .Pr ocess st at e bef or e the model is c alled ( e.g., message tr imming, cont e x t injection)\nModify or v alidat e the modelʼ s r esponse ( e.g., guar drails, cont ent fil t er ing)\nHandle t ool e x ecution er r ors with cust om logic\nImplement d ynamic model selection b ased on st at e or cont e x t\nAdd cust om logging, monit or ing, or anal y ticsfrom langchain.messages import AIMessage, HumanMessage\nfor chunk in agent.stream({\n    \"messages\": [{\"role\": \"user\", \"c",
+        "node (which e x ecut es t ools), or middle war e.\nLe ar n mor e about the .\nCore componentsaction obser v ation finishinput\nmodel\nt ools outputt ools\ncreate_agent\nAn LLM Agent runs t ools in a loop t o achie v e a go al\ncreate_agent LangGraph\nGraph APICor e component s Agent s\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 1/17\nModel\nThe  is the r e asoning engine of y our agent. I t c an be specified in mul tiple wa ys,\nsuppor ting both st atic"
+      ],
+      "response": "根据文档片段，中间件允许在代理执行流程的以下关键点进行数据拦截和修改：\n\n1.  **在调用模型之前**：处理状态（例如消息修剪、上下文注入）。\n2.  **在模型生成响应后**：修改或验证模型的响应（例如护栏、内容过滤）。\n3.  **在工具执行期间**：使用自定义逻辑处理工具执行错误。\n4.  **模型选择阶段**：基于状态或上下文实现动态模型选择。\n5.  **通用监控**：添加自定义日志记录、监控或分析。",
+      "reference": "允许在调用模型前处理状态、调用模型后修改响应以及处理工具执行错误时进行拦截。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9180850703402015,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "定义一个简单工具的最基础的方法是在函数上添加什么装饰器？",
+      "retrieved_contexts": [
+        "ools are callable functions with w ell-defined input s and output s that get\npassed to a . The model decides when t o invoke a tool based on the\nconversation cont ext, and what input ar guments to provide.\nF or det ails on ho w models handle t ool c alls, see .\nCreate tools\nBasic tool definition\nThe simplest wa y to create a tool is with the  decorat or. By default, the function ʼs\ndocstring becomes the t oolʼs description that helps the model underst and when t o use it:\nfrom langchain.tools i",
+        "ge(\"tools\", \"llm\")\ngraph = builder.compile()ToolNode\ntools_condition\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/l",
+        "/tools 1/16\nType hint s are required as they define the t oolʼs input schema. The docstr ing should be\ninformative and concise t o help the model underst and the t oolʼs purpose.\nServer-side tool use:  Some chat models f e atur e buil t -in t ools (w eb se ar ch, code\nint er pr et ers) that ar e e x ecut ed ser v er -side. See  f or det ails.\nPr ef er snake_case  f or t ool names ( e.g., web_search  inst e ad of Web Search ). Some\nmodel pr o viders ha v e issues with or r eject names cont aining"
+      ],
+      "response": "定义一个简单工具的最基础的方法是在函数上添加 `@tool` 装饰器。",
+      "reference": "在函数上添加 @tool 装饰器。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.6587130544063725,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在使用 @tool 装饰器而不提供额外描述时，模型是从哪里了解该工具的用途的？",
+      "retrieved_contexts": [
+        "ools are callable functions with w ell-defined input s and output s that get\npassed to a . The model decides when t o invoke a tool based on the\nconversation cont ext, and what input ar guments to provide.\nF or det ails on ho w models handle t ool c alls, see .\nCreate tools\nBasic tool definition\nThe simplest wa y to create a tool is with the  decorat or. By default, the function ʼs\ndocstring becomes the t oolʼs description that helps the model underst and when t o use it:\nfrom langchain.tools i",
+        "/tools 1/16\nType hint s are required as they define the t oolʼs input schema. The docstr ing should be\ninformative and concise t o help the model underst and the t oolʼs purpose.\nServer-side tool use:  Some chat models f e atur e buil t -in t ools (w eb se ar ch, code\nint er pr et ers) that ar e e x ecut ed ser v er -side. See  f or det ails.\nPr ef er snake_case  f or t ool names ( e.g., web_search  inst e ad of Web Search ). Some\nmodel pr o viders ha v e issues with or r eject names cont aining",
+        ". These r eady-to-use tools\ncan be dir ectly integrated into your agent s without wr iting cust om code.\nSee the  integration p age for a complet e list of a vailable tools organized\nby category.\nServer-side tool use\nSome chat models f eature built-in tools that ar e executed server-side by the model\nprovider. These include c apabilities lik e web search and code int erpreters that don ʼt\nrequire you to define or host the t ool logic.\nRefer to the individual  and the \nfor details on enabling and"
+      ],
+      "response": "默认情况下，函数的 **docstring（文档字符串）** 会成为工具的描述，模型通过这个描述来了解工具的用途以及何时使用它。",
+      "reference": "模型是从该函数的文档字符串（docstring）中了解其用途的。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2642267500110321,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如何让函数的实际名称和暴露给代理的工具名称不一致？",
+      "retrieved_contexts": [
+        "agent and r emain unchanged thr oughout\ne x ecution. This is the most common and straight f or war d appr o ach.\nT o define an agent with st atic t ools, p ass a list of the t ools t o the agent.\nT ools c an be specified as plain Py thon functions or cor outines .\nThe  c an be used t o cust omiz e t ool names, descr iptions, ar gument schemas,\nand other pr oper ties.Mul tiple t ool c alls in sequence (tr igger ed b y a single pr ompt)\nParallel t ool c alls when appr opr iat e\nDynamic t ool selec",
+        "rs ha v e issues with or r eject names cont aining sp aces or special charact ers\nwith er r ors. Sticking t o alphanumer ic charact ers, underscor es, and h yphens helps t o\nimpr o v e comp atibilit y acr oss pr o viders.\nCustomize tool properties\nCus tom tool nam e\nBy default, the tool name comes fr om the function name. Ov erride it when y ou need\nsomething mor e descriptive:\nCus tom tool des cription\nOverride the aut o-generat ed tool descr iption for clearer model guidance:\nAdvanced schema d",
+        "print(f\"Calling tools: {[tc['name'] for tc in latest_message.tool_calls\nStr e aming\nMiddle war e\n@before_model\n@after_model @wrap_tool_call Middle war e\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 16/17\nCore component s\nToolsCop y p age\nTools extend what  can do—letting them f etch real-time dat a, execute code, quer y\nexternal databases, and t ake actions in the w orld.\nUnder the hood, t ools are callable functions with w ell-defined in"
+      ],
+      "response": "根据检索到的文档，你可以通过在 `@tool` 装饰器中传入字符串参数来自定义暴露给代理的工具名称。\n\n默认情况下，工具名称来源于函数名。如果你需要更具描述性的名称，可以在装饰器中覆盖它。\n\n示例代码如下：\n\n```python\n@tool(\"web_search\")  # 自定义工具名称\ndef my_actual_function_name(...):\n    ...\n```\n\n在这个例子中，尽管函数的实际名称是 `my_actual_function_name`，但暴露给代理的工具名称将是 `web_search`。",
+      "reference": "可以在 @tool 装饰器中显式传递一个自定义名称，如 @tool(\"custom_name\")。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.4804898108846494,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "当 @tool 函数的文档字符串不足以清晰指导模型时，如何重写工具描述？",
+      "retrieved_contexts": [
+        "ools are callable functions with w ell-defined input s and output s that get\npassed to a . The model decides when t o invoke a tool based on the\nconversation cont ext, and what input ar guments to provide.\nF or det ails on ho w models handle t ool c alls, see .\nCreate tools\nBasic tool definition\nThe simplest wa y to create a tool is with the  decorat or. By default, the function ʼs\ndocstring becomes the t oolʼs description that helps the model underst and when t o use it:\nfrom langchain.tools i",
+        "/tools 1/16\nType hint s are required as they define the t oolʼs input schema. The docstr ing should be\ninformative and concise t o help the model underst and the t oolʼs purpose.\nServer-side tool use:  Some chat models f e atur e buil t -in t ools (w eb se ar ch, code\nint er pr et ers) that ar e e x ecut ed ser v er -side. See  f or det ails.\nPr ef er snake_case  f or t ool names ( e.g., web_search  inst e ad of Web Search ). Some\nmodel pr o viders ha v e issues with or r eject names cont aining",
+        "rs ha v e issues with or r eject names cont aining sp aces or special charact ers\nwith er r ors. Sticking t o alphanumer ic charact ers, underscor es, and h yphens helps t o\nimpr o v e comp atibilit y acr oss pr o viders.\nCustomize tool properties\nCus tom tool nam e\nBy default, the tool name comes fr om the function name. Ov erride it when y ou need\nsomething mor e descriptive:\nCus tom tool des cription\nOverride the aut o-generat ed tool descr iption for clearer model guidance:\nAdvanced schema d"
+      ],
+      "response": "",
+      "reference": "可以在 @tool 装饰器中使用 description 参数来重写它。",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "若需要工具接收高度复杂的 JSON 结构或具有细致校验的参数，应使用 @tool 装饰器的哪个参数？",
+      "retrieved_contexts": [
+        "/tools 1/16\nType hint s are required as they define the t oolʼs input schema. The docstr ing should be\ninformative and concise t o help the model underst and the t oolʼs purpose.\nServer-side tool use:  Some chat models f e atur e buil t -in t ools (w eb se ar ch, code\nint er pr et ers) that ar e e x ecut ed ser v er -side. See  f or det ails.\nPr ef er snake_case  f or t ool names ( e.g., web_search  inst e ad of Web Search ). Some\nmodel pr o viders ha v e issues with or r eject names cont aining",
+        "ools are callable functions with w ell-defined input s and output s that get\npassed to a . The model decides when t o invoke a tool based on the\nconversation cont ext, and what input ar guments to provide.\nF or det ails on ho w models handle t ool c alls, see .\nCreate tools\nBasic tool definition\nThe simplest wa y to create a tool is with the  decorat or. By default, the function ʼs\ndocstring becomes the t oolʼs description that helps the model underst and when t o use it:\nfrom langchain.tools i",
+        "ols=[search, get_weather],\n    middleware=[handle_tool_errors]\n)T ools\n@wrap_tool_call\nToolMessage\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 7/17\nTool us e in t he ReAct loo p\nAgent s f ollo w the R e Act (“R e asoning + Acting”) p att er n, al t er nating bet w een br ief\nr e asoning st eps with t ar get ed t ool c alls and f eeding the r esul ting obser v ations int o\nsubsequent decisions until the y c an deliv er a final answ er .\nSystem"
+      ],
+      "response": "",
+      "reference": "应使用 args_schema 参数并结合一个 Pydantic 模型。",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.9999999999,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在定义工具函数的参数时，哪个参数名称被保留用于传递 RunnableConfig 而不能被使用？",
+      "retrieved_contexts": [
+        "de t ool use\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 2/16\nReserved argument names\nThe following parameter names ar e reserved and c annot be used as t ool arguments.\nUsing these names will c ause runtime er rors.\nParamet er name Pur pose\nconfig Reserved for passing RunnableConfig to tools internally\nruntime Reserved for ToolRuntime parameter (accessing st ate, context, store)\nTo access runtime inf ormation, use the  parameter instead of nam",
+        "ess for long-\nrunning operations\nConfig  for the executionAccess c allbacks, tags, and\nmetadata\nTool Call IDUnique identifier f or the cur rent tool\ninvocationCorrelate tool calls for logs\nand model in vocationsToolRuntime\nRunnableConfig\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 4/16\nShort-term memory (State)\nState represents short-term memor y that exists for the duration of a con versation. I t\nincludes the message hist ory and an y custom",
+        "guage set to {language}.\",\n                    tool_call_id=runtime.tool_call_id,\n                )\n            ],\n        }\n    )Command\n2026/3/21 17"
+      ],
+      "response": "`config`",
+      "reference": "参数名称 \"config\" 被保留使用。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在定义工具函数的参数时，哪个参数名称被保留用于访问 ToolRuntime 实例？",
+      "retrieved_contexts": [
+        "de t ool use\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 2/16\nReserved argument names\nThe following parameter names ar e reserved and c annot be used as t ool arguments.\nUsing these names will c ause runtime er rors.\nParamet er name Pur pose\nconfig Reserved for passing RunnableConfig to tools internally\nruntime Reserved for ToolRuntime parameter (accessing st ate, context, store)\nTo access runtime inf ormation, use the  parameter instead of nam",
+        "I t\nincludes the message hist ory and an y custom fields y ou define in y our .\nAdd runtime: ToolRuntime  t o y our t ool signatur e t o access st at e. This p aramet er is\naut omatic all y inject ed and hidden fr om the LLM - it w on ʼ t appe ar in the t oolʼ s schema.\nAccess s tate\nTools can access the cur rent conversation st ate using runtime.state:⚡ Enhanced T ool \nCapabilities📊 Available R esources🔧 Tool Runtime Cont ext\nTool Call ToolRuntimeState AccessContext Access\nStore Access\nStream W",
+        "real-time updat es during tool executionShow progress for long-\nrunning operations\nConfig  for the executionAccess c allbacks, tags, and\nmetadata\nTool"
+      ],
+      "response": "根据文档，参数名称 **`runtime`** 被保留用于访问 ToolRuntime 实例（以访问状态、上下文和存储）。",
+      "reference": "参数名称 \"runtime\" 被保留使用。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8715554510633939,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果一个工具的签名中包含 runtime: ToolRuntime 参数，模型在调用该工具时会看到这个参数吗？",
+      "retrieved_contexts": [
+        "I t\nincludes the message hist ory and an y custom fields y ou define in y our .\nAdd runtime: ToolRuntime  t o y our t ool signatur e t o access st at e. This p aramet er is\naut omatic all y inject ed and hidden fr om the LLM - it w on ʼ t appe ar in the t oolʼ s schema.\nAccess s tate\nTools can access the cur rent conversation st ate using runtime.state:⚡ Enhanced T ool \nCapabilities📊 Available R esources🔧 Tool Runtime Cont ext\nTool Call ToolRuntimeState AccessContext Access\nStore Access\nStream W",
+        "de t ool use\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 2/16\nReserved argument names\nThe following parameter names ar e reserved and c annot be used as t ool arguments.\nUsing these names will c ause runtime er rors.\nParamet er name Pur pose\nconfig Reserved for passing RunnableConfig to tools internally\nruntime Reserved for ToolRuntime parameter (accessing st ate, context, store)\nTo access runtime inf ormation, use the  parameter instead of nam",
+        "a\nToolMessage. If the model needs t o see that the t ool succeeded (f or example, t o confirm\na preference change ), include a ToolMessage in the updat e, using\nruntime.tool_call_id for the tool_call_id parameter.\nBehavior:\nUse this when the t ool is not just r eturning dat a, but also mut ating agent st ate.The command updat es state using update.\nUpdated state is available to subsequent st eps in the same run.\nUse reducers f or fields that ma y be updat ed by parallel tool calls.from langchai"
+      ],
+      "response": "不会看到。\n\n根据文档片段，`runtime: ToolRuntime` 参数是自动注入的，并且对 LLM（大语言模型）是隐藏的。它不会出现在工具的 schema 中，因此模型在调用该工具时只能看到其他定义的参数。",
+      "reference": "不会，它会自动被注入并对 LLM 隐藏。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "工具如何访问当前对话中用户发出的最新消息？",
+      "retrieved_contexts": [
+        "his is useful f or tools that need t o update\ncustom state fields:from langchain.tools import tool, ToolRuntime\nfrom langchain.messages import HumanMessage\n@tool\ndef get_last_user_message(runtime: ToolRuntime) -> str:\n    \"\"\"Get the most recent message from the user.\"\"\"\n    messages = runtime.state[\"messages\"]\n    # Find the last human message\n    for message in reversed(messages):\n        if isinstance(message, HumanMessage):\n            return message.content\n    return \"No user messages found",
+        "ontent\": \"Search for AI news and summarize \n}, stream_mode=\"values\"):\n    # Each chunk contains the full state at that point\n    latest_message = chunk[\"messages\"][-1]\n    if latest_message.content:\n        if isinstance(latest_message, HumanMessage):\n            print(f\"User: {latest_message.content}\")\n        elif isinstance(latest_message, AIMessage):\n            print(f\"Agent: {latest_message.content}\")\n    elif latest_message.tool_calls:\n        print(f\"Calling tools: {[tc['name'] for tc in",
+        "essage) and message.tool_calls:\n        print(f\"Tool calls: {message.tool_calls}\")\n    if isinstance(message, ToolMessage):\n        print(f\"Tool response: {message.content_blocks}\")\ninput_message = {\"role\": \"user\", \"content\": \"What is the weather in Boston?\"}\nfor chunk in agent.stream(\n    {\"messages\": [input_message]},\n    stream_mode=[\"messages\", \"updates\"],\n):\n        if isinstance(token, AIMessage):\n            _render_message_chunk(token)\n            if source in (\"model\", \"tools\"):"
+      ],
+      "response": "工具可以通过接受 `ToolRuntime` 类型的参数来访问当前对话的状态，进而获取最新的用户消息。\n\n具体步骤如下：\n1.  在工具函数定义中添加 `runtime: ToolRuntime` 参数。\n2.  通过 `runtime.state[\"messages\"]` 获取消息列表。\n3.  遍历该列表（通常反向遍历），找到类型为 `HumanMessage` 的最后一条消息并返回其内容。\n\n文档中提供的代码示例如下：\n\n```python\nfrom langchain.tools import tool, ToolRuntime\nfrom langchain.messages import HumanMessage\n\n@tool\ndef get_last_user_message(runtime: ToolRuntime) -> str:\n    \"\"\"Get the most recent message from the user.\"\"\"\n    messages = runtime.state[\"messages\"]\n    # Find the last human message\n    for message in reversed(messages):\n        if isinstance(message, HumanMessage):\n            return message.content\n    return \"No user messages found\"\n```",
+      "reference": "通过访问 runtime.state[\"messages\"] 并从中提取最后一条属于人类的消息。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.6911116731364395,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "除了读取数据，工具如果需要主动将数据（如新设置的用户名称）写入或更新到状态中，它的返回值应当是什么类型？",
+      "retrieved_contexts": [
+        "a\nToolMessage. If the model needs t o see that the t ool succeeded (f or example, t o confirm\na preference change ), include a ToolMessage in the updat e, using\nruntime.tool_call_id for the tool_call_id parameter.\nBehavior:\nUse this when the t ool is not just r eturning dat a, but also mut ating agent st ate.The command updat es state using update.\nUpdated state is available to subsequent st eps in the same run.\nUse reducers f or fields that ma y be updat ed by parallel tool calls.from langchai",
+        "Updat e state\nUse  to update the agentʼ s state. This is useful f or tools that need t o update\ncustom state fields:from langchain.tools import tool,",
+        "meState AccessContext Access\nStore Access\nStream WriterMessages\nCustom StateUser IDSession Inf o\nLong-term Memor yUser PreferencesContext-Aware Tools\nStateful Tools\nMemory-Enabled T ools\nStreaming Tools\ngraph st at e\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 5/16\nThe runtime  p aramet er is hidden fr om the model. F or the e xample abo v e, the model onl y\nsees pref_name  in the t ool schema.\nUpdat e state\nUse  to update the agentʼ s state. T"
+      ],
+      "response": "它的返回值应当是 `Command` 类型。",
+      "reference": "它的返回值应当是 Command 类型。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果多个工具在并行执行时更新了同一个状态字段，必须利用什么机制来解决写入冲突？",
+      "retrieved_contexts": [
+        "a\nToolMessage. If the model needs t o see that the t ool succeeded (f or example, t o confirm\na preference change ), include a ToolMessage in the updat e, using\nruntime.tool_call_id for the tool_call_id parameter.\nBehavior:\nUse this when the t ool is not just r eturning dat a, but also mut ating agent st ate.The command updat es state using update.\nUpdated state is available to subsequent st eps in the same run.\nUse reducers f or fields that ma y be updat ed by parallel tool calls.from langchai",
+        "real-time updat es during tool executionShow progress for long-\nrunning operations\nConfig  for the executionAccess c allbacks, tags, and\nmetadata\nTool",
+        "Updat e state\nUse  to update the agentʼ s state. This is useful f or tools that need t o update\ncustom state fields:from langchain.tools import tool,"
+      ],
+      "response": "必须利用 **reducers**（或 reducer 函数）机制。",
+      "reference": "必须为这些字段定义一个归约器（reducer）。",
+      "faithfulness": 0.5,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "用来存储用户 ID、会话详情等在对话调用时即不可变的配置数据的是哪个运行时对象？",
+      "retrieved_contexts": [
+        "StateShort-term memor y - mutable dat a that exists\nfor the cur rent conversation (messages,\ncounters, cust om fields)Access con versation hist ory,\ntrack tool call count s\nContextImmutable configuration p assed at in vocation\ntime (user IDs, session inf o)Personaliz e responses b ased\non user identit y\nStoreLong-term memor y - persist ent data that\nsurvives across conversationsSave user pr eferences,\nmaintain knowledge b ase\nStream Writer Emit real-time updat es during tool executionShow progr",
+        "ess for long-\nrunning operations\nConfig  for the executionAccess c allbacks, tags, and\nmetadata\nTool Call IDUnique identifier f or the cur rent tool\ninvocationCorrelate tool calls for logs\nand model in vocationsToolRuntime\nRunnableConfig\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 4/16\nShort-term memory (State)\nState represents short-term memor y that exists for the duration of a con versation. I t\nincludes the message hist ory and an y custom",
+        "I t\nincludes the message hist ory and an y custom fields y ou define in y our .\nAdd runtime: ToolRuntime  t o y our t ool signatur e t o access st at e. This p aramet er is\naut omatic all y inject ed and hidden fr om the LLM - it w on ʼ t appe ar in the t oolʼ s schema.\nAccess s tate\nTools can access the cur rent conversation st ate using runtime.state:⚡ Enhanced T ool \nCapabilities📊 Available R esources🔧 Tool Runtime Cont ext\nTool Call ToolRuntimeState AccessContext Access\nStore Access\nStream W"
+      ],
+      "response": "是 **Context**（上下文）。\n\n根据文档描述，Context 是在调用时传递的不可变配置，用于包含用户 ID 和会话信息等数据。",
+      "reference": "是 Context（上下文）对象。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2255289470618531,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "工具内部应当通过哪条代码路径获取在调用时传入的只读 Context 数据？",
+      "retrieved_contexts": [
+        "2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 3/16\nAccess context\nTools are most po werful when the y can access runtime inf ormation lik e conversation\nhistory, user dat a, and persist ent memor y. This section co vers how to access and updat e\nthis information fr om within y our tools.\nTools can access runtime inf ormation thr ough the  parameter, which\nprovides:\nComponent Descr iption Use c ase\nStateShort-term memor y - mutable dat a that exis",
+        "e v ar iables, consider defining a  f or those fields. Since LLMs\nc an c all mul tiple t ools in p arallel, a r educer det er mines ho w t o r esol v e conflict s when the\nsame st at e field is updat ed b y concur r ent t ool c alls.\nContext\nContext provides immut able configuration dat a that is p assed at in vocation time. Use it\nfor user IDs, session det ails, or applic ation-specific settings that shouldn ʼt change dur ing\na conversation.\nAccess cont ext through runtime.context:from langgrap",
+        "chain.tools import tool, ToolRuntime\nUSER_DATABASE = {\n    \"user123\": {\n        \"name\": \"Alice Johnson\",\n        \"account_type\": \"Premium\",\n        \"balance\": 5000,\n        \"email\": \"alice@example.com\"\n    },\n    \"user456\": {\n        \"name\": \"Bob Smith\",\n        \"account_type\": \"Standard\",\n        \"balance\": 1200,\n        \"email\": \"bob@example.com\"\n    }\n}\n@dataclass\nclass UserContext:\n    user_id: str\n@tool\ndef get_account_info(runtime: ToolRuntime[UserContext]) -> str:\n    \"\"\"Get the current u"
+      ],
+      "response": "根据文档片段，工具内部应当通过 **`runtime.context`** 路径获取调用时传入的只读 Context 数据。\n\n具体实现方式是在工具函数参数中定义 `ToolRuntime` 类型的参数（通常命名为 `runtime`），然后访问其 `context` 属性。例如：\n\n```python\n@tool\ndef get_account_info(runtime: ToolRuntime[UserContext]) -> str:\n    user_id = runtime.context.user_id\n    ...\n```",
+      "reference": "应当通过 runtime.context 获取。",
+      "faithfulness": 0.75,
+      "answer_relevancy": 0.817848403184074,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果代理需要记录用户的喜好，并且希望这种偏好在未来的对话会话中依然有效，它应该使用哪个存储系统？",
+      "retrieved_contexts": [
+        "ou c an\nalso configur e the agent t o use a cust om st at e schema t o r emember additional\ninf or mation dur ing the con v ersation.\nInf or mation st",
+        "StateShort-term memor y - mutable dat a that exists\nfor the cur rent conversation (messages,\ncounters, cust om fields)Access con versation hist ory,\ntrack tool call count s\nContextImmutable configuration p assed at in vocation\ntime (user IDs, session inf o)Personaliz e responses b ased\non user identit y\nStoreLong-term memor y - persist ent data that\nsurvives across conversationsSave user pr eferences,\nmaintain knowledge b ase\nStream Writer Emit real-time updat es during tool executionShow progr",
+        "ls - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 8/16\nLong-term memory (Store)\nThe  provides persist ent storage that sur vives across conversations. Unlik e\nstate (short-term memor y), data saved to the store remains a vailable in futur e sessions.\nAccess the st ore through runtime.store. The store uses a namesp ace/key pattern to\norganize data:\nF or pr oduction deplo yment s, use a persist ent st or e implement ation lik e \ninst e ad of InMemoryStore . See the  f or"
+      ],
+      "response": "它应该使用 **Store**（长期记忆）。\n\n根据文档片段，**Store** 提供了在对话之间依然存在的持久存储，其用例明确包括“保存用户偏好”。与仅存在于当前对话中的短期记忆（State）不同，保存到 Store 的数据在未来会话中依然可用。",
+      "reference": "它应该使用通过 runtime.store 访问的长周期记忆（Store）。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7179576379611476,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "持久化数据在 Store 中是通过哪种组织模式来保存和查找的？",
+      "retrieved_contexts": [
+        "ls - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 8/16\nLong-term memory (Store)\nThe  provides persist ent storage that sur vives across conversations. Unlik e\nstate (short-term memor y), data saved to the store remains a vailable in futur e sessions.\nAccess the st ore through runtime.store. The store uses a namesp ace/key pattern to\norganize data:\nF or pr oduction deplo yment s, use a persist ent st or e implement ation lik e \ninst e ad of InMemoryStore . See the  f or",
+        "StateShort-term memor y - mutable dat a that exists\nfor the cur rent conversation (messages,\ncounters, cust om fields)Access con versation hist ory,\ntrack tool call count s\nContextImmutable configuration p assed at in vocation\ntime (user IDs, session inf o)Personaliz e responses b ased\non user identit y\nStoreLong-term memor y - persist ent data that\nsurvives across conversationsSave user pr eferences,\nmaintain knowledge b ase\nStream Writer Emit real-time updat es during tool executionShow progr",
+        "ool c alls when appr opr iat e\nDynamic t ool selection b ased on pr e vious r esul t s\nT ool r etr y logic and er r or handling\nSt at e persist ence a"
+      ],
+      "response": "根据检索到的文档，持久化数据在 Store 中是通过 **namespace/key pattern**（命名空间/键模式）来组织和查找数据的。",
+      "reference": "是通过命名空间和键（namespace/key）的模式来组织的。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9126788535443839,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "为了在生产环境中安全留存长期记忆数据，官方推荐采用哪种特定实现来替代 InMemoryStore？",
+      "retrieved_contexts": [
+        "ls - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 8/16\nLong-term memory (Store)\nThe  provides persist ent storage that sur vives across conversations. Unlik e\nstate (short-term memor y), data saved to the store remains a vailable in futur e sessions.\nAccess the st ore through runtime.store. The store uses a namesp ace/key pattern to\norganize data:\nF or pr oduction deplo yment s, use a persist ent st or e implement ation lik e \ninst e ad of InMemoryStore . See the  f or",
+        "StateShort-term memor y - mutable dat a that exists\nfor the cur rent conversation (messages,\ncounters, cust om fields)Access con versation hist ory,\ntrack tool call count s\nContextImmutable configuration p assed at in vocation\ntime (user IDs, session inf o)Personaliz e responses b ased\non user identit y\nStoreLong-term memor y - persist ent data that\nsurvives across conversationsSave user pr eferences,\nmaintain knowledge b ase\nStream Writer Emit real-time updat es during tool executionShow progr",
+        "lik e \ninst e ad of InMemoryStore . See the  f or setup det ails.\nStream writer\nStream real-time updat es from tools dur ing execution. This is useful f or providing\nprogress feedback to users dur ing long-running operations.\nUse runtime.stream_writer to emit cust om updat es:\nSee all 42 linesresult = agent.invoke(\n    {\"messages\": [{\"role\": \"user\", \"content\": \"What's my current balance?\"}]},\n    context=UserContext(user_id=\"user123\")\n)\nfrom typing import Any\nfrom langgraph.store.memory import"
+      ],
+      "response": "为了在生产环境中安全留存长期记忆数据，官方推荐使用 **PostgresStore** 来替代 InMemoryStore。",
+      "reference": "推荐使用像 PostgresStore 这样的持久化存储实现。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.956387022965647,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果一个工具操作耗时很长，它应该通过调用什么来为终端用户发射实时的进度事件？",
+      "retrieved_contexts": [
+        "real-time updat es during tool executionShow progress for long-\nrunning operations\nConfig  for the executionAccess c allbacks, tags, and\nmetadata\nTool",
+        "a\nToolMessage. If the model needs t o see that the t ool succeeded (f or example, t o confirm\na preference change ), include a ToolMessage in the updat e, using\nruntime.tool_call_id for the tool_call_id parameter.\nBehavior:\nUse this when the t ool is not just r eturning dat a, but also mut ating agent st ate.The command updat es state using update.\nUpdated state is available to subsequent st eps in the same run.\nUse reducers f or fields that ma y be updat ed by parallel tool calls.from langchai",
+        "his is useful f or tools that need t o update\ncustom state fields:from langchain.tools import tool, ToolRuntime\nfrom langchain.messages import HumanMessage\n@tool\ndef get_last_user_message(runtime: ToolRuntime) -> str:\n    \"\"\"Get the most recent message from the user.\"\"\"\n    messages = runtime.state[\"messages\"]\n    # Find the last human message\n    for message in reversed(messages):\n        if isinstance(message, HumanMessage):\n            return message.content\n    return \"No user messages found"
+      ],
+      "response": "根据文档片段，如果一个工具操作耗时很长，它应该通过调用 **Stream Writer**（流式写入器）来为终端用户发射实时的进度事件。\n\n文档中提到：“Stream Writer Emit real-time updates during tool execution Show progress for long-running operations”（流式写入器：在工具执行期间发射实时更新，用于显示长时间运行操作的进度）。",
+      "reference": "它应该调用 runtime.stream_writer 来发射事件。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8875418825254178,
+      "llm_context_precision_with_reference": 0.49999999995,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "在 LangGraph 工作流中，哪个预构建节点主要负责并行处理工具执行、错误拦截和状态注入？",
+      "retrieved_contexts": [
+        "r mor e det ails.\nToolNode\n is a prebuilt node that e xecutes tools in LangGraph w orkflows. It handles\nparallel tool execution, er ror handling, and",
+        "exception types\ntool_node = ToolNode(tools, handle_tool_errors=(ValueError, TypeError))\nfrom langgraph.prebuilt import ToolNode, tools_condition\nfrom langgraph.graph import StateGraph, MessagesState, START, END\nbuilder = StateGraph(MessagesState)\nbuilder.add_node(\"llm\", call_llm)\nbuilder.add_node(\"tools\", ToolNode(tools))\nbuilder.add_edge(START, \"llm\")\nbuilder.add_conditional_edges(\"llm\", tools_condition)  # Routes to \"tools\" or E\nbuilder.add_edge(\"tools\", \"llm\")\ngraph = builder.compile()ToolNo",
+        "node (which e x ecut es t ools), or middle war e.\nLe ar n mor e about the .\nCore componentsaction obser v ation finishinput\nmodel\nt ools outputt ools\ncreate_agent\nAn LLM Agent runs t ools in a loop t o achie v e a go al\ncreate_agent LangGraph\nGraph APICor e component s Agent s\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 1/17\nModel\nThe  is the r e asoning engine of y our agent. I t c an be specified in mul tiple wa ys,\nsuppor ting both st atic"
+      ],
+      "response": "在 LangGraph 工作流中，**ToolNode** 是负责并行处理工具执行、错误处理等功能的预构建节点。\n\n根据文档片段描述：\n> “`ToolNode` is a prebuilt node that executes tools in LangGraph workflows. It handles parallel tool execution, error handling, and...”",
+      "reference": "是 ToolNode 节点。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7247735834904985,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果要在一个完全自定义的 StateGraph 中使用工具组合，应当将工具列表传递给哪个类的实例？",
+      "retrieved_contexts": [
+        "exception types\ntool_node = ToolNode(tools, handle_tool_errors=(ValueError, TypeError))\nfrom langgraph.prebuilt import ToolNode, tools_condition\nfrom langgraph.graph import StateGraph, MessagesState, START, END\nbuilder = StateGraph(MessagesState)\nbuilder.add_node(\"llm\", call_llm)\nbuilder.add_node(\"tools\", ToolNode(tools))\nbuilder.add_edge(START, \"llm\")\nbuilder.add_conditional_edges(\"llm\", tools_condition)  # Routes to \"tools\" or E\nbuilder.add_edge(\"tools\", \"llm\")\ngraph = builder.compile()ToolNo",
+        "ge(\"tools\", \"llm\")\ngraph = builder.compile()ToolNode\ntools_condition\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/l",
+        "el,\n    tools=[tool1, tool2],\n    state_schema=CustomState\n)\n# The agent can now track additional state beyond messages\nresult = agent.invoke({\n    \"m"
+      ],
+      "response": "应当将工具列表传递给 **`ToolNode`** 类的实例。\n\n根据文档片段，使用方式如下：\n```python\nfrom langgraph.prebuilt import ToolNode\n\ntool_node = ToolNode(tools)\n```\n然后在构建 `StateGraph` 时将其作为一个节点添加：\n```python\nbuilder.add_node(\"tools\", tool_node)\n```",
+      "reference": "应当传递给 ToolNode 类的实例。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7670685481058879,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果一个工具的目的是向语言模型提供纯粹供其阅读和推理的自然语言内容，那么该工具最合适的返回类型是什么？",
+      "retrieved_contexts": [
+        "/docs.langchain.com/oss/python/langchain/tools 11/16\nBehavior:\nUse this when the r esult is naturall y human-r eadable t ext.\nReturn an ob ject\nReturn an object (f or example, a dict) when y our tool produces structur ed data that the\nmodel should inspect.\nBehavior:The return value is con verted to a ToolMessage.\nThe model sees that t ext and decides what t o do next.\nNo agent st ate fields ar e changed unless the model or another t ool does so lat er.\nThe object is ser ialized and sent b ack as",
+        "alues for your tools:\nReturn a s tring\nReturn a string when the t ool should pr ovide plain t ext for the model t o read and use in it s\nnext response.Return a string for human-r eadable r esults.\nReturn an object for structur ed results the model should p arse.\nReturn a Command with optional message when y ou need t o write to state.from langchain.tools import tool\nfrom langgraph.prebuilt import ToolNode\nfrom langgraph.graph import StateGraph, MessagesState, START, END\n@tool\ndef search(query: s",
+        "ools are callable functions with w ell-defined input s and output s that get\npassed to a . The model decides when t o invoke a tool based on the\nconversation cont ext, and what input ar guments to provide.\nF or det ails on ho w models handle t ool c alls, see .\nCreate tools\nBasic tool definition\nThe simplest wa y to create a tool is with the  decorat or. By default, the function ʼs\ndocstring becomes the t oolʼs description that helps the model underst and when t o use it:\nfrom langchain.tools i"
+      ],
+      "response": "根据文档片段，如果一个工具的目的是向语言模型提供纯粹供其阅读和推理的自然语言内容，该工具最合适的返回类型是 **字符串 (String)**。\n\n文档中明确提到：\n*   \"Return a string when the tool should provide plain text for the model to read and use in its next response.\"（当工具应该提供纯文本供模型阅读并在其下一个响应中使用时，返回一个字符串。）\n*   \"Use this when the result is naturally human-readable text.\"（当结果自然是人类可读的文本时，使用此选项。）",
+      "reference": "最合适的返回类型是纯文本字符串（string）。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9400948595481659,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "返回一个字符串内容的工具会自动更新代理的工作图状态（graph state）字段吗？",
+      "retrieved_contexts": [
+        "a\nToolMessage. If the model needs t o see that the t ool succeeded (f or example, t o confirm\na preference change ), include a ToolMessage in the updat e, using\nruntime.tool_call_id for the tool_call_id parameter.\nBehavior:\nUse this when the t ool is not just r eturning dat a, but also mut ating agent st ate.The command updat es state using update.\nUpdated state is available to subsequent st eps in the same run.\nUse reducers f or fields that ma y be updat ed by parallel tool calls.from langchai",
+        "real-time updat es during tool executionShow progress for long-\nrunning operations\nConfig  for the executionAccess c allbacks, tags, and\nmetadata\nTool",
+        "Updat e state\nUse  to update the agentʼ s state. This is useful f or tools that need t o update\ncustom state fields:from langchain.tools import tool,"
+      ],
+      "response": "不会。根据文档，当工具需要更新代理的图状态时，应该返回一个 `Command` 对象（例如 `Command(update={...})`）。\n\n仅仅返回字符串内容的工具（如示例中的 `get_weather`）通常用于返回数据，而不会自动更新图状态字段。",
+      "reference": "不会，它不会直接更新状态，除非模型或后续工具据此采取了写操作。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.6633568421406077,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果一个工具向后方返回的是一个包含气温和天气的 Python 字典对象，这个对象在返回给模型前会经历什么处理？",
+      "retrieved_contexts": [
+        "at er.\nThe object is ser ialized and sent b ack as tool output.\nThe model c an read specific fields and r eason over them.\nLike string returns, this does not dir ectly update graph st ate.from langchain.tools import tool\n@tool\ndef get_weather(city: str) -> str:\n    \"\"\"Get weather for a city.\"\"\"\n    return f\"It is currently sunny in {city}.\"\nfrom langchain.tools import tool\n@tool\ndef get_weather_data(city: str) -> dict:\n    \"\"\"Get structured weather data for a city.\"\"\"\n    return {\n        \"city\"",
+        "/docs.langchain.com/oss/python/langchain/tools 11/16\nBehavior:\nUse this when the r esult is naturall y human-r eadable t ext.\nReturn an ob ject\nReturn an object (f or example, a dict) when y our tool produces structur ed data that the\nmodel should inspect.\nBehavior:The return value is con verted to a ToolMessage.\nThe model sees that t ext and decides what t o do next.\nNo agent st ate fields ar e changed unless the model or another t ool does so lat er.\nThe object is ser ialized and sent b ack as",
+        ": city,\n        \"temperature_c\": 22,\n        \"conditions\": \"sunny\",\n    }\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 12/16\nUse this when do wnstream reasoning benefit s from explicit fields inst ead of free-form\ntext.\nReturn a Co mman d\nReturn a  when the t ool needs t o update graph st ate (for example, setting user\npreferences or app st ate). You can return a Command with or without including a\nToolMessage. If the model needs t o see that th"
+      ],
+      "response": "根据文档片段，当一个工具返回一个对象（例如包含气温和天气的 Python 字典）时，会经历以下处理：\n\n1.  **转换为 ToolMessage**：返回值会被转换为一个 `ToolMessage`。\n2.  **序列化**：该对象会被序列化，并作为工具输出发送回去。\n3.  **模型读取**：模型可以读取这些特定字段并对其进行推理。",
+      "reference": "它会被序列化并作为工具的输出返回。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.4863856270877881,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "当工具通过 Command 去更新代理状态时，为了向模型确认执行成功，应在 update 参数中额外包括什么类型的对象？",
+      "retrieved_contexts": [
+        "a\nToolMessage. If the model needs t o see that the t ool succeeded (f or example, t o confirm\na preference change ), include a ToolMessage in the updat e, using\nruntime.tool_call_id for the tool_call_id parameter.\nBehavior:\nUse this when the t ool is not just r eturning dat a, but also mut ating agent st ate.The command updat es state using update.\nUpdated state is available to subsequent st eps in the same run.\nUse reducers f or fields that ma y be updat ed by parallel tool calls.from langchai",
+        "Updat e state\nUse  to update the agentʼ s state. This is useful f or tools that need t o update\ncustom state fields:from langchain.tools import tool,",
+        "real-time updat es during tool executionShow progress for long-\nrunning operations\nConfig  for the executionAccess c allbacks, tags, and\nmetadata\nTool"
+      ],
+      "response": "应在 `update` 参数中额外包括 `ToolMessage` 类型的对象。",
+      "reference": "应包括一个指定了 tool_call_id 的 ToolMessage 消息对象。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在生成确认 ToolMessage 时，工具调用的唯一标识符应该从 ToolRuntime 的哪个属性获取？",
+      "retrieved_contexts": [
+        "a\nToolMessage. If the model needs t o see that the t ool succeeded (f or example, t o confirm\na preference change ), include a ToolMessage in the updat e, using\nruntime.tool_call_id for the tool_call_id parameter.\nBehavior:\nUse this when the t ool is not just r eturning dat a, but also mut ating agent st ate.The command updat es state using update.\nUpdated state is available to subsequent st eps in the same run.\nUse reducers f or fields that ma y be updat ed by parallel tool calls.from langchai",
+        "I t\nincludes the message hist ory and an y custom fields y ou define in y our .\nAdd runtime: ToolRuntime  t o y our t ool signatur e t o access st at e. This p aramet er is\naut omatic all y inject ed and hidden fr om the LLM - it w on ʼ t appe ar in the t oolʼ s schema.\nAccess s tate\nTools can access the cur rent conversation st ate using runtime.state:⚡ Enhanced T ool \nCapabilities📊 Available R esources🔧 Tool Runtime Cont ext\nTool Call ToolRuntimeState AccessContext Access\nStore Access\nStream W",
+        "e individual  and the \nfor details on enabling and using these buil t-in tools.from langchain.tools import tool, ToolRuntime\nfrom langgraph.prebuilt import ToolNode\n@tool\ndef get_message_count(runtime: ToolRuntime) -> str:\n    \"\"\"Get the number of messages in the conversation.\"\"\"\n    messages = runtime.state[\"messages\"]\n    return f\"There are {len(messages)} messages.\"\ntool_node = ToolNode([get_message_count])ToolRuntime\nAccess cont e x t\nt ools and t oolkit s\nchat model int egration p ages t oo"
+      ],
+      "response": "应该从 `ToolRuntime` 的 `tool_call_id` 属性获取。\n\n文档中的示例代码显示如下用法：\n```python\nToolMessage(\n    content=f\"Language set to {language}.\",\n    tool_call_id=runtime.tool_call_id,\n)\n```",
+      "reference": "应该从 runtime.tool_call_id 属性获取。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.609827819845436,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在不做额外设置的默认情况下，ToolNode 会如何处理工具抛出的代码执行错误（execution errors）？",
+      "retrieved_contexts": [
+        "on errors, re-raise execution errors\ntool_node = ToolNode(tools)\n# Catch all errors and return error message to LLM\ntool_node = ToolNode(tools, handle_tool_errors=True)\n# Custom error message\ntool_node = ToolNode(tools, handle_tool_errors=\"Something went wrong, please tr\n# Custom error handler\ndef handle_error(e: ValueError) -> str:\n    return f\"Invalid input: {e}\"\ntool_node = ToolNode(tools, handle_tool_errors=handle_error)\n# Only catch specific exception types\ntool_node = ToolNode(tools, handl",
+        "r mor e det ails.\nToolNode\n is a prebuilt node that e xecutes tools in LangGraph w orkflows. It handles\nparallel tool execution, er ror handling, and",
+        "l_call_id=runtime.tool_call_id,\n                )\n            ],\n        }\n    )Command\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 13/16\nError handling\nConfigur e how tool errors are handled. See the  API reference for all options.\nRoute with tools_condition\nUse  for conditional r outing b ased on whether the LLM made t ool calls:from langgraph.prebuilt import ToolNode\n# Default: catch invocation errors, re-raise execution errors\ntool_node = T"
+      ],
+      "response": "根据文档片段，在默认情况下，ToolNode 会捕获调用错误，但会**重新抛出代码执行错误**（re-raise execution errors）。",
+      "reference": "它会重新抛出（re-raise）这些执行错误。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8723920826255441,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果你希望工具运行出现崩溃时不会中断整个流程，而是将错误信息发还给大语言模型，你需要给 ToolNode 配置什么参数？",
+      "retrieved_contexts": [
+        "r mor e det ails.\nToolNode\n is a prebuilt node that e xecutes tools in LangGraph w orkflows. It handles\nparallel tool execution, er ror handling, and",
+        "on errors, re-raise execution errors\ntool_node = ToolNode(tools)\n# Catch all errors and return error message to LLM\ntool_node = ToolNode(tools, handle_tool_errors=True)\n# Custom error message\ntool_node = ToolNode(tools, handle_tool_errors=\"Something went wrong, please tr\n# Custom error handler\ndef handle_error(e: ValueError) -> str:\n    return f\"Invalid input: {e}\"\ntool_node = ToolNode(tools, handle_tool_errors=handle_error)\n# Only catch specific exception types\ntool_node = ToolNode(tools, handl",
+        "l_call_id=runtime.tool_call_id,\n                )\n            ],\n        }\n    )Command\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 13/16\nError handling\nConfigur e how tool errors are handled. See the  API reference for all options.\nRoute with tools_condition\nUse  for conditional r outing b ased on whether the LLM made t ool calls:from langgraph.prebuilt import ToolNode\n# Default: catch invocation errors, re-raise execution errors\ntool_node = T"
+      ],
+      "response": "你需要给 `ToolNode` 配置 `handle_tool_errors` 参数，并将其设置为 `True`。\n\n根据文档片段，配置 `handle_tool_errors=True` 可以“捕获所有错误并将错误信息返回给 LLM”。",
+      "reference": "需要配置 handle_tool_errors=True。",
+      "faithfulness": 0.3333333333333333,
+      "answer_relevancy": 0.7186381205496017,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "ToolNode 能否只针对特定类型的错误进行拦截并向模型发送失败反馈？",
+      "retrieved_contexts": [
+        "on errors, re-raise execution errors\ntool_node = ToolNode(tools)\n# Catch all errors and return error message to LLM\ntool_node = ToolNode(tools, handle_tool_errors=True)\n# Custom error message\ntool_node = ToolNode(tools, handle_tool_errors=\"Something went wrong, please tr\n# Custom error handler\ndef handle_error(e: ValueError) -> str:\n    return f\"Invalid input: {e}\"\ntool_node = ToolNode(tools, handle_tool_errors=handle_error)\n# Only catch specific exception types\ntool_node = ToolNode(tools, handl",
+        "r mor e det ails.\nToolNode\n is a prebuilt node that e xecutes tools in LangGraph w orkflows. It handles\nparallel tool execution, er ror handling, and",
+        "angchain.messages import ToolMessage\n@wrap_tool_call\ndef handle_tool_errors(request, handler):\n    \"\"\"Handle tool execution errors with custom messages.\"\"\"\n    try:\n        return handler(request)\n    except Exception as e:\n        # Return a custom error message to the model\n        return ToolMessage(\n            content=f\"Tool error: Please check your input and try again. \n({str(e)})\",\n            tool_call_id=request.tool_call[\"id\"]\n        )\nagent = create_agent(\n    model=\"gpt-4.1\",\n    to"
+      ],
+      "response": "是的，`ToolNode` 可以只针对特定类型的错误进行拦截并向模型发送反馈。\n\n根据文档片段，你可以在初始化 `ToolNode` 时，将 `handle_tool_errors` 参数设置为一个包含特定异常类型的元组。\n\n例如：\n```python\ntool_node = ToolNode(tools, handle_tool_errors=(ValueError, TypeError))\n```\n这样配置后，`ToolNode` 仅会捕获 `ValueError` 和 `TypeError`，并将错误信息返回给 LLM。",
+      "reference": "可以，通过将特定异常类（如 ValueError, TypeError）作为元组传递给 handle_tool_errors。",
+      "faithfulness": 0.5,
+      "answer_relevancy": 0.8700039126634729,
+      "llm_context_precision_with_reference": 0.8333333332916666,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在为图形编排添加条件边缘（conditional edges）时，可以用哪个预置函数来判断 LLM 节点是否输出了调用工具的指令？",
+      "retrieved_contexts": [
+        "ge(\"tools\", \"llm\")\ngraph = builder.compile()ToolNode\ntools_condition\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/l",
+        "exception types\ntool_node = ToolNode(tools, handle_tool_errors=(ValueError, TypeError))\nfrom langgraph.prebuilt import ToolNode, tools_condition\nfrom langgraph.graph import StateGraph, MessagesState, START, END\nbuilder = StateGraph(MessagesState)\nbuilder.add_node(\"llm\", call_llm)\nbuilder.add_node(\"tools\", ToolNode(tools))\nbuilder.add_edge(START, \"llm\")\nbuilder.add_conditional_edges(\"llm\", tools_condition)  # Routes to \"tools\" or E\nbuilder.add_edge(\"tools\", \"llm\")\ngraph = builder.compile()ToolNo",
+        "l_call_id=runtime.tool_call_id,\n                )\n            ],\n        }\n    )Command\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 13/16\nError handling\nConfigur e how tool errors are handled. See the  API reference for all options.\nRoute with tools_condition\nUse  for conditional r outing b ased on whether the LLM made t ool calls:from langgraph.prebuilt import ToolNode\n# Default: catch invocation errors, re-raise execution errors\ntool_node = T"
+      ],
+      "response": "可以使用 **`tools_condition`** 函数。\n\n根据文档片段，该函数位于 `langgraph.prebuilt` 中，用于基于 LLM 是否进行了工具调用来进行条件路由。",
+      "reference": "可以使用 tools_condition 预置函数。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.5123675741037714,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "当 tools_condition 检测到 LLM 要求调用工具时，它会将图形路由到哪一个目标节点？",
+      "retrieved_contexts": [
+        "ge(\"tools\", \"llm\")\ngraph = builder.compile()ToolNode\ntools_condition\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/l",
+        "l_call_id=runtime.tool_call_id,\n                )\n            ],\n        }\n    )Command\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 13/16\nError handling\nConfigur e how tool errors are handled. See the  API reference for all options.\nRoute with tools_condition\nUse  for conditional r outing b ased on whether the LLM made t ool calls:from langgraph.prebuilt import ToolNode\n# Default: catch invocation errors, re-raise execution errors\ntool_node = T",
+        "r mor e det ails.\nToolNode\n is a prebuilt node that e xecutes tools in LangGraph w orkflows. It handles\nparallel tool execution, er ror handling, and"
+      ],
+      "response": "根据文档片段中的代码示例，当 `tools_condition` 检测到 LLM 要求调用工具时，它会将图形路由到名为 **\"tools\"** 的节点（该节点通常是一个 `ToolNode`）。",
+      "reference": "它会将图形路由到 \"tools\" 节点。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.846522261424782,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "LangChain 官方是否提供诸如网络搜索、代码解释等开箱即用的能力集成？",
+      "retrieved_contexts": [
+        "de\ntools_condition\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 14/16\nState injection\nTools can access the cur rent graph st ate through :\nFor more details on accessing st ate, context, and long-t erm memor y from tools, see\n.\nPrebuilt tools\nLangChain pr ovides a lar ge collection of pr ebuilt tools and t oolkits for common t asks like\nweb search, code int erpretation, dat abase access, and mor e. These r eady-to-use tools\ncan be dir ectly integ",
+        "human-in-the-loop\nLangGraph str e aming\nEdit this p age on GitHub file an issue\nConnect these docs\nResources\nForum\nChangelog\nLangChain Ac ademyCompany\nHome\nAbout\nCareers\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 26/27\nCor e component s\nAgentsCop y p age\nAgent s combine language models with  t o cr e at e syst ems that c an r e ason about\nt asks, decide which t ools t o use, and it erativ el y w or k t o war ds solutions.\n pr o vides a",
+        "Core component s\nS t r e a m i n gCop y p age\nLangChain implement s a streaming syst em to surface real-time updat es.\nStreaming is crucial f or enhancing the r esponsiv eness of applic ations buil t on LLMs. By\ndisplaying output pr ogressively, even before a complet e response is r eady, streaming\nsignificantly improves user e xperience (UX), p articularly when de aling with the lat ency of\nLLMs.\nOverview\nLangChain ʼs streaming syst em lets you surface live feedback from agent runs t o your\napp"
+      ],
+      "response": "是的，LangChain 官方提供了这些能力。\n\n根据文档，LangChain 提供了大量的**预构建工具和工具包**，涵盖了**网络搜索**、**代码解释**、数据库访问等常见任务。这些工具是**开箱即用**的，可以直接集成到你的 agents 中，无需编写自定义代码。\n\n此外，某些聊天模型还包含由模型提供商在服务端执行的内置工具，其中也包括网络搜索和代码解释器功能。",
+      "reference": "是的，LangChain 提供了一大批预构建工具（Prebuilt tools）和工具包。",
+      "faithfulness": 0.75,
+      "answer_relevancy": 0.8937921772448242,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "由模型提供方自己在后端运行网络搜索或者代码执行环境，而无需开发者在本地部署具体工具逻辑的特性被称为什么？",
+      "retrieved_contexts": [
+        ". These r eady-to-use tools\ncan be dir ectly integrated into your agent s without wr iting cust om code.\nSee the  integration p age for a complet e list of a vailable tools organized\nby category.\nServer-side tool use\nSome chat models f eature built-in tools that ar e executed server-side by the model\nprovider. These include c apabilities lik e web search and code int erpreters that don ʼt\nrequire you to define or host the t ool logic.\nRefer to the individual  and the \nfor details on enabling and",
+        "node (which e x ecut es t ools), or middle war e.\nLe ar n mor e about the .\nCore componentsaction obser v ation finishinput\nmodel\nt ools outputt ools\ncreate_agent\nAn LLM Agent runs t ools in a loop t o achie v e a go al\ncreate_agent LangGraph\nGraph APICor e component s Agent s\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 1/17\nModel\nThe  is the r e asoning engine of y our agent. I t c an be specified in mul tiple wa ys,\nsuppor ting both st atic",
+        "ls, the set of t ools a v ailable t o the agent is modified at runtime rather\nthan defined all upfr ont. Not e v er y t ool is appr opr iat e f or e v er y situation. T oo man y t ools\nma y o v er whelm the model ( o v er lo ad cont e x t) and incr e ase er r ors; t oo f e w limit\nc ap abilities. Dynamic t ool selection enables adapting the a v ailable t oolset b ased on\nauthentic ation st at e, user per missions, f e atur e flags, or con v ersation st age.\nTher e ar e t w o appr o aches dependi"
+      ],
+      "response": "根据文档片段，该特性被称为 **Server-side tool use**（服务端工具使用）。\n\n文档中提到：“Some chat models feature built-in tools that are executed server-side by the model provider...”（某些聊天模型具有由模型提供方在服务器端执行的内置工具……）。",
+      "reference": "这被称为服务器端工具使用（Server-side tool use）。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.23156555570566284,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "系统提示（system prompt）能在每次运行前发生改变吗？",
+      "retrieved_contexts": [
+        "until the y c an deliv er a final answ er .\nSystem prompt\nY ou c an shape ho w y our agent appr o aches t asks b y pr o viding a pr ompt. The\n p aramet er c an be pr o vided as a str ing:\nWhen no  is pr o vided, the agent will inf er it s t ask fr om the messages\ndir ectl y .\nThe  p aramet er accept s either a str  or a . Using a\nSystemMessage  giv es y ou mor e contr ol o v er the pr ompt structur e, which is useful f or\npr o vider -specific f e atur es lik e :Example of R e Act loop\n[\n    ...",
+        "if user_role == \"expert\":\n        return f\"{base_prompt} Provide detailed technical responses.\"\n    elif user_role == \"beginner\":\n        return f\"{base_prompt} Explain concepts simply and avoid jargon.\"\n    return base_prompt\nagent = create_agent(\n    model=\"gpt-4.1\",\n    tools=[web_search],\n    middleware=[user_role_prompt],\n    context_schema=Context\n)\n# The system prompt will be set dynamically based on context\nresult = agent.invoke(\n    {\"messages\": [{\"role\": \"user\", \"content\": \"Explain mac",
+        "atur es lik e :Example of R e Act loop\n[\n    ...\n    ToolMessage(\n        content=\"Tool error: Please check your input and try again. (division b\n        tool_call_id=\"...\"\n    ),\n    ...\n]\nagent = create_agent(\n    model,\n    tools,\n    system_prompt=\"You are a helpful assistant. Be concise and accurate.\"\n)system_prompt\nsystem_prompt\nsystem_prompt SystemMessage\nAnthr opic ʼ s pr ompt c aching\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 8/17"
+      ],
+      "response": "是的，系统提示可以在每次运行前发生改变。\n\n根据文档片段，你可以使用 `dynamic_prompt` 中间件来实现动态设置。具体做法如下：\n\n1.  定义一个被 `@dynamic_prompt` 装饰的函数，该函数根据运行时的上下文（`request.runtime.context`）生成并返回系统提示字符串。\n2.  在创建 agent 时，将该函数放入 `middleware` 列表中。\n3.  在调用 agent（`agent.invoke`）时，通过 `context` 参数传入相应的上下文数据（例如 `user_role`），系统提示就会根据这些数据动态生成。",
+      "reference": "可以，通过 @dynamic_prompt 等中间件技术可以在运行时根据上下文动态改变系统提示。",
+      "faithfulness": 0.8571428571428571,
+      "answer_relevancy": 0.7419284734094266,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "若一个流数据块显示 {\"type\": \"messages\"}，我们应当通过它的什么结构去访问产生的 token？",
+      "retrieved_contexts": [
+        "ender_message_chunk(token)    middleware=[safety_guardrail],\n    stream_mode=[\"messages\", \"updates\", \"custom\"],\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n    elif chunk[\"type\"] == \"updates\":\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 14/27\nAlternatively, if you arenʼt able to add cust om events to the str eam, you can aggregate\nmessage chunks within the str eaming loop:\nOutput\nSee all",
+        "version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n    elif chunk[\"type\"] == \"updates\":\n        for source, u",
+        "],\n)\n    {\"messages\": [{\"role\": \"user\", \"content\": \"What is the weather in SF?\"}]},\n    stream_mode=\"messages\",\n):\n        print(f\"node: {metadata['langgraph_node']}\")\n        print(f\"content: {token.content_blocks}\")\n        print(\"\\n\")for chunk in agent.stream(\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\nnode: model\ncontent: [{'type': 'tool_call_chunk', 'id': 'call_vbCyBcP8VuneUzyYlSBZZsVa', 'n\nnode: model\ncontent: [{'type': 'tool_call_chunk',"
+      ],
+      "response": "若一个流数据块显示 `{\"type\": \"messages\"}`，应当通过 `chunk[\"data\"]` 结构去访问产生的 token。\n\n根据文档片段，`chunk[\"data\"]` 是一个包含两个元素的元组，通常通过解构赋值来获取：\n```python\ntoken, metadata = chunk[\"data\"]\n```",
+      "reference": "应当通过解析它的 \"data\" 属性获得一个包含 token 和 metadata 的元组。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7508227863316473,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "当开发者在自定义状态模型中需要对字段更新进行冲突控制时，除了定义类型外，还应为可能并发修改的字段提供什么？",
+      "retrieved_contexts": [
+        "e v ar iables, consider defining a  f or those fields. Since LLMs\nc an c all mul tiple t ools in p arallel, a r educer det er mines ho w t o r esol v e conflict s when the\nsame st at e field is updat ed b y concur r ent t ool c alls.\nContext\nContext provides immut able configuration dat a that is p assed at in vocation time. Use it\nfor user IDs, session det ails, or applic ation-specific settings that shouldn ʼt change dur ing\na conversation.\nAccess cont ext through runtime.context:from langgrap",
+        "a\nToolMessage. If the model needs t o see that the t ool succeeded (f or example, t o confirm\na preference change ), include a ToolMessage in the updat e, using\nruntime.tool_call_id for the tool_call_id parameter.\nBehavior:\nUse this when the t ool is not just r eturning dat a, but also mut ating agent st ate.The command updat es state using update.\nUpdated state is available to subsequent st eps in the same run.\nUse reducers f or fields that ma y be updat ed by parallel tool calls.from langchai",
+        "meState AccessContext Access\nStore Access\nStream WriterMessages\nCustom StateUser IDSession Inf o\nLong-term Memor yUser PreferencesContext-Aware Tools\nStateful Tools\nMemory-Enabled T ools\nStreaming Tools\ngraph st at e\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 5/16\nThe runtime  p aramet er is hidden fr om the model. F or the e xample abo v e, the model onl y\nsees pref_name  in the t ool schema.\nUpdat e state\nUse  to update the agentʼ s state. T"
+      ],
+      "response": "根据文档片段，除了定义类型外，还应为可能并发修改的字段定义一个 **reducer**（或 reducer 函数）。\n\n文档指出，由于 LLM 可以并行调用多个工具，当同一个状态字段被并发工具调用更新时，reducer 决定了如何解决冲突。",
+      "reference": "应提供一个 reducer（归约器）函数。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7008339299778957,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "在使用流式人类在环控制时，Interrupt.value 提供的数据结构是什么？",
+      "retrieved_contexts": [
+        "int(result.interrupts)  # tuple of Interrupt objects (empty if none)LangGraph str e aming guide\nv2 (ne w)v1 (current default)\nLangGraph str e aming docs\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 25/27\nW as this p age helpful?\n Y es\n No or .\n t o Claude, VSCode, and mor e via MCP f or r e al-time answ ers.—Build R eact UIs with useStream for real-time agent\ninteractions\n—Stream tokens directly from a chat model without using\nan agent o",
+        "LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 18/27\nWe next collect a  for each interrupt. Impor tantly, the order of decisions must\nmatch the or der of actions w e collect ed.\nTo illustrat e, we will edit one t ool call and accept the other:\ndef _get_interrupt_decisions(interrupt: Interrupt) -> list[dict]:\n    return [\n        {\n            \"type\": \"edit\",\n            \"edited_action\": {\n                \"name\": \"get_weather\",\n                \"args\": {\"city\": \"Boston, U.K.\"",
+        "e=[\n        HumanInTheLoopMiddleware(interrupt_on={\"get_weather\": True}),\n    ],\n    checkpointer=checkpointer,\ndef _render_interrupt(interrupt: Interrupt) -> null:\n    interrupts = interrupt.value  \n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 17/27\nOutput\nSee all 21 linesinput_message = {\n    \"role\": \"user\",\n    \"content\": (\n        \"Can you look up the weather in Boston and San Francisco?\"\n    ),\n}\nfor chunk in agent.stream(\n    {\"mes"
+      ],
+      "response": "根据检索到的文档片段，`Interrupt.value` 提供的数据结构是一个**字典**。\n\n具体依据如下：\n在代码示例的 `_render_interrupt` 函数中，可以看到 `interrupts = interrupt.value`，随后代码通过 `interrupts[\"action_requests\"]` 访问该",
+      "reference": "它提供了一个包含了待处理动作请求及其详细信息的数据列表。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7160126282571238,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "为了响应中断并继续代理执行流，必须向代理的 stream() 方法传递包含决策的什么对象？",
+      "retrieved_contexts": [
+        "},\n            },\n        }\n        if \"boston\" in request[\"description\"].lower()\n        else {\"type\": \"approve\"}\n        for request in interrupt.value[\"action_requests\"]\n    ]\ndecisions = {}\nfor interrupt in interrupts:\n    decisions[interrupt.id] = {\n        \"decisions\": _get_interrupt_decisions(interrupt)\n    }\ndecisionsdecision\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 19/27\nWe can then r esume b y passing a  into the same str e",
+        "an then r esume b y passing a  into the same str eaming loop:\nOutput\n{\n    'a96c40474e429d661b5b32a8d86f0f3e': {\n        'decisions': [\n            {\n                'type': 'edit',\n                 'edited_action': {\n                     'name': 'get_weather',\n                     'args': {'city': 'Boston, U.K.'}\n                 }\n            },\n            {'type': 'approve'},\n        ]\n    }\n}\ninterrupts = []\nfor chunk in agent.stream(\n    config=config,\n    stream_mode=[\"messages\", \"updates",
+        "e can then incor porate this middle ware into our agent and include it s custom stream\nevents:\n    tool_call = result.tool_calls[0]\n    if tool_call[\"args\"][\"evaluation\"] == \"unsafe\":\n        last_message.content = \"I cannot provide that response. Please rephrase\n    return null    stream_writer(result)\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 13/27\nfrom typing import Any\nfrom langchain.agents import create_agent\nfrom langchain.messa"
+      ],
+      "response": "",
+      "reference": "必须传递一个 Command(resume=decisions) 对象。",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.99999999995,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果不希望处理整个中间件流程，是否有更快捷的途径只将状态约束在某几个特定的工具之中？",
+      "retrieved_contexts": [
+        "ess for long-\nrunning operations\nConfig  for the executionAccess c allbacks, tags, and\nmetadata\nTool Call IDUnique identifier f or the cur rent tool\ninvocationCorrelate tool calls for logs\nand model in vocationsToolRuntime\nRunnableConfig\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 4/16\nShort-term memory (State)\nState represents short-term memor y that exists for the duration of a con versation. I t\nincludes the message hist ory and an y custom",
+        "meState AccessContext Access\nStore Access\nStream WriterMessages\nCustom StateUser IDSession Inf o\nLong-term Memor yUser PreferencesContext-Aware Tools\nStateful Tools\nMemory-Enabled T ools\nStreaming Tools\ngraph st at e\n2026/3/21 17:09 Tools - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/tools 5/16\nThe runtime  p aramet er is hidden fr om the model. F or the e xample abo v e, the model onl y\nsees pref_name  in the t ool schema.\nUpdat e state\nUse  to update the agentʼ s state. T",
+        "17\nF or mor e det ails on str e aming, see .\nMiddleware\n pr o vides po w er ful e x t ensibilit y f or cust omizing agent beha vior at dif f er ent\nst ages of e x ecution. Y ou c an use middle war e t o:\nMiddle war e int egrat es se amlessl y int o the agentʼ s e x ecution, allo wing y ou t o int er cept\nand modify dat a flo w at k e y point s without changing the cor e agent logic.\nF or compr ehensiv e middle war e document ation including decorat ors lik e ,\n, and , see .Pr ocess st at e bef o"
+      ],
+      "response": "是的，可以通过在工具签名中添加 `runtime: ToolRuntime` 参数来实现。这种方式允许特定的工具直接访问和更新状态，而无需介入整个中间件流程。\n\n具体方法如下：\n\n1.  **添加参数**：在你的工具定义中加入 `runtime: ToolRuntime`。\n2.  **访问状态**：通过 `runtime.state` 访问当前的对话状态（包括消息历史和自定义字段）。\n3.  **更新状态**：使用 `runtime.update_state` 来更新代理的状态。\n\n此外，该参数是自动注入的，并且对 LLM 是隐藏的（不会出现在工具的 schema 中），因此不会干扰模型的调用。",
+      "reference": "可以使用 create_agent 函数上的 state_schema 参数。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.4784827576184072,
+      "llm_context_precision_with_reference": 0.49999999995,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "如何快速从代理流式结果的 token 结构中辨别出它是一个带有工具执行请求的数据块？",
+      "retrieved_contexts": [
+        "ent that c alls a tool once, y ou should see the f ollowing\nupdates:\nLLM node:  with tool call requests\nTool node:  with execution r esult\nLLM node: Final AI r esponsestream astream\nstream astream\nAIMessage\nToolMessage\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 2/27\nLLM tokens\nTo stream tokens as the y are produced b y the LLM, use stream_mode=\"messages\".\nBelow you can see the output of the agent str eaming tool calls and the final r e",
+        "nt(f\"step: {step}\")\n            print(f\"content: {data['messages'][-1].content_blocks}\")for chunk in agent.stream(\n    version=\"v2\",\n    if chunk[\"typ",
+        "ender_message_chunk(token)    middleware=[safety_guardrail],\n    stream_mode=[\"messages\", \"updates\", \"custom\"],\n    version=\"v2\",\n    if chunk[\"type\"] == \"messages\":\n        token, metadata = chunk[\"data\"]\n    elif chunk[\"type\"] == \"updates\":\n2026/3/21 17:14 Streaming - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/streaming 14/27\nAlternatively, if you arenʼt able to add cust om events to the str eam, you can aggregate\nmessage chunks within the str eaming loop:\nOutput\nSee all"
+      ],
+      "response": "根据提供的文档片段，可以通过检查 `AIMessageChunk` 对象的 `tool_call_chunks` 属性来辨别。\n\n具体来说，在代码示例中（如 `_render_message_chunk` 函数所示），通过判断 `token.tool_call_chunks` 是否存在或包含数据，即可识别该数据块是否带有工具执行请求。",
+      "reference": "可以通过判断其 content_blocks 是否包含 type='tool_call_chunk' 的子块。",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7186072418078971,
+      "llm_context_precision_with_reference": 0.9999999999,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "当 agent 运行时遇到多轮思考，但最终生成回答前由于网络等原因需要暂停，我们可以用哪一项机制确保它能在稍后继续运行？",
+      "retrieved_contexts": [
+        "mplementing long-t er m\nmemor y that persist s acr oss sessions, see .\nStreaming\nW e ʼ v e seen ho w the agent c an be c alled with invoke  t o get a final r esponse. If the\nagent e x ecut es mul tiple st eps, this ma y t ak e a while. T o sho w int er mediat e pr ogr ess, w e\nc an str e am b ack messages as the y occur .from langchain.agents import AgentState\nclass CustomState(AgentState):\n    user_preferences: dict\nagent = create_agent(\n    model,\n    tools=[tool1, tool2],\n    state_schema=Cus",
+        "an then r esume b y passing a  into the same str eaming loop:\nOutput\n{\n    'a96c40474e429d661b5b32a8d86f0f3e': {\n        'decisions': [\n            {\n                'type': 'edit',\n                 'edited_action': {\n                     'name': 'get_weather',\n                     'args': {'city': 'Boston, U.K.'}\n                 }\n            },\n            {'type': 'approve'},\n        ]\n    }\n}\ninterrupts = []\nfor chunk in agent.stream(\n    config=config,\n    stream_mode=[\"messages\", \"updates",
+        "atur es lik e :Example of R e Act loop\n[\n    ...\n    ToolMessage(\n        content=\"Tool error: Please check your input and try again. (division b\n        tool_call_id=\"...\"\n    ),\n    ...\n]\nagent = create_agent(\n    model,\n    tools,\n    system_prompt=\"You are a helpful assistant. Be concise and accurate.\"\n)system_prompt\nsystem_prompt\nsystem_prompt SystemMessage\nAnthr opic ʼ s pr ompt c aching\n2026/3/21 17:08 Agents - Docs by LangChain\nhttps://docs.langchain.com/oss/python/langchain/agents 8/17"
+      ],
+      "response": "",
+      "reference": "可以通过使用检查点（checkpointer）配合持久化存储来实现中断与恢复。",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.9999999999666667,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "如果在使用 ChatOpenAI 初始化模型时没有指定 tools 列表，那么 invoke 该模型能返回 ToolMessage 吗？",
+      "retrieved_contexts": [
+        "angchain.messages import ToolMessage\n@wrap_tool_call\ndef handle_tool_errors(request, handler):\n    \"\"\"Handle tool execution errors with custom messages.\"\"\"\n    try:\n        return handler(request)\n    except Exception as e:\n        # Return a custom error message to the model\n        return ToolMessage(\n            content=f\"Tool error: Please check your input and try again. \n({str(e)})\",\n            tool_call_id=request.tool_call[\"id\"]\n        )\nagent = create_agent(\n    model=\"gpt-4.1\",\n    to",
+        "nyMessage) -> null:\n    if isinstance(message, AIMessage) and message.tool_calls:\n        print(f\"Tool calls: {message.tool_calls}\")\n    if isinstance",
+        "a\nToolMessage. If the model needs t o see that the t ool succeeded (f or example, t o confirm\na preference change ), include a ToolMessage in the updat e, using\nruntime.tool_call_id for the tool_call_id parameter.\nBehavior:\nUse this when the t ool is not just r eturning dat a, but also mut ating agent st ate.The command updat es state using update.\nUpdated state is available to subsequent st eps in the same run.\nUse reducers f or fields that ma y be updat ed by parallel tool calls.from langchai"
+      ],
+      "response": "",
+      "reference": "不能，如果不给代理配置可用工具集，代理就只具备单纯的 LLM 文字生成能力，无法产生后续的工具消息响应。",
+      "faithfulness": NaN,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.3333333333,
+      "context_recall": 1.0
+    }
+  ]
+}

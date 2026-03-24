@@ -1,33 +1,31 @@
 """
 Layer 3: 嵌入生成
 =================
-封装 OpenAI Embedding API，提供批量文本嵌入能力。
+封装 SentenceTransformer，提供批量文本嵌入能力。
 """
+import os
+hf_token = os.getenv("HUGGINGFACE_API_KEY")
 
-from openai import OpenAI
+from sentence_transformers import SentenceTransformer
+
+from sentence_transformers import SentenceTransformer
 
 from config.settings import settings
 
 
 class EmbeddingClient:
-    """OpenAI Embedding 客户端。
-
-    管理 API client 生命周期，并提供分批嵌入功能。
-    """
+    """SentenceTransformer Embedding 客户端。"""
 
     def __init__(
         self,
-        api_key: str = settings.openai_api_key,
-        base_url: str = settings.openai_base_url,
         model: str = settings.embedding_model,
         batch_size: int = settings.embedding_batch_size,
+        normalize_embeddings: bool = settings.embedding_normalize,
     ):
-        if not api_key:
-            raise EnvironmentError("未设置 OPENAI_API_KEY，请在 .env 文件中配置")
-
-        self._client = OpenAI(api_key=api_key, base_url=base_url)
+        self._model = SentenceTransformer(model)
         self.model = model
         self.batch_size = batch_size
+        self.normalize_embeddings = normalize_embeddings
 
     def embed(self, texts: list[str]) -> list[list[float]]:
         """批量生成文本嵌入向量。
@@ -38,14 +36,30 @@ class EmbeddingClient:
         Returns:
             与输入同序的嵌入向量列表。
         """
-        all_embeddings: list[list[float]] = []
+        if not texts:
+            return []
 
+        all_embeddings: list[list[float]] = []
         for i in range(0, len(texts), self.batch_size):
             batch = texts[i : i + self.batch_size]
-            response = self._client.embeddings.create(model=self.model, input=batch)
-            batch_embeddings = [item.embedding for item in response.data]
-            all_embeddings.extend(batch_embeddings)
+            batch_embeddings = self._model.encode(
+                batch,
+                batch_size=self.batch_size,
+                normalize_embeddings=self.normalize_embeddings,
+                convert_to_numpy=True,
+                show_progress_bar=False,
+            )
+            all_embeddings.extend(batch_embeddings.tolist())
             print(f"🧠 嵌入生成: {min(i + self.batch_size, len(texts))}/{len(texts)}")
 
         print(f"🧠 嵌入生成完成: {len(all_embeddings)} 条, 维度={len(all_embeddings[0])}")
         return all_embeddings
+
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        """兼容 SemanticChunker 所需接口。"""
+        return self.embed(texts)
+
+    def embed_query(self, text: str) -> list[float]:
+        """兼容 SemanticChunker 所需接口。"""
+        result = self.embed([text])
+        return result[0] if result else []

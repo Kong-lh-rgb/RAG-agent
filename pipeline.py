@@ -18,7 +18,7 @@ import uuid
 from collections.abc import Generator
 
 from core.parser import parse_pdf
-from core.chunker import chunk_text
+from core.chunker import split_parent_chunks, split_child_chunks_semantic
 from core.embedder import EmbeddingClient
 from core.vector_store import MilvusStore
 from core.retriever import MilvusRetriever
@@ -67,48 +67,35 @@ class RAGPipeline:
         Args:
             pdf_path:      PDF 文件路径。
             filename:      原始文件名（用于记录）。
-            chunk_size:    子块大小（可选，默认使用配置值）。
-            chunk_overlap: 子块重叠大小（可选，默认使用配置值）。
+            chunk_size:    兼容保留参数（语义子块模式下不使用）。
+            chunk_overlap: 兼容保留参数（语义子块模式下不使用）。
 
         Returns:
             {"doc_id": ..., "chunk_count": ..., "parent_chunk_count": ...}
         """
         t0 = time.time()
         doc_id = uuid.uuid4().hex[:16]
+        _ = (chunk_size, chunk_overlap)
 
         # Step 1: PDF 解析
         text = parse_pdf(pdf_path)
 
         # Step 2: 父块分块
-        parent_chunks = chunk_text(
+        parent_chunks = split_parent_chunks(
             text,
             chunk_size=settings.parent_chunk_size,
             overlap=settings.parent_chunk_overlap,
         )
         print(f"📦 父块分块: {len(parent_chunks)} 个 (大小={settings.parent_chunk_size})")
 
-        # Step 3: 每个父块再切成子块
-        child_chunk_size = chunk_size or settings.chunk_size
-        child_chunk_overlap = chunk_overlap or settings.chunk_overlap
-
-        all_child_chunks: list[str] = []
-        all_chunk_indices: list[int] = []
-        all_parent_indices: list[int] = []
-
-        global_child_idx = 0
-        for parent_idx, parent_text in enumerate(parent_chunks):
-            children = chunk_text(
-                parent_text,
-                chunk_size=child_chunk_size,
-                overlap=child_chunk_overlap,
-            )
-            for child_text in children:
-                all_child_chunks.append(child_text)
-                all_chunk_indices.append(global_child_idx)
-                all_parent_indices.append(parent_idx)
-                global_child_idx += 1
-
-        print(f"✂️  子块总计: {len(all_child_chunks)} 个 (大小={child_chunk_size})")
+        # Step 3: 语义子块分块（对每个父块）
+        all_child_chunks, all_chunk_indices, all_parent_indices = split_child_chunks_semantic(
+            parent_chunks,
+            embedding_client=self._embedder,
+            breakpoint_threshold_type=settings.semantic_breakpoint_threshold_type,
+            breakpoint_threshold_amount=settings.semantic_breakpoint_threshold_amount,
+        )
+        print(f"✂️  子块总计: {len(all_child_chunks)} 个 (语义分块)")
 
         # Step 4: 嵌入生成（子块）
         embeddings = self._embedder.embed(all_child_chunks)

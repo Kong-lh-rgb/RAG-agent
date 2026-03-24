@@ -19,30 +19,42 @@ load_dotenv()
 class Settings:
     """应用配置（不可变）。"""
 
-    # ── OpenAI（Embedding 专用）────────────────
+    # ── OpenAI 兼容配置（主要用于评测）──────────
     openai_api_key: str = field(
         default_factory=lambda: os.getenv("OPENAI_API_KEY", "")
     )
     openai_base_url: str = field(
         default_factory=lambda: os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
     )
-    embedding_model: str = "text-embedding-3-small"
-    embedding_dim: int = 1536
-    embedding_batch_size: int = 100
 
-    # ── LLM（智谱 GLM）─────────────────────────
+    # ── Embedding（SentenceTransformers）────────
+    embedding_model: str = field(
+        default_factory=lambda: os.getenv("EMBEDDING_MODEL", "BAAI/bge-m3")
+    )
+    eval_embedding_model: str = field(
+        default_factory=lambda: os.getenv(
+            "EVAL_EMBEDDING_MODEL", "text-embedding-3-small"
+        )
+    )
+    embedding_dim: int = int(os.getenv("EMBEDDING_DIM", "1024"))
+    embedding_batch_size: int = int(os.getenv("EMBEDDING_BATCH_SIZE", "32"))
+    embedding_normalize: bool = (
+        os.getenv("EMBEDDING_NORMALIZE", "true").lower() == "true"
+    )
+
+    # ── LLM─────────────────────────
     llm_api_key: str = field(
         default_factory=lambda: os.getenv("LLM_API_KEY", "")
     )
-    llm_base_url: str = "https://open.bigmodel.cn/api/paas/v4"
+    llm_base_url: str = "https://dashscope.aliyuncs.com/compatible-mode/v1"
     llm_model: str = field(
-        default_factory=lambda: os.getenv("LLM_MODEL", "glm-4.7-flash")
+        default_factory=lambda: os.getenv("LLM_MODEL", "glm-5")
     )
     judge_model: str = field(
-        default_factory=lambda: os.getenv("JUDGE_MODEL", "qwen3-vl-flash-2026-01-22")
+        default_factory=lambda: os.getenv("JUDGE_MODEL")
     )
     judge_api_key: str = field(
-        default_factory=lambda: os.getenv("DASHSCOPE_API_KEY", "")
+        default_factory=lambda: os.getenv("DASHSCOPE_API_KEY")
     )
     judge_base_url: str = field(
         default_factory=lambda: os.getenv(
@@ -88,13 +100,37 @@ class Settings:
         )
 
     # ── 分块参数 ────────────────────────────────
-    parent_chunk_size: int = 1500      # 父块大小
-    parent_chunk_overlap: int = 100    # 父块重叠
-    chunk_size: int = 500              # 子块大小
-    chunk_overlap: int = 50            # 子块重叠
+    parent_chunk_size: int = int(os.getenv("PARENT_CHUNK_SIZE", "900"))
+    parent_chunk_overlap: int = int(os.getenv("PARENT_CHUNK_OVERLAP", "100"))
+    chunk_size: int = int(os.getenv("CHUNK_SIZE", "400"))
+    chunk_overlap: int = int(os.getenv("CHUNK_OVERLAP", "50"))
+    semantic_breakpoint_threshold_type: str = field(
+        default_factory=lambda: os.getenv(
+            "SEMANTIC_BREAKPOINT_THRESHOLD_TYPE", "percentile"
+        )
+    )
+    semantic_breakpoint_threshold_amount: int = int(
+        os.getenv("SEMANTIC_BREAKPOINT_THRESHOLD_AMOUNT", "85")
+    )
 
     # ── 检索参数 ────────────────────────────────
-    top_k: int = 3
+    top_k: int = 3  # 最终返回结果数（rerank_top_k 的默认值）
+    retrieval_top_k: int = int(os.getenv("RETRIEVAL_TOP_K", "10"))  # Milvus 搜索 Top-K
+    rerank_top_k: int = int(os.getenv("RERANK_TOP_K", "3"))  # 重排序后返回 Top-K（通常等于 top_k）
+
+    # ── Reranker（CrossEncoder）─────────────────
+    enable_reranker: bool = (
+        os.getenv("ENABLE_RERANKER", "true").lower() == "true"
+    )
+    reranker_model: str = field(
+        default_factory=lambda: os.getenv(
+            "RERANKER_MODEL", "BAAI/bge-reranker-v2-m3"
+        )
+    )
+    reranker_batch_size: int = int(os.getenv("RERANKER_BATCH_SIZE", "32"))
+    reranker_use_fp16: bool = (
+        os.getenv("RERANKER_USE_FP16", "true").lower() == "true"
+    )
 
 
 settings = Settings()

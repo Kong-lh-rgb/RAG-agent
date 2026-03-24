@@ -57,10 +57,12 @@ def cmd_evaluate(args):
     if args.doc_id:
         print(f"   Doc ID: {args.doc_id}")
     print(f"   Top-K:  {args.top_k}")
+    if args.sample_size:
+        print(f"   样本数: {args.sample_size}")
     print()
 
     # 1. 加载评测数据集
-    samples = load_dataset_from_json(args.dataset)
+    samples = load_dataset_from_json(args.dataset, limit=args.sample_size)
 
     # 2. 调用 Pipeline 生成 answer + contexts
     pipeline = RAGPipeline()
@@ -111,6 +113,8 @@ def main():
                         help="可选，仅在指定文档中检索")
     p_eval.add_argument("--top-k", type=int, default=3,
                         help="检索结果数 (默认 3)")
+    p_eval.add_argument("--sample-size", type=int, default=None,
+                        help="可选，仅评测指定数量的数据。如不指定，则评测全部数据")
     p_eval.add_argument("--output", default="data/eval_results.json",
                         help="评测结果输出路径 (默认 data/eval_results.json)")
     p_eval.set_defaults(func=cmd_evaluate)

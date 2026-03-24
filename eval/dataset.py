@@ -25,17 +25,22 @@ class EvalSample:
     contexts: list[str] | None = None
 
 
-def load_dataset_from_json(path: str) -> list[EvalSample]:
+def load_dataset_from_json(path: str, limit: int | None = None) -> list[EvalSample]:
     """从 JSON 文件加载评测问答对。
 
     Args:
         path: JSON 文件路径，格式为 [{"question": "...", "ground_truth": "..."}, ...]
+        limit: 可选，限制加载的数据条数。如果为 None，则加载所有数据。
 
     Returns:
         EvalSample 列表（answer 和 contexts 待填充）。
     """
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
+
+    # 限制数据条数
+    if limit is not None:
+        data = data[:limit]
 
     samples = []
     for item in data:
